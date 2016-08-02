@@ -52,14 +52,23 @@ Plugin 'sjl/gundo.vim'
 nnoremap <leader>u :GundoToggle<CR>
 
 " Syntax checker
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic'
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+
+" Python mode
+Plugin 'klen/python-mode'
+let g:pymode_lint_cwindow = 0
+" If you prefer the Omni-Completion tip window to close when a selection is
+" made, these lines close it on movement in insert mode or when leaving
+" insert mode
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 " A class outline viewer
 " REQUIRES sudo apt-get install exuberant-ctags
@@ -83,6 +92,8 @@ colorscheme elflord
 
 " indent based on filetype
 filetype plugin indent on
+filetype plugin on
+filetype indent on
 set expandtab
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType python setlocal shiftwidth=4 tabstop=4
