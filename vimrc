@@ -63,12 +63,10 @@ nnoremap <leader>u :GundoToggle<CR>
 
 " Python mode
 Plugin 'klen/python-mode'
+" don't show error window - just the msg in the status bar
 let g:pymode_lint_cwindow = 0
-" If you prefer the Omni-Completion tip window to close when a selection is
-" made, these lines close it on movement in insert mode or when leaving
-" insert mode
-autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+" close doc window after completion is done
+autocmd CompleteDone * pclose
 
 " A class outline viewer
 " REQUIRES sudo apt-get install exuberant-ctags
