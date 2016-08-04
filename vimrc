@@ -9,6 +9,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle
+" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 Plugin 'VundleVim/Vundle.vim'
 
 " cp to copy to system-clipboard
@@ -90,8 +91,6 @@ colorscheme elflord
 
 " indent based on filetype
 filetype plugin indent on
-filetype plugin on
-filetype indent on
 set expandtab
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType python setlocal shiftwidth=4 tabstop=4
