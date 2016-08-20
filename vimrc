@@ -24,7 +24,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 
 " Git plugin TODO not yet tested
-Plugin 'tpope/vim-fugitive'
+" Plugin 'tpope/vim-fugitive'
 
 " Python folding plugin
 " Plugin 'tmhedberg/SimpylFold'
@@ -33,7 +33,7 @@ Plugin 'tpope/vim-fugitive'
 " REQUIRES:
 " sudo apt-get install build-essential cmake
 " sudo apt-get install python-dev python3-dev
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 
 " Plugin for the powerline
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
