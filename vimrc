@@ -231,3 +231,6 @@ vnoremap <leader>c "_c
 
 nnoremap <leader>p "_dP
 vnoremap <leader>p "_dP
+
+" add _ (underscore) as word delimiter
+set iskeyword-=_
