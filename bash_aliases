@@ -10,3 +10,5 @@ alias zoidboot="tabesc|tabctrl|middlemouse"
 alias rldapache="sudo /etc/init.d/apache2 reload"
 alias errapache="sudo vim /var/log/apache2/error.log"
 alias dotunnel="ssh -R 10002:localhost:22 tunneler@46.101.112.121"
+
+set -o vi
