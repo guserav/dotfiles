@@ -1,3 +1,5 @@
+" Section: Plugins {{{
+
 set nocompatible
 filetype off
 
@@ -86,151 +88,172 @@ Plugin 'christoomey/vim-tmux-navigator'
 
 call vundle#end()
 
-" colorscheme
-colorscheme elflord
+" }}}
 
-" indent based on filetype
-filetype plugin indent on
-set expandtab
-autocmd FileType html setlocal shiftwidth=2 tabstop=2
-autocmd FileType python setlocal shiftwidth=4 tabstop=4
-autocmd FileType haskell setlocal shiftwidth=2 tabstop=2
+" Section: OS-Specific {{{
 
-" syntax highlighting
-syntax on
+" Windows {{{
 
-" split navigations
-" nnoremap <C-J> <C-W><C-J>
-" nnoremap <C-K> <C-W><C-K>
-" nnoremap <C-L> <C-W><C-L>
-" nnoremap <C-H> <C-W><C-H>
+" nnoremap <leader>cp "*p                     " paste from system clipboard
+" nmap cv o<esc>0D"*p                           " paste from system clipboard
+" vnoremap <leader>cy "*y                     " copy to system clipboard
+" set backupdir=$HOME\_vim\backup\\
+" set directory=$HOME\_vim\tmp\\
 
-" move in split line
+" }}}
+
+" Linux {{{
+
+" source .vimrc_linux
+" paste with ,p<Enter>
+" nnoremap <Leader>p :r !xsel -p
+
+set backupdir=$HOME/.vim/backup//
+set directory=$HOME/.vim/tmp//
+
+" }}}
+
+" }}}
+
+" Section: Experimental {{{
+
+" Zoom / Restore window.
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+nnoremap <silent> <C-Z> :ZoomToggle<CR>
+
+set foldmethod=syntax
+filetype plugin indent on                  " detect filetype specific indent, plugin, syntax...
+
+" set foldlevel=99
+" set foldlevelstart=99                       " open most folds by default
+
+colorscheme torte
+set laststatus=2                            " Always show statusline
+set iskeyword-=_                            " add _ (underscore) as word delimiter (eg. when navigating)
+autocmd BufEnter * lcd %:p:h                " Set working directory to the current file
+
+au BufWinLeave * silent! mkview             " restore folds on load sadly throws errors
+au BufWinEnter * silent! loadview           " maybe needs foldlevel or foldlevelstart
+
+" }}}
+
+" Section: Options {{{
+
+set encoding=utf-8                          " force utf8 support
+syntax on                                   " syntax highlighting
+set t_Co=256                                " Use 256 colours
+set mouse=a                                 " enable mouse (only for resizing splits)
+set showmatch                               " highlight matching braces/parentheses/brackets
+set cursorline                              " highlight current line
+set modelines=1                             " last line of this file applies to just this file
+set autoindent
+set expandtab                               " insert spaces when pressing tab
+set ruler                                   " show line and column number
+
+" move swapfiles somewhere else (directories decloared in OS specific
+" Two path separators at the end to ensure file name uniqueness
+" in the preserve directory (see the :help docs)
+set swapfile
+set backup
+
+set relativenumber                          " show relative line numbers
+set number                                  " but absolute of current line
+
+set ignorecase                              " make search case insensitive
+set smartcase                               " Case insensitive searches become sensitive with capitals
+set lazyredraw                              " redraw only when we need to
+set incsearch                               " search as characters are entered
+set hlsearch                                " highlight matches
+
+set splitbelow                              " new splits on the right and on the botttom
+set splitright                              " more intutitive for LTR languages
+
+set wildmenu                                " visual autocomplete for command menu
+set wildmode=list:longest,full
+
+set wrap                                    " wrap long lines
+set linebreak                               " wrap lines only on characters in 'breakat'
+" set breakat&vim                           " reset breakat to vims default
+set whichwrap+=<,>,h,l,[,]                  " moving beyound edge moves to adjacent line
+set backspace=indent,eol,start              " enable deleting newline from beginning of next line
+
+" }}}
+
+" Section: Remappings {{{
+
+let mapleader=","                           " set leader to , (Comma)
+
+nmap <silent> <leader>ev :e $MYVIMRC<cr>    " open .vimrc with <leader>ev
+nmap <silent> <leader>sv :so $MYVIMRC<cr>   " open .vimrc with <leader>sv
+
+nnoremap <silent> <leader><space> :nohlsearch<cr>    " turn off search highlight
+
+nnoremap <leader>m `                        " jump to marker by pressing leader, m and the buffer
+noremap gg mg<bar>gg                        " save position to marker g before jumping to beginning
+noremap G mG<bar>G                          " save position to marker G before jumping to end
+
+" move in split navigations with ^W prefix for tmux compatibility
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Support indenting multiple times in visual mode
+vnoremap < <gv
+vnoremap > >gv
+
+" move in wrapped line as if they were separate
 nnoremap k gk
 nnoremap j gj
 vnoremap k gk
 vnoremap j gj
 
-" delete linebreak at beginning of line with backspace
-set backspace=indent,eol,start
+nnoremap <space> za                         " toggle fold on spacebar
 
-" move left or right brings you to previous/next line
-set whichwrap+=<,>,h,l,[,]
+" }}}
 
-" map F1 to escape
-map <F1> <Esc>
-imap <F1> <Esc>
+" Section: To be revised {{{
 
-" break not on the last character a.k.a dont break up words
-set nolist wrap linebreak breakat&vim
+""python with virtualenv support for code completion
+"py << EOF
+"import os
+"import sys
+"if 'VIRTUAL_ENV' in os.environ:
+"  project_base_dir = os.environ['VIRTUAL_ENV']
+"  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+"  execfile(activate_this, dict(__file__=activate_this))
+"EOF
+"
+"" add powerline
+"set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
+"" highlight last inserted text
+"nnoremap gV `[v`]
+"
+"" add this to ~/.vim/after/syntax/html.vim to enable proper folding for html
+"" syntax region htmlFold start="<\z(\<\(area\|base\|br\|col\|command\|embed\|hr\|img\|input\|keygen\|link\|meta\|para\|source\|track\|wbr\>\)\@![a-z-]\+\>\)\%(\_s*\_[^/]\?>\|\_s\_[^>]*\_[^>/]>\)" end="</\z1\_s*>" fold transparent keepend extend containedin=htmlHead,htmlH\d
+"
+"
+"" delete, change and paste without yanking
+"nnoremap <leader>d "_d
+"vnoremap <leader>d "_d
+"
+"nnoremap <leader>c "_c
+"vnoremap <leader>c "_c
+"
+"nnoremap <leader>p "_dP
+"vnoremap <leader>p "_dP
 
-" show current line number but all others relative to that
-set number
-set relativenumber
+" }}}
 
-" folding 99 deepr
-set foldlevel=99
-"fold on spacebar
-nnoremap <space> za
-" toggle all folds zi and custom fold zf
-set foldmethod=syntax
-" restore folds on load
-autocmd BufWinLeave *.* mkview!
-autocmd BufWinEnter *.* silent loadview
-
-
-" utf8 support
-set encoding=utf-8
-
-" support indenting multiple times
-vnoremap < <gv
-vnoremap > >gv
-
-" highlight trailing whitespace
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
-
-" make search case insensitive
-set ignorecase
-
-"python with virtualenv support for code completion
-py << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
-EOF
-
-" paste with ,p<Enter>
-" nnoremap <Leader>p :r !xsel -p
-
-" add powerline
-set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
-
-" Always show statusline
-set laststatus=2
-
-" Use 256 colours
-set t_Co=256
-
-" Let's make it easy to edit this file (mnemonic for the key sequence is
-" 'e'dit 'v'imrc)
-nmap <silent> ,ev :e $MYVIMRC<cr>
-" And to source this file as well (mnemonic for the key sequence is
-" 's'ource 'v'imrc)
-nmap <silent> ,sv :so $MYVIMRC<cr>
-
-" enable mouse
-set mouse=a
-
-" highlight matching braces/parentheses/brackets
-set showmatch
-
-" highlight current line
-set cursorline
-
-set lazyredraw          " redraw only when we need to
-set incsearch           " search as characters are entered
-set hlsearch            " highlight matches
-
-"" turn off search highlight
-nnoremap <leader><space> :nohlsearch<CR>
-
-" highlight last inserted text
-nnoremap gV `[v`]
-
-" add this to ~/.vim/after/syntax/html.vim to enable proper folding for html
-" syntax region htmlFold start="<\z(\<\(area\|base\|br\|col\|command\|embed\|hr\|img\|input\|keygen\|link\|meta\|para\|source\|track\|wbr\>\)\@![a-z-]\+\>\)\%(\_s*\_[^/]\?>\|\_s\_[^>]*\_[^>/]>\)" end="</\z1\_s*>" fold transparent keepend extend containedin=htmlHead,htmlH\d
-
-" new splits on the right and on the botttom - more intutitive for LTR languages
-set splitbelow
-set splitright
-
-" jump to position by pressing leader and m and the buffer
-nnoremap <leader>m `
-
-" save position before jumping to beginning or end
-nnoremap gg mg<bar>gg
-nnoremap G mg<bar>G
-
-" Set working directory to the current file
-autocmd BufEnter * lcd %:p:h
-
-" delete, change and paste without yanking
-nnoremap <leader>d "_d
-vnoremap <leader>d "_d
-
-nnoremap <leader>c "_c
-vnoremap <leader>c "_c
-
-nnoremap <leader>p "_dP
-vnoremap <leader>p "_dP
-
-" add _ (underscore) as word delimiter
-set iskeyword-=_
+" vim:foldmethod=marker
