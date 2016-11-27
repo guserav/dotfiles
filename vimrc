@@ -158,8 +158,12 @@ set showmatch                               " highlight matching braces/parenthe
 set cursorline                              " highlight current line
 set modelines=1                             " last line of this file applies to just this file
 set autoindent
-set expandtab                               " insert spaces when pressing tab
 set ruler                                   " show line and column number
+
+set expandtab                               " insert spaces when pressing tab
+set shiftwidth=2 tabstop=2 softtabstop=2    " sets default tab size to 2 spaces
+autocmd Filetype css setlocal tabstop=4
+autocmd Filetype python setlocal tabstop=4
 
 " move swapfiles somewhere else (directories decloared in OS specific
 " Two path separators at the end to ensure file name uniqueness
