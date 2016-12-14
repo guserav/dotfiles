@@ -3,102 +3,101 @@
 set nocompatible
 filetype off
 
-" set leader to , (Comma)
-let mapleader=","
-
 " Vundle Plugin manager
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+if isdirectory("~/.vim/bundle/Vundle.vim")
+  call vundle#begin()
 
-" let Vundle manage Vundle
-" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-Plugin 'VundleVim/Vundle.vim'
+  " let Vundle manage Vundle
+  " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  Plugin 'VundleVim/Vundle.vim'
 
-" LaTeXjk
-" Track the engine.
-Plugin 'SirVer/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-n>"
-let g:UltiSnipsJumpBackwardTrigger="<c-m>"
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+  " Snippets
+  " UltiSnips Snippet Engine
+  Plugin 'SirVer/ultisnips'
+  " Snippets are separated from the engine
+  Plugin 'honza/vim-snippets'
+  " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+  let g:UltiSnipsExpandTrigger="<tab>"
+  let g:UltiSnipsJumpForwardTrigger="<c-m>"
+  let g:UltiSnipsJumpBackwardTrigger="<c-n>"
+  " If you want :UltiSnipsEdit to split your window.
+  let g:UltiSnipsEditSplit="vertical"
 
-" cp to copy to system-clipboard
-" cP to copy line and cv to paste to next line
-" REQUIRES apt-get install xsel
-Plugin 'christoomey/vim-system-copy'
+  " cp to copy to system-clipboard
+  " cP to copy line and cv to paste to next line
+  " REQUIRES apt-get install xsel
+  Plugin 'christoomey/vim-system-copy'
 
-" surround with s
-Plugin 'tpope/vim-surround'
+  " surround with s
+  Plugin 'tpope/vim-surround'
 
-" repeat plugin commands
-Plugin 'tpope/vim-repeat'
+  " repeat plugin commands
+  Plugin 'tpope/vim-repeat'
 
-" Git plugin TODO not yet tested
-" Plugin 'tpope/vim-fugitive'
+  " Git plugin TODO not yet tested
+  " Plugin 'tpope/vim-fugitive'
 
-" Python folding plugin
-" Plugin 'tmhedberg/SimpylFold'
+  " Python folding plugin
+  " Plugin 'tmhedberg/SimpylFold'
 
-" Autocomplete plugin for all kinds of languages
-" REQUIRES:
-" sudo apt-get install build-essential cmake
-" sudo apt-get install python-dev python3-dev
-" Plugin 'Valloric/YouCompleteMe'
+  " Autocomplete plugin for all kinds of languages
+  " REQUIRES:
+  " sudo apt-get install build-essential cmake
+  " sudo apt-get install python-dev python3-dev
+  " Plugin 'Valloric/YouCompleteMe'
 
-" Plugin for the powerline
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-let g:Powerline_symbols = 'fancy'
+  " Plugin for the powerline
+  Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+  let g:Powerline_symbols = 'fancy'
 
-" File navigating plugin
-Plugin 'scrooloose/nerdtree'
-" close vim if only window left is nerdtree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" toggle nerdtree with ctrl+n
-map <C-n> :NERDTreeToggle<CR>
-" Nerdtree file type highlighting
-Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+  " File navigating plugin
+  Plugin 'scrooloose/nerdtree'
+  " close vim if only window left is nerdtree
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+  " toggle nerdtree with ctrl+n
+  map <C-n> :NERDTreeToggle<CR>
+  " Nerdtree file type highlighting
+  Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 
-" Plugin for visualizing the vim undo tree
-Plugin 'sjl/gundo.vim'
-nnoremap <leader>u :GundoToggle<CR>
+  " Plugin for visualizing the vim undo tree
+  Plugin 'sjl/gundo.vim'
+  nnoremap <leader>u :GundoToggle<CR>
 
-" Syntax checker
-"Plugin 'scrooloose/syntastic'
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
+  " Syntax checker
+  "Plugin 'scrooloose/syntastic'
+  "set statusline+=%#warningmsg#
+  "set statusline+=%{SyntasticStatuslineFlag()}
+  "set statusline+=%*
+  "let g:syntastic_always_populate_loc_list = 1
+  "let g:syntastic_auto_loc_list = 1
+  "let g:syntastic_check_on_open = 1
+  "let g:syntastic_check_on_wq = 0
 
-" Python mode
-Plugin 'klen/python-mode'
-" don't show error window - just the msg in the status bar
-let g:pymode_lint_cwindow = 0
-" close doc window after completion is done
-autocmd CompleteDone * pclose
+  " Python mode
+  Plugin 'klen/python-mode'
+  " don't show error window - just the msg in the status bar
+  let g:pymode_lint_cwindow = 0
+  " close doc window after completion is done
+  autocmd CompleteDone * pclose
 
-" A class outline viewer
-" REQUIRES sudo apt-get install exuberant-ctags
-Plugin 'majutsushi/tagbar'
-noremap <leader>t :TagbarOpenAutoClose<CR>
-noremap <leader>T :TagbarToggle<CR>
+  " A class outline viewer
+  " REQUIRES sudo apt-get install exuberant-ctags
+  Plugin 'majutsushi/tagbar'
+  noremap <leader>t :TagbarOpenAutoClose<CR>
+  noremap <leader>T :TagbarToggle<CR>
 
-" Automatically insert closing parentheses, brackets, etc.
-Plugin 'jiangmiao/auto-pairs'
+  " Automatically insert closing parentheses, brackets, etc.
+  Plugin 'jiangmiao/auto-pairs'
 
-" Requirement for ghc-mod
-Plugin 'Shougo/vimproc.vim'
+  " Requirement for ghc-mod
+  Plugin 'Shougo/vimproc.vim'
 
-" Move seamlessly between vim and tmux panes
-Plugin 'christoomey/vim-tmux-navigator'
+  " Move seamlessly between vim and tmux panes
+  Plugin 'christoomey/vim-tmux-navigator'
 
-call vundle#end()
+  call vundle#end()
+endif
 
 " }}}
 
@@ -142,6 +141,13 @@ autocmd FileType tex nnoremap <leader>ls :!<Space>setsid<Space>evince<Space><C-R
 
 " Section: Experimental {{{
 
+" Highlight trailing whitespace
+highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+
+highlight ColorColumn ctermbg=grey guibg=gray
+set colorcolumn=80
 
 " Zoom / Restore window.
 function! s:ZoomToggle() abort
@@ -287,4 +293,4 @@ nnoremap <space> za                         " toggle fold on spacebar
 
 " }}}
 
-" vim:foldmethod=marker
+" vim: foldmethod=marker
