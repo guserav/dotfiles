@@ -14,6 +14,18 @@ call vundle#begin()
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 Plugin 'VundleVim/Vundle.vim'
 
+" LaTeXjk
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
+let g:UltiSnipsJumpBackwardTrigger="<c-m>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
 " cp to copy to system-clipboard
 " cP to copy line and cv to paste to next line
 " REQUIRES apt-get install xsel
@@ -115,7 +127,21 @@ set directory=$HOME/.vim/tmp//
 
 " }}}
 
+" Section: LaTeX {{{
+
+" compile markdown & latex
+autocmd FileType markdown nnoremap <leader>lc :w<Enter>:! pandoc -o %.pdf %<Enter><Enter>
+autocmd FileType markdown nnoremap <leader>ll :w<Enter>:!(setsid<Space>pandoc<Space>-o<Space>%.pdf<Space><C-R>%<Space>&><space>/dev/null&)<Enter><Enter>
+autocmd FileType markdown nnoremap <leader>ls :!<Space>setsid<Space>evince<Space><C-R>%.pdf<Space>&><Space>/dev/null<Space>&<Enter><Enter>
+" compile latex
+autocmd FileType tex nnoremap <leader>lc :w<Enter>:! pdflatex --shell-escape %<Enter>
+autocmd FileType tex nnoremap <leader>ll :w<Enter>:!(setsid<Space>pdflatex<Space>--shell-escape<Space><C-R>%<Space>&><space>/dev/null&)<Enter><Enter>
+autocmd FileType tex nnoremap <leader>ls :!<Space>setsid<Space>evince<Space><C-R>%<Backspace><Backspace><Backspace>pdf<Space>&><Space>/dev/null<Space>&<Enter><Enter>
+
+" }}}
+
 " Section: Experimental {{{
+
 
 " Zoom / Restore window.
 function! s:ZoomToggle() abort
@@ -135,8 +161,8 @@ nnoremap <silent> <C-Z> :ZoomToggle<CR>
 set foldmethod=syntax
 filetype plugin indent on                  " detect filetype specific indent, plugin, syntax...
 
-" set foldlevel=99
-" set foldlevelstart=99                       " open most folds by default
+set foldlevel=99
+set foldlevelstart=99                       " open most folds by default
 
 colorscheme torte
 set laststatus=2                            " Always show statusline
@@ -160,10 +186,11 @@ set modelines=1                             " last line of this file applies to 
 set autoindent
 set ruler                                   " show line and column number
 
-set expandtab                               " insert spaces when pressing tab
 set shiftwidth=2 tabstop=2 softtabstop=2    " sets default tab size to 2 spaces
 autocmd Filetype css setlocal tabstop=4
 autocmd Filetype python setlocal tabstop=4
+autocmd Filetype markdown setlocal shiftwidth=4 tabstop=4 softtabstop=4
+set expandtab                               " insert spaces when pressing tab
 
 " move swapfiles somewhere else (directories decloared in OS specific
 " Two path separators at the end to ensure file name uniqueness
