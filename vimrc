@@ -1,3 +1,36 @@
+" Section: Remappings {{{
+
+let mapleader=","                           " set leader to , (Comma)
+
+nmap <silent> <leader>ev :e $MYVIMRC<cr>    " open .vimrc with <leader>ev
+nmap <silent> <leader>sv :so $MYVIMRC<cr>   " open .vimrc with <leader>sv
+
+nnoremap <silent> <leader><space> :nohlsearch<cr>    " turn off search highlight
+
+nnoremap <leader>m `                        " jump to marker by pressing leader, m and the buffer
+noremap gg mg<bar>gg                        " save position to marker g before jumping to beginning
+noremap G mG<bar>G                          " save position to marker G before jumping to end
+
+" move in split navigations with ^W prefix for tmux compatibility
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Support indenting multiple times in visual mode
+vnoremap < <gv
+vnoremap > >gv
+
+" move in wrapped line as if they were separate
+nnoremap k gk
+nnoremap j gj
+vnoremap k gk
+vnoremap j gj
+
+nnoremap <space> za                         " toggle fold on spacebar
+
+" }}}
+
 " Section: Plugins {{{
 
 set nocompatible
@@ -224,39 +257,6 @@ set linebreak                               " wrap lines only on characters in '
 " set breakat&vim                           " reset breakat to vims default
 set whichwrap+=<,>,h,l,[,]                  " moving beyound edge moves to adjacent line
 set backspace=indent,eol,start              " enable deleting newline from beginning of next line
-
-" }}}
-
-" Section: Remappings {{{
-
-let mapleader=","                           " set leader to , (Comma)
-
-nmap <silent> <leader>ev :e $MYVIMRC<cr>    " open .vimrc with <leader>ev
-nmap <silent> <leader>sv :so $MYVIMRC<cr>   " open .vimrc with <leader>sv
-
-nnoremap <silent> <leader><space> :nohlsearch<cr>    " turn off search highlight
-
-nnoremap <leader>m `                        " jump to marker by pressing leader, m and the buffer
-noremap gg mg<bar>gg                        " save position to marker g before jumping to beginning
-noremap G mG<bar>G                          " save position to marker G before jumping to end
-
-" move in split navigations with ^W prefix for tmux compatibility
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
-" Support indenting multiple times in visual mode
-vnoremap < <gv
-vnoremap > >gv
-
-" move in wrapped line as if they were separate
-nnoremap k gk
-nnoremap j gj
-vnoremap k gk
-vnoremap j gj
-
-nnoremap <space> za                         " toggle fold on spacebar
 
 " }}}
 
