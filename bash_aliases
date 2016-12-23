@@ -1,3 +1,6 @@
+# typo aliases
+alias claer="clear"
+
 # change working directory to frequently used directories
 alias cdhtml="cd /var/www/html"
 alias cdprjct="cd ~/projects"
