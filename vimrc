@@ -163,11 +163,12 @@ set directory=$HOME/.vim/tmp//
 
 " }}}
 
-" Section: LaTeX {{{
+" Section: LaTeX and Markdown{{{
 
 " compile markdown & latex
 autocmd FileType markdown nnoremap <leader>lc :w<Enter>:! pandoc -o %.pdf %<Enter><Enter>
-autocmd FileType markdown nnoremap <leader>ll :w<Enter>:!(setsid<Space>pandoc<Space>-o<Space>%.pdf<Space><C-R>%<Space>&><space>/dev/null&)<Enter><Enter>
+autocmd FileType markdown nnoremap <leader>lm :w<Enter>:!(setsid<Space>pandoc<Space>-o<Space>%.pdf<Space><C-R>%<Space>&><space>/dev/null&)<Enter><Enter>
+autocmd FileType markdown nnoremap <leader>ll :w<Enter>:!(setsid<Space>pandoc<Space>--latex-engine=xelatex<Space>-o<Space>%.pdf<Space><C-R>%<Space>&><space>/dev/null&)<Enter><Enter>
 autocmd FileType markdown nnoremap <leader>ls :!<Space>setsid<Space>evince<Space><C-R>%.pdf<Space>&><Space>/dev/null<Space>&<Enter><Enter>
 " compile latex
 autocmd FileType tex nnoremap <leader>lc :w<Enter>:! pdflatex --shell-escape %<Enter>
