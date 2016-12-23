@@ -45,6 +45,10 @@ if isdirectory("~/.vim/bundle/Vundle.vim")
   " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   Plugin 'VundleVim/Vundle.vim'
 
+  " show git diff +, -, ~ at the left
+  Plugin 'airblade/vim-gitgutter'
+  set updatetime=250
+
   " Snippets
   " UltiSnips Snippet Engine
   Plugin 'SirVer/ultisnips'
