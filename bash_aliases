@@ -8,7 +8,17 @@ alias cdprjct="cd ~/projects"
 alias tabesc="xcape -e 'Caps_Lock=Escape'"                          # Map Caps-Lock to Escape
 alias tabctrl="setxkbmap -option 'caps:ctrl_modifier'"              # Map Caps-Lock-modifier to Ctrl
 alias middlemouse="synclient TapButton3=2"                          # Map triple tap to 3rd mouse button
-alias zoidboot="tabesc|tabctrl|middlemouse"                         # Enable my custom settings
+function disablerightclick {
+    synclient RightButtonAreaLeft=0
+    synclient RightButtonAreaTop=0
+}
+function zoidboot {                                                 # Configure up the machine after a boot
+    tabesc
+    tabctrl
+    middlemouse
+    disablerightclick
+}
+# alias zoidboot="tabesc|tabctrl|middlemouse|disablerightclick"             # Enable my custom settings
 
 alias rldapache="sudo /etc/init.d/apache2 reload"                   # Reload apache
 alias errapache="tail -f /var/log/apache2/error.log"                # Show error log of apache
