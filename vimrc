@@ -38,7 +38,7 @@ filetype off
 
 " Vundle Plugin manager
 set rtp+=~/.vim/bundle/Vundle.vim
-if isdirectory("~/.vim/bundle/Vundle.vim")
+if 1
   call vundle#begin()
 
   " let Vundle manage Vundle
@@ -140,6 +140,7 @@ endif
 
 " Section: OS-Specific {{{
 
+" if has("win32")
 " Windows {{{
 
 " nnoremap <leader>cp "*p                     " paste from system clipboard
@@ -154,8 +155,12 @@ endif
 
 " source .vimrc_linux
 " paste with ,p<Enter>
-" nnoremap <Leader>p :r !xsel -p
+" nnoremap <leader>p :r !xsel -p
+" copy to system clipboard with ,y
+vnoremap <leader>y :w !xsel -i -b<Enter><Enter>
 
+" move the backup and temp files somewhere else so they don't clutter up the
+" current directory
 set backupdir=$HOME/.vim/backup//
 set directory=$HOME/.vim/tmp//
 
@@ -210,7 +215,7 @@ set foldlevelstart=99                       " open most folds by default
 
 colorscheme torte
 set laststatus=2                            " Always show statusline
-set iskeyword-=_                            " add _ (underscore) as word delimiter (eg. when navigating)
+" set iskeyword-=_                            " add _ (underscore) as word delimiter (eg. when navigating)
 autocmd BufEnter * lcd %:p:h                " Set working directory to the current file
 
 au BufWinLeave * silent! mkview             " restore folds on load sadly throws errors
@@ -233,7 +238,7 @@ set ruler                                   " show line and column number
 set shiftwidth=2 tabstop=2 softtabstop=2    " sets default tab size to 2 spaces
 autocmd Filetype css setlocal tabstop=4
 autocmd Filetype python setlocal tabstop=4
-autocmd Filetype markdown setlocal shiftwidth=4 tabstop=4 softtabstop=4
+"autocmd Filetype markdown setlocal shiftwidth=4 tabstop=4 softtabstop=4
 set expandtab                               " insert spaces when pressing tab
 
 " move swapfiles somewhere else (directories decloared in OS specific
