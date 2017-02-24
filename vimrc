@@ -183,12 +183,16 @@ autocmd FileType tex nnoremap <leader>ls :!<Space>setsid<Space>evince<Space><C-R
 " }}}
 
 " Section: Experimental {{{
-
-" Highlight trailing whitespace
+" Highlight trailing whitespace when not in insert mode
+" and highlight all tabs
+highlight EvilTabs ctermbg=red guibg=red
 highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd ColorScheme * highlight EvilTabs ctermbg=red guibg=red
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
+match EvilTabs /\t/
+match ExtraWhitespace /\s\+\%#\@<!$/
 
+" Show a red column at character position 80
 highlight ColorColumn ctermbg=grey guibg=gray
 set colorcolumn=80
 
