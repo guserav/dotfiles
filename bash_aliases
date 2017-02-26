@@ -8,6 +8,7 @@ alias cdprjct="cd ~/projects"
 alias tabesc="xcape -e 'Caps_Lock=Escape'"                          # Map Caps-Lock to Escape
 alias tabctrl="setxkbmap -option 'caps:ctrl_modifier'"              # Map Caps-Lock-modifier to Ctrl
 alias middlemouse="synclient TapButton3=2"                          # Map triple tap to 3rd mouse button
+alias hscroll="synclient HorizTwoFingerScroll=1"
 function disablerightclick {
     synclient RightButtonAreaLeft=0
     synclient RightButtonAreaTop=0
@@ -17,6 +18,7 @@ function zoidboot {                                                 # Configure 
     tabctrl
     middlemouse
     disablerightclick
+    hscroll
 }
 # alias zoidboot="tabesc|tabctrl|middlemouse|disablerightclick"             # Enable my custom settings
 
@@ -34,3 +36,8 @@ alias lsh='ls -l --ignore "*.pyc" --ignore "*.swp" --ignore "*swo"' # Clean ls w
 set -o vi                                                           # Enable vi mode for the terminal
 
 shopt -s globstar                                                   # Enable globstar (**) recurses directories
+
+function scrots {
+    SCROT_NAME = escrot -s
+    mv $SCROT_NAME "~/screenshots/$SCROT_NAME"
+}

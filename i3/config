@@ -146,7 +146,9 @@ bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle # amixer -q set Master t
 bindsym $mod+Shift+Escape exec "i3lock -c 000000"
 
 # screenshot
-bindsym Print exec "scrot -e 'mv $f /home/zoid/screenshots/'"
+# requires pip install escrotum
+bindsym Shift exec "mv $(escrotum) ~/screenshots"
+bindsym Shift+Print exec "mv $(escrotum -s) ~/screenshots"
 
 # start bluetooth applet
 exec --no-startup-id blueman-applet
