@@ -183,19 +183,6 @@ autocmd FileType tex nnoremap <leader>ls :!<Space>setsid<Space>evince<Space><C-R
 " }}}
 
 " Section: Experimental {{{
-" Highlight trailing whitespace when not in insert mode
-" and highlight all tabs
-highlight EvilTabs ctermbg=red guibg=red
-highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd ColorScheme * highlight EvilTabs ctermbg=red guibg=red
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-match EvilTabs /\t/
-match ExtraWhitespace /\s\+\%#\@<!$/
-
-" Show a red column at character position 80
-highlight ColorColumn ctermbg=grey guibg=gray
-set colorcolumn=80
-
 " Zoom / Restore window.
 function! s:ZoomToggle() abort
     if exists('t:zoomed') && t:zoomed
@@ -217,7 +204,6 @@ filetype plugin indent on                  " detect filetype specific indent, pl
 set foldlevel=99
 set foldlevelstart=99                       " open most folds by default
 
-colorscheme torte
 set laststatus=2                            " Always show statusline
 " set iskeyword-=_                            " add _ (underscore) as word delimiter (eg. when navigating)
 autocmd BufEnter * lcd %:p:h                " Set working directory to the current file
@@ -272,6 +258,22 @@ set linebreak                               " wrap lines only on characters in '
 set whichwrap+=<,>,h,l,[,]                  " moving beyound edge moves to adjacent line
 set backspace=indent,eol,start              " enable deleting newline from beginning of next line
 
+" Highlight trailing whitespace when not in insert mode
+" and highlight all tabs
+highlight EvilTabs ctermbg=red guibg=red
+highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd ColorScheme * highlight EvilTabs ctermbg=red guibg=red
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+match EvilTabs /\t/
+match ExtraWhitespace /\s\+\%#\@<!$/
+
+colorscheme torte                           " colorscheme torte
+set background=light
+set background=dark
+
+" Show a lightgrey column at character position 80
+highlight ColorColumn guibg=#808080 ctermbg=8
+set colorcolumn=80
 " }}}
 
 " Section: To be revised {{{
