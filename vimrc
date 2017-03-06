@@ -28,6 +28,7 @@ vnoremap k gk
 vnoremap j gj
 
 nnoremap <space> za                         " toggle fold on spacebar
+nnoremap <leader>w :%s/\s\+$//<cr>          " delete all trailing whitespace
 
 " }}}
 
