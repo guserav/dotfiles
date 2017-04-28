@@ -227,8 +227,8 @@ set autoindent
 set ruler                                   " show line and column number
 
 set shiftwidth=2 tabstop=2 softtabstop=2    " sets default tab size to 2 spaces
-autocmd Filetype css setlocal tabstop=4
-autocmd Filetype python setlocal tabstop=4
+autocmd Filetype css setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd Filetype python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 "autocmd Filetype markdown setlocal shiftwidth=4 tabstop=4 softtabstop=4
 set expandtab                               " insert spaces when pressing tab
 
