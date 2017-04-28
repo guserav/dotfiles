@@ -64,10 +64,10 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+bindsym $mod+p focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+c focus child
 
 # switch to workspace
 bindsym $mod+1 workspace number 1
@@ -142,12 +142,14 @@ bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%
 bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle # amixer -q set Master toggle
 
+# suspend screen
+bindsym $mod+Shift+Escape exec i3lock -c 000000 && systemctl suspend
 # lock screen
-bindsym $mod+Shift+Escape exec "i3lock -c 000000"
+bindsym $mod+m exec "i3lock -c 000000; sleep 2; pgrep i3lock && xset dpms force off"
 
 # screenshot
 # requires pip install escrotum
-bindsym Shift exec "mv $(escrotum) ~/screenshots"
+bindsym control+Print exec "mv $(escrotum) ~/screenshots"
 bindsym Shift+Print exec "mv $(escrotum -s) ~/screenshots"
 
 # start bluetooth applet
@@ -158,7 +160,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id feh --bg-scale /home/zoid/wallpapers/HPE_wallpaper_2560x1440_r3.jpg
 
 # rename workspace on the fly
-bindsym $mod+c exec ~/.i3/rename_workspace
+bindsym $mod+comma exec ~/.i3/rename_workspace
 
 # flip through containers
 bindsym $mod+Tab focus right
