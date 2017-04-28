@@ -28,6 +28,7 @@ vnoremap k gk
 vnoremap j gj
 
 nnoremap <space> za                         " toggle fold on spacebar
+
 nnoremap <leader>w :%s/\s\+$//<cr>          " delete all trailing whitespace
 
 " }}}
@@ -72,9 +73,6 @@ if 1
 
   " repeat plugin commands
   Plugin 'tpope/vim-repeat'
-
-  " Git plugin TODO not yet tested
-  " Plugin 'tpope/vim-fugitive'
 
   " Python folding plugin
   " Plugin 'tmhedberg/SimpylFold'
@@ -133,6 +131,23 @@ if 1
 
   " Move seamlessly between vim and tmux panes
   Plugin 'christoomey/vim-tmux-navigator'
+
+  " Align lines by symbol like |, = or :
+  Plugin 'godlygeek/tabular'
+  Plugin 'junegunn/vim-easy-align'
+  xmap ga <Plug>(EasyAlign)
+  nmap ga <Plug>(EasyAlign)
+
+  " Text object for CamelCase and snake_case words
+  Plugin 'bkad/CamelCaseMotion'
+  call camelcasemotion#CreateMotionMappings('<leader>')
+  vmap <silent> <leader>i <Esc>l,bv,e
+  omap <silent> <leader>i :normal v,i<CR>
+
+  Plugin 'vim-scripts/argtextobj.vim'
+
+  Plugin 'michaeljsmith/vim-indent-object'
+
 
   call vundle#end()
 endif
@@ -268,13 +283,20 @@ autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 match EvilTabs /\t/
 match ExtraWhitespace /\s\+\%#\@<!$/
 
-colorscheme torte                           " colorscheme torte
-set background=light
 set background=dark
+colorscheme solarized                       " colorscheme solarized
 
 " Show a lightgrey column at character position 80
 highlight ColorColumn guibg=#808080 ctermbg=8
 set colorcolumn=80
+
+set timeout timeoutlen=250                  "  low timeout for partial commands
+
+" yank all matches of the previous search to register a
+function! YankMatches()
+  let @a = ''
+  %s//\=setreg('A', submatch(0), 'V')/gn
+endfunction
 " }}}
 
 " Section: To be revised {{{
