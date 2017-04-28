@@ -37,7 +37,16 @@ set -o vi                                                           # Enable vi 
 
 shopt -s globstar                                                   # Enable globstar (**) recurses directories
 
+# take screenshot
 function scrots {
     SCROT_NAME = escrot -s
     mv $SCROT_NAME "~/screenshots/$SCROT_NAME"
+}
+
+# count number of files in all subfolders
+function treecount {
+    find . -type d -print0 | while read -d '' -r dir; do
+        files=("$dir"/*)
+        printf "%5d files in directory %s\n" "${#files[@]}" "$dir"
+    done
 }
