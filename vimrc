@@ -5,11 +5,6 @@ let mapleader=","                           " set leader to , (Comma)
 nmap <silent> <leader>ev :e $MYVIMRC<cr>    " open .vimrc with <leader>ev
 nmap <silent> <leader>sv :so $MYVIMRC<cr>   " open .vimrc with <leader>sv
 
-nnoremap <silent> <leader><space> :nohlsearch<cr>    " turn off search highlight
-
-nnoremap <leader>m `                        " jump to marker by pressing leader, m and the buffer
-noremap gg mg<bar>gg                        " save position to marker g before jumping to beginning
-noremap G mG<bar>G                          " save position to marker G before jumping to end
 
 " move in split navigations with ^W prefix for tmux compatibility
 nnoremap <C-J> <C-W><C-J>
@@ -27,11 +22,12 @@ nnoremap j gj
 vnoremap k gk
 vnoremap j gj
 
+nnoremap <silent> <leader><space>
+    \ :nohlsearch<cr>                       " turn off search highlight
 nnoremap <space> za                         " toggle fold on spacebar
-
 nnoremap <silent><leader>w :%s/\s\+$//<cr>  " delete all trailing whitespace
-
 nnoremap <C-A> ggVG                         " select entire file
+nnoremap <leader>m `                        " jump to marker by pressing leader, m and the buffer
 
 " Zoom / Restore window.
 function! s:ZoomToggle() abort
@@ -47,7 +43,6 @@ function! s:ZoomToggle() abort
 endfunction
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <C-Z> :ZoomToggle<CR>
-
 
 " }}}
 
@@ -287,7 +282,7 @@ set splitbelow                              " new splits on the right and on the
 set splitright                              " more intutitive for LTR languages
 
 set wildmenu                                " visual autocomplete for command menu
-set wildmode=list:full
+set wildmode=list:full                      " autocomplete first match and show list
 
 set wrap                                    " wrap long lines
 set linebreak                               " wrap lines only on characters in 'breakat'
@@ -320,9 +315,10 @@ function! YankMatches()
 endfunction
 
 autocmd BufEnter * lcd %:p:h                " Set working directory to the current file
+
 " }}}
 
-" Section: To be revised {{{
+" Section: To be reviewed {{{
 
 "" delete, change and paste without yanking
 "nnoremap <leader>d "_d
