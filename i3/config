@@ -145,18 +145,19 @@ bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle # amixer -q set Master t
 # suspend screen
 bindsym $mod+Shift+Escape exec i3lock -c 000000 && systemctl suspend
 # lock screen
-bindsym $mod+m exec "i3lock -c 000000; sleep 2; pgrep i3lock && xset dpms force off"
+bindsym $mod+m exec "i3lock -c 000000; sleep 1; pgrep i3lock && xset dpms force off"
+bindsym $mod+b exec "sleep 1; xset dpms force off"
 
 # screenshot
 # requires pip install escrotum
 bindsym control+Print exec "mv $(escrotum) ~/screenshots"
-bindsym Shift+Print exec "mv $(escrotum -s) ~/screenshots"
+bindsym $mod+Print exec "sleep1; mv $(escrotum -s) ~/screenshots"
 
 # start bluetooth applet
 exec --no-startup-id blueman-applet
 # start wifi applet
 exec --no-startup-id nm-applet
-# se background picture
+# set background picture
 exec --no-startup-id feh --bg-scale /home/zoid/wallpapers/HPE_wallpaper_2560x1440_r3.jpg
 
 # rename workspace on the fly
