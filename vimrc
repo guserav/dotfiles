@@ -1,4 +1,4 @@
-" Section: Remappings {{{
+" Section: Mappings {{{
 
 let mapleader=","                           " set leader to , (Comma)
 
@@ -29,7 +29,25 @@ vnoremap j gj
 
 nnoremap <space> za                         " toggle fold on spacebar
 
-nnoremap <leader>w :%s/\s\+$//<cr>          " delete all trailing whitespace
+nnoremap <silent><leader>w :%s/\s\+$//<cr>  " delete all trailing whitespace
+
+nnoremap <C-A> ggVG                         " select entire file
+
+" Zoom / Restore window.
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+nnoremap <silent> <C-Z> :ZoomToggle<CR>
+
 
 " }}}
 
@@ -43,6 +61,8 @@ set rtp+=~/.vim/bundle/Vundle.vim
 if 1
   call vundle#begin()
 
+  " Plugins: In use {{{
+
   " let Vundle manage Vundle
   " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   Plugin 'VundleVim/Vundle.vim'
@@ -50,18 +70,6 @@ if 1
   " show git diff +, -, ~ at the left
   Plugin 'airblade/vim-gitgutter'
   set updatetime=250
-
-  " Snippets
-  " UltiSnips Snippet Engine
-  Plugin 'SirVer/ultisnips'
-  " Snippets are separated from the engine
-  Plugin 'honza/vim-snippets'
-  " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-  let g:UltiSnipsExpandTrigger="<tab>"
-  let g:UltiSnipsJumpForwardTrigger="<c-m>"
-  let g:UltiSnipsJumpBackwardTrigger="<c-n>"
-  " If you want :UltiSnipsEdit to split your window.
-  let g:UltiSnipsEditSplit="vertical"
 
   " cp to copy to system-clipboard
   " cP to copy line and cv to paste to next line
@@ -74,16 +82,7 @@ if 1
   " repeat plugin commands
   Plugin 'tpope/vim-repeat'
 
-  " Python folding plugin
-  " Plugin 'tmhedberg/SimpylFold'
-
-  " Autocomplete plugin for all kinds of languages
-  " REQUIRES:
-  " sudo apt-get install build-essential cmake
-  " sudo apt-get install python-dev python3-dev
-  " Plugin 'Valloric/YouCompleteMe'
-
-  " Plugin for the powerline
+  " Advanced powerline
   Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
   let g:Powerline_symbols = 'fancy'
 
@@ -96,11 +95,65 @@ if 1
   " Nerdtree file type highlighting
   Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 
+  " New textobject i - same indent level
+  Plugin 'michaeljsmith/vim-indent-object'
+
+  " }}}
+
+  " Plugins: Testing {{{
+
   " Plugin for visualizing the vim undo tree
   Plugin 'sjl/gundo.vim'
   nnoremap <leader>u :GundoToggle<CR>
 
-  " Syntax checker
+  " Automatically insert closing parentheses, brackets, etc.
+  Plugin 'jiangmiao/auto-pairs'
+
+  " Align lines by symbol like |, = or :
+  " and markdown table plugins
+  Plugin 'godlygeek/tabular'
+  Plugin 'junegunn/vim-easy-align'
+  xmap ga <Plug>(EasyAlign)
+  nmap ga <Plug>(EasyAlign)
+  Plugin 'dhruvasagar/vim-table-mode'
+  let g:table_mode_corner_corner='+'
+  let g:table_mode_header_fillchar='='
+
+  " New textobject a - arguments of functions
+  Plugin 'vim-scripts/argtextobj.vim'
+
+  " :Fp regex
+  " fold every line not matching regex
+  Plugin 'embear/vim-foldsearch'
+
+  Plugin 'vimwiki/vimwiki'
+
+  "}}}
+
+  " Plugins: Unused {{{
+
+  "  Snippets
+  "" UltiSnips Snippet Engine
+  "Plugin 'SirVer/ultisnips'
+  "" Snippets are separated from the engine
+  "Plugin 'honza/vim-snippets'
+  "" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+  "let g:UltiSnipsExpandTrigger="<tab>"
+  "let g:UltiSnipsJumpForwardTrigger="<c-m>"
+  "let g:UltiSnipsJumpBackwardTrigger="<c-n>"
+  "" If you want :UltiSnipsEdit to split your window.
+  "let g:UltiSnipsEditSplit="vertical"
+
+  "" Python folding plugin
+  "Plugin 'tmhedberg/SimpylFold'
+
+  "" Autocomplete plugin for all kinds of languages
+  "" REQUIRES:
+  "" sudo apt-get install build-essential cmake
+  "" sudo apt-get install python-dev python3-dev
+  "Plugin 'Valloric/YouCompleteMe'
+
+  "" Syntax checker
   "Plugin 'scrooloose/syntastic'
   "set statusline+=%#warningmsg#
   "set statusline+=%{SyntasticStatuslineFlag()}
@@ -110,44 +163,26 @@ if 1
   "let g:syntastic_check_on_open = 1
   "let g:syntastic_check_on_wq = 0
 
-  " Python mode
-  Plugin 'klen/python-mode'
-  " don't show error window - just the msg in the status bar
-  let g:pymode_lint_cwindow = 0
-  " close doc window after completion is done
-  autocmd CompleteDone * pclose
+  "" Python mode
+  "" TODOPlugin 'klen/python-mode'
+  "" don't show error window - just the msg in the status bar
+  "let g:pymode_lint_cwindow = 0
+  "" close doc window after completion is done
+  "autocmd CompleteDone * pclose
 
-  " A class outline viewer
-  " REQUIRES sudo apt-get install exuberant-ctags
-  Plugin 'majutsushi/tagbar'
-  noremap <leader>t :TagbarOpenAutoClose<CR>
-  noremap <leader>T :TagbarToggle<CR>
+  "" A class outline viewer
+  "" REQUIRES sudo apt-get install exuberant-ctags
+  "Plugin 'majutsushi/tagbar'
+  "noremap <leader>t :TagbarOpenAutoClose<CR>
+  "noremap <leader>T :TagbarToggle<CR>
 
-  " Automatically insert closing parentheses, brackets, etc.
-  Plugin 'jiangmiao/auto-pairs'
+  "" Requirement for ghc-mod
+  "Plugin 'Shougo/vimproc.vim'
 
-  " Requirement for ghc-mod
-  Plugin 'Shougo/vimproc.vim'
+  "" Move seamlessly between vim and tmux panes
+  "Plugin 'christoomey/vim-tmux-navigator'
 
-  " Move seamlessly between vim and tmux panes
-  Plugin 'christoomey/vim-tmux-navigator'
-
-  " Align lines by symbol like |, = or :
-  Plugin 'godlygeek/tabular'
-  Plugin 'junegunn/vim-easy-align'
-  xmap ga <Plug>(EasyAlign)
-  nmap ga <Plug>(EasyAlign)
-
-  " Text object for CamelCase and snake_case words
-  Plugin 'bkad/CamelCaseMotion'
-  call camelcasemotion#CreateMotionMappings('<leader>')
-  vmap <silent> <leader>i <Esc>l,bv,e
-  omap <silent> <leader>i :normal v,i<CR>
-
-  Plugin 'vim-scripts/argtextobj.vim'
-
-  Plugin 'michaeljsmith/vim-indent-object'
-
+  " }}}
 
   call vundle#end()
 endif
@@ -191,6 +226,7 @@ autocmd FileType markdown nnoremap <leader>lc :w<Enter>:! pandoc -o %.pdf %<Ente
 autocmd FileType markdown nnoremap <leader>lm :w<Enter>:!(setsid<Space>pandoc<Space>-o<Space>%.pdf<Space><C-R>%<Space>&><space>/dev/null&)<Enter><Enter>
 autocmd FileType markdown nnoremap <leader>ll :w<Enter>:!(setsid<Space>pandoc<Space>--latex-engine=xelatex<Space>-o<Space>%.pdf<Space><C-R>%<Space>&><space>/dev/null&)<Enter><Enter>
 autocmd FileType markdown nnoremap <leader>ls :!<Space>setsid<Space>evince<Space><C-R>%.pdf<Space>&><Space>/dev/null<Space>&<Enter><Enter>
+
 " compile latex
 autocmd FileType tex nnoremap <leader>lc :w<Enter>:! pdflatex --shell-escape %<Enter>
 autocmd FileType tex nnoremap <leader>ll :w<Enter>:!(setsid<Space>pdflatex<Space>--shell-escape<Space><C-R>%<Space>&><space>/dev/null&)<Enter><Enter>
@@ -199,20 +235,6 @@ autocmd FileType tex nnoremap <leader>ls :!<Space>setsid<Space>evince<Space><C-R
 " }}}
 
 " Section: Experimental {{{
-" Zoom / Restore window.
-function! s:ZoomToggle() abort
-    if exists('t:zoomed') && t:zoomed
-        execute t:zoom_winrestcmd
-        let t:zoomed = 0
-    else
-        let t:zoom_winrestcmd = winrestcmd()
-        resize
-        vertical resize
-        let t:zoomed = 1
-    endif
-endfunction
-command! ZoomToggle call s:ZoomToggle()
-nnoremap <silent> <C-Z> :ZoomToggle<CR>
 
 set foldmethod=syntax
 filetype plugin indent on                  " detect filetype specific indent, plugin, syntax...
@@ -222,7 +244,6 @@ set foldlevelstart=99                       " open most folds by default
 
 set laststatus=2                            " Always show statusline
 " set iskeyword-=_                            " add _ (underscore) as word delimiter (eg. when navigating)
-autocmd BufEnter * lcd %:p:h                " Set working directory to the current file
 
 au BufWinLeave * silent! mkview             " restore folds on load sadly throws errors
 au BufWinEnter * silent! loadview           " maybe needs foldlevel or foldlevelstart
@@ -266,7 +287,7 @@ set splitbelow                              " new splits on the right and on the
 set splitright                              " more intutitive for LTR languages
 
 set wildmenu                                " visual autocomplete for command menu
-set wildmode=list:longest,full
+set wildmode=list:full
 
 set wrap                                    " wrap long lines
 set linebreak                               " wrap lines only on characters in 'breakat'
@@ -297,29 +318,12 @@ function! YankMatches()
   let @a = ''
   %s//\=setreg('A', submatch(0), 'V')/gn
 endfunction
+
+autocmd BufEnter * lcd %:p:h                " Set working directory to the current file
 " }}}
 
 " Section: To be revised {{{
 
-""python with virtualenv support for code completion
-"py << EOF
-"import os
-"import sys
-"if 'VIRTUAL_ENV' in os.environ:
-"  project_base_dir = os.environ['VIRTUAL_ENV']
-"  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-"  execfile(activate_this, dict(__file__=activate_this))
-"EOF
-"
-"" add powerline
-"set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
-"" highlight last inserted text
-"nnoremap gV `[v`]
-"
-"" add this to ~/.vim/after/syntax/html.vim to enable proper folding for html
-"" syntax region htmlFold start="<\z(\<\(area\|base\|br\|col\|command\|embed\|hr\|img\|input\|keygen\|link\|meta\|para\|source\|track\|wbr\>\)\@![a-z-]\+\>\)\%(\_s*\_[^/]\?>\|\_s\_[^>]*\_[^>/]>\)" end="</\z1\_s*>" fold transparent keepend extend containedin=htmlHead,htmlH\d
-"
-"
 "" delete, change and paste without yanking
 "nnoremap <leader>d "_d
 "vnoremap <leader>d "_d
