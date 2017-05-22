@@ -49,19 +49,20 @@ class Py3status:
     timeout = 5
     url = None
     max_title_length = 25
-    datetime_format = "%a %H:%M"
-    time_format = "%H:%M"
+    day_format = "%a"
+    datetime_format = "%-H:%M"
+    time_format = "%-H:%M"
     format = "{remaining}h until {end}!"
-    next_format = "{title} - {time}"
+    next_format = "{title} ({day} {start}-{end})"
 
     next_event = False
     local_tz = get_localzone()
-    color = self.py3.COLOR_MUTED
 
 
     def rapla(self):
         event_index = int(self.next_event)
         now = dt.datetime.now(pytz.utc)
+        color = self.py3.COLOR_MUTED
         try:
             json_data = self.py3.request(self.url, timeout=self.timeout).json()
             # get the first two events that haven't ended yet
@@ -73,19 +74,24 @@ class Py3status:
 
             # display next event
             if self.next_event or parse(events[0]['start']) > now:
-                date_str = events[event_index]['start']
-                date = parse(date_str).astimezone(self.local_tz)
-                time = date.strftime(self.datetime_format)
+                start = parse(events[event_index]['start']) \
+                        .astimezone(self.local_tz)
+                end = parse(events[event_index]['end']) \
+                        .astimezone(self.local_tz)
                 title = events[event_index]['title'][:self.max_title_length]
 
-                diff = (date.date() - dt.datetime.today().date())
+                diff = (start.date() - dt.datetime.today().date())
                 if diff.days > 0:
                     days_until = "+{}d".format(diff.days)
                 else:
                     days_until = ""
                     color = self.py3.COLOR_DEGRADED
 
-                text = self.next_format.format(title=title, time=time,
+                text = self.next_format.format(
+                        title=title,
+                        day=start.strftime(self.day_format),
+                        start=start.strftime(self.datetime_format),
+                        end=end.strftime(self.datetime_format),
                         diff=diff)
             else: # display start and end of current event
                 end = parse(events[0]['end']).astimezone(self.local_tz)
