@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import json
-from datetime import datetime
+import datetime as dt
 from dateutil.parser import parse
 from tzlocal import get_localzone
+import pytz
 """
 Display current and next calendar entry from JSON URL.
 
@@ -49,31 +50,58 @@ class Py3status:
     url = None
     max_title_length = 25
     datetime_format = "%a %H:%M"
-    format = "{title} - {time}"
+    time_format = "%H:%M"
+    format = "{remaining}h until {end}!"
+    next_format = "{title} - {time}"
 
     next_event = False
     local_tz = get_localzone()
+    color = self.py3.COLOR_MUTED
 
 
     def rapla(self):
         event_index = int(self.next_event)
+        now = dt.datetime.now(pytz.utc)
         try:
             json_data = self.py3.request(self.url, timeout=self.timeout).json()
-            events = json_data['events']
+            # get the first two events that haven't ended yet
+            events = [
+                event for event
+                in json_data['events']
+                if parse(event['end']).astimezone(self.local_tz) > now
+            ][:2]
 
-            title = events[event_index]['title'][:self.max_title_length]
+            # display next event
+            if self.next_event or parse(events[0]['start']) > now:
+                date_str = events[event_index]['start']
+                date = parse(date_str).astimezone(self.local_tz)
+                time = date.strftime(self.datetime_format)
+                title = events[event_index]['title'][:self.max_title_length]
 
-            date = parse(events[event_index]['start']).astimezone(self.local_tz)
-            time = date.strftime(self.datetime_format)
-            days_until  = (date.date() - datetime.today().date()).days
-            diff = "+{}d".format(days_until) if days_until > 0 else ""
+                diff = (date.date() - dt.datetime.today().date())
+                if diff.days > 0:
+                    days_until = "+{}d".format(diff.days)
+                else:
+                    days_until = ""
+                    color = self.py3.COLOR_DEGRADED
 
-            text = self.format.format(title=title, time=time, diff=diff)
+                text = self.next_format.format(title=title, time=time,
+                        diff=diff)
+            else: # display start and end of current event
+                end = parse(events[0]['end']).astimezone(self.local_tz)
+                rem_sec = int((end - now).total_seconds())
+                remaining = dt.time(rem_sec // 3600, rem_sec % 3600 // 60, 0)
+
+                text = self.format.format(
+                        remaining=remaining.strftime(self.time_format),
+                        end=end.strftime(self.time_format))
+                color = self.py3.COLOR_GOOD if rem_sec < 3600 else self.py3.COLOR_BAD
         except self.py3.RequestException:
             text = "Could not reach URL"
 
         return {
             'full_text': text,
+            'color': color,
             'cached_until': self.py3.CACHE_FOREVER
         }
 
