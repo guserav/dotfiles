@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
+import os
 import json
+import time
 import datetime as dt
 from dateutil.parser import parse
 from tzlocal import get_localzone
@@ -43,9 +45,12 @@ module {
 @license GPLv2
 """
 
+class FileUpToDateException(Exception):
+    pass
+
 
 class Py3status:
-    cache_timeout = 30
+    cache_timeout = 5
     timeout = 5
     url = None
     max_title_length = 25
@@ -58,13 +63,30 @@ class Py3status:
     next_event = False
     local_tz = get_localzone()
 
+    cache_file = os.path.join(os.path.expanduser("~"), ".cache", "py3status_rapla.json")
+
 
     def rapla(self):
         event_index = int(self.next_event)
         now = dt.datetime.now(pytz.utc)
         color = self.py3.COLOR_MUTED
+
+        json_data = {}
         try:
-            json_data = self.py3.request(self.url, timeout=self.timeout).json()
+            if (not os.path.isfile(self.cache_file) or os.path.getmtime(self.cache_file) < time.time() - 3600):
+                json_data = self.py3.request(self.url, timeout=self.timeout).json()
+                with open(self.cache_file, "w") as f:
+                    json.dump(json_data, f)
+            else:
+                raise FileUpToDateException
+        except (self.py3.RequestException, FileUpToDateException) as e:
+            try:
+                with open(self.cache_file) as f:
+                    json_data = json.load(f)
+            except FileNotFoundError:
+                pass
+
+        if json_data:
             # get the first two events that haven't ended yet
             events = [
                 event for event
@@ -102,13 +124,13 @@ class Py3status:
                         remaining=remaining.strftime(self.time_format),
                         end=end.strftime(self.time_format))
                 color = self.py3.COLOR_GOOD if rem_sec < 3600 else self.py3.COLOR_BAD
-        except self.py3.RequestException:
+        else:
             text = "Could not reach URL"
 
         return {
             'full_text': text,
             'color': color,
-            'cached_until': self.py3.CACHE_FOREVER
+            'cache_until': self.cache_timeout
         }
 
     def on_click(self, event):
