@@ -1,0 +1,37 @@
+pacman -S
+lightdm                           # Login manager
+git                               # Source control
+python python2 pip-python         # Python 2&3 language and package manager
+vim                               # Commandline editor
+wget                              # Download files on the web
+openssh                           # ssh client & server
+tmux                              # Terminal multiplexer
+gnome-control-center              # Gnome "Control Panel"
+thunderbird                       # Thunderbird email client
+ranger                            # Console file browser
+nautilus                          # Graphical file browser
+xf86-input-synaptics              # Touchpad driver
+xsel                              # Clipboard manager
+i3-wm i3status i3lock             # i3 window manager
+xorg-xbacklight                   # Change LCD backlight
+intellij-idea-ultimate-edition    # IntelliJ Idea Ultimate
+jdk8-openjdk java-openjfx         # OpenJDK & JavaFX
+java-openjfx-src java-openjfx-doc # JavaFX sources and doc
+openjdk8-src openjdk8-doc         # JavaFX sources and doc
+evince                            # pdf Viewer
+libreoffice-still                 # LibreOffice
+chromium chromium-widevine        # Google Chrome & netflix player
+feh                               # Image viewer
+npm                               # node.js package manager
+arandr                            # GUI interface for XRandR
+pavucontrol                       # GUI interface for pulseaudio
+
+pacaur -S
+ttf-font-awesome                  # Font with icons
+ttf-fantasque-sans                # Pretty font
+xcape                             # Map e.g tab to escape
+escrotum-git                      # utility to take screenshots
+
+pip install
+py3status                         # i3 status bar in Python
+numpy pandas matplotlib           # Number & graphing libraries
