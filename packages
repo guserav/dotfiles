@@ -17,7 +17,7 @@ xorg-xbacklight                   # Change LCD backlight
 intellij-idea-ultimate-edition    # IntelliJ Idea Ultimate
 jdk8-openjdk java-openjfx         # OpenJDK & JavaFX
 java-openjfx-src java-openjfx-doc # JavaFX sources and doc
-openjdk8-src openjdk8-doc         # JavaFX sources and doc
+openjdk8-src openjdk8-doc         # Java JDK sources and doc
 evince                            # pdf Viewer
 libreoffice-still                 # LibreOffice
 chromium chromium-widevine        # Google Chrome & netflix player
@@ -25,12 +25,22 @@ feh                               # Image viewer
 npm                               # node.js package manager
 arandr                            # GUI interface for XRandR
 pavucontrol                       # GUI interface for pulseaudio
+cloc                              # Count SLOCs
+keepass                           # Password manager
+libnotify                         # Notification sending library
+dunst                             # Notification server
 
 pacaur -S
 ttf-font-awesome                  # Font with icons
 ttf-fantasque-sans                # Pretty font
 xcape                             # Map e.g tab to escape
 escrotum-git                      # utility to take screenshots
+android-platform                  # Android Platform
+android-sdk-build-tools           # Android Build tools
+android-support                   # Android Support Library
+android-support-repository        # Android Support Library
+android-tools                     # Android Tools
+android-udev                      # Android Device...
 
 pip install
 py3status                         # i3 status bar in Python
