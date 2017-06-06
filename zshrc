@@ -42,6 +42,23 @@ function zoidboot {
   setxkbmap -option 'caps:ctrl_modifier'              # Map Caps-Lock-modifier to Ctrl
 }
 
+function apply {
+  cat ~/dotfiles/terminalrc ~/dotfiles/$BACKGROUND > ~/.config/xfce4/terminal/terminalrc
+  sleep 0.5
+  touch ~/.config/xfce4/terminal/terminalrc
+}
+# change background color of terminal and vim
+function light {
+  export BACKGROUND="light" && apply
+}
+function dark {
+  export BACKGROUND="dark" && apply
+}
+# default is dark
+if [ -z "$BACKGROUND" ]; then
+    export BACKGROUND="dark"
+fi
+
 function dusort {
   du -hs "$@" | sort -h
 }
