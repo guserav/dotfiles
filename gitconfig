@@ -1,28 +1,44 @@
 [user]
 	email = ds@struckmeierfliesen.de
 	name = Daniel Schäfer
+
+[commit]
+	template= ~/.gitfiles/COMMIT_EDITMSG
+
 [push]
 	default = simple
+
+[pull]
+	rebase = true
+
 [advice]
   # Disable “how to stage/unstage/add” hints
   statusHints = false
+
 [diff]
   # basic rename and copy detection
   renames = copies
   # use mnemonic prefixes (index, work tree, commit, object) instead of a & b
   mnemonicprefix = true
+
 [branch]
   # When branching off a remote branch, automatically let the local branch track the remote branch
   autosetupmerge = true
+
 [merge]
   # Always show a diffstat at the end of a merge
   stat = true
+
 [core]
   # global .gitignore
   excludesfile = '~/.gitignore'
+
 [alias]
   hide = update-index --assume-unchanged
   unhide = update-index --no-assume-unchanged
+  unhide-all = update-index --really-refresh
+  hidden = "!f(){ git -C \"$GIT_PREFIX\" ls-files -v \"$@\" | grep \"^[a-z]\";}; f"
+  ignored = "!f(){ git -C \"$GIT_PREFIX\" status -s --ignored \"$@\" | grep \"^!!\";}; f"
   lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
   lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
   lg = !"git lg1"
