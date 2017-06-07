@@ -38,6 +38,7 @@ alias convertdoc="libreoffice --convert-to pdf *.doc* && rm *.doc*"
 alias showkeys="screenkey -t 1 --bak-mode baked --ignore Caps_Lock"
 # }}}
 
+# should be run after boot
 function zoidboot {
   xcape -e 'Caps_Lock=Escape'                                      # Map Caps-Lock to Escape
   setxkbmap -option 'caps:ctrl_modifier'                           # Map Caps-Lock-modifier to Ctrl
@@ -77,7 +78,14 @@ export ZSH=/home/zoid/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 # }}}
 
+# Python virtualenvwrapper
+export WORKON_HOME=~/.virtualenvs
+mkdir -p $WORKON_HOME
+source /usr/bin/virtualenvwrapper.sh
+
 # vi-keybindings
 bindkey -v '^?' backward-delete-char
+bindkey -v '^u' backward-kill-line
+bindkey -v '^w' backward-kill-word
 
 # zsh: foldmethod=marker
