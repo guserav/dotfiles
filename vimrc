@@ -2,8 +2,8 @@
 
 let mapleader=","                           " set leader to , (Comma)
 
-nmap <silent> <leader>ev :e $MYVIMRC<cr>    " open .vimrc with <leader>ev
-nmap <silent> <leader>sv :so $MYVIMRC<cr>   " open .vimrc with <leader>sv
+noremap <silent> <leader>ev :e $MYVIMRC<cr> " open .vimrc with <leader>ev
+noremap <silent> <leader>sv :so $MYVIMRC<cr>" open .vimrc with <leader>sv
 
 
 " move in split navigations with ^W prefix for tmux compatibility
@@ -22,12 +22,18 @@ nnoremap j gj
 vnoremap k gk
 vnoremap j gj
 
-nnoremap <silent> <leader><space>
-    \ :nohlsearch<cr>                       " turn off search highlight
+noremap <leader><space> :nohlsearch<cr><leader><space>                       " turn off search highlight
 nnoremap <space> za                         " toggle fold on spacebar
 nnoremap <silent><leader>w :%s/\s\+$//<cr>  " delete all trailing whitespace
-nnoremap <C-A> ggVG                         " select entire file
+vnoremap <c-a> <esc>ggVG                         " select entire file
 nnoremap <leader>m `                        " jump to marker by pressing leader, m and the buffer
+
+" scroll 3 lines instead of one
+nmap <C-Y> <C-Y>3
+nmap <C-E> <C-E>3
+
+" save as sudo
+cmap w!! w !sudo tee > /dev/null %
 
 " Zoom / Restore window.
 function! s:ZoomToggle() abort
@@ -48,12 +54,13 @@ nnoremap <silent> <C-Z> :ZoomToggle<CR>
 
 " Section: Plugins {{{
 
+" needed for vundle to work
 set nocompatible
 filetype off
 
 " Vundle Plugin manager
 set rtp+=~/.vim/bundle/Vundle.vim
-if 1
+if 1 " should check if vundle is installed
   call vundle#begin()
 
   " Plugins: In use {{{
@@ -62,11 +69,14 @@ if 1
   " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   Plugin 'VundleVim/Vundle.vim'
 
+  " solarized colorscheme
+  Plugin 'altercation/vim-colors-solarized'
+
   " show git diff +, -, ~ at the left
   Plugin 'airblade/vim-gitgutter'
-  set updatetime=250
+  "set updatetime=250
 
-  " cp to copy to system-clipboard
+  " cp to copy to system-Clipboard
   " cP to copy line and cv to paste to next line
   " REQUIRES apt-get install xsel
   Plugin 'christoomey/vim-system-copy'
@@ -83,6 +93,7 @@ if 1
 
   " File navigating plugin
   Plugin 'scrooloose/nerdtree'
+  let NERDTreeQuitOnOpen=1  " close nerdtree on opening file
   " close vim if only window left is nerdtree
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
   " toggle nerdtree with ctrl+n
@@ -93,20 +104,44 @@ if 1
   " New textobject i - same indent level
   Plugin 'michaeljsmith/vim-indent-object'
 
+  " Snippets
+  Plugin 'SirVer/ultisnips'
+  " Snippets are separated from the engine
+  Plugin 'honza/vim-snippets'
+  " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+  let g:UltiSnipsExpandTrigger="<tab>"
+  let g:UltiSnipsJumpForwardTrigger="<c-m>"
+  let g:UltiSnipsJumpBackwardTrigger="<c-n>"
+  " If you want :UltiSnipsEdit to split your window.
+  let g:UltiSnipsEditSplit="vertical"
+  " Dir for custom snippets
+  set runtimepath+=~/dotfiles/vim/snippets/
+
   " }}}
 
   " Plugins: Testing {{{
 
-  " Plugin for visualizing the vim undo tree
-  Plugin 'sjl/gundo.vim'
-  nnoremap <leader>u :GundoToggle<CR>
+  " fuzzy file finding
+  Plugin 'ctrlpvim/ctrlp.vim'
+  let g:ctrlp_map = '<c-p>'
+  let g:ctrlp_cmd = 'CtrlP'
+
+  " HTML Plugin
+  Plugin 'alvan/vim-closetag'
+
+  " JavaScript highlighting
+  Plugin 'pangloss/vim-javascript'
+  " JSX highlighting
+  Plugin 'mxw/vim-jsx'
+
+  " Elixir highlighting
+  Plugin 'elixir-lang/vim-elixir'
 
   " Automatically insert closing parentheses, brackets, etc.
   Plugin 'jiangmiao/auto-pairs'
 
   " Align lines by symbol like |, = or :
   " and markdown table plugins
-  Plugin 'godlygeek/tabular'
   Plugin 'junegunn/vim-easy-align'
   xmap ga <Plug>(EasyAlign)
   nmap ga <Plug>(EasyAlign)
@@ -115,7 +150,9 @@ if 1
   let g:table_mode_header_fillchar='='
 
   " New textobject a - arguments of functions
-  Plugin 'vim-scripts/argtextobj.vim'
+  Plugin 'b4winckler/vim-angry'
+
+  Plugin 'chrisbra/Colorizer'
 
   " :Fp regex
   " fold every line not matching regex
@@ -126,18 +163,6 @@ if 1
   "}}}
 
   " Plugins: Unused {{{
-
-  "  Snippets
-  "" UltiSnips Snippet Engine
-  "Plugin 'SirVer/ultisnips'
-  "" Snippets are separated from the engine
-  "Plugin 'honza/vim-snippets'
-  "" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-  "let g:UltiSnipsExpandTrigger="<tab>"
-  "let g:UltiSnipsJumpForwardTrigger="<c-m>"
-  "let g:UltiSnipsJumpBackwardTrigger="<c-n>"
-  "" If you want :UltiSnipsEdit to split your window.
-  "let g:UltiSnipsEditSplit="vertical"
 
   "" Python folding plugin
   "Plugin 'tmhedberg/SimpylFold'
@@ -186,31 +211,23 @@ endif
 
 " Section: OS-Specific {{{
 
-" if has("win32")
-" Windows {{{
+if has("win32")
+  " Windows {{{
 
-" nnoremap <leader>cp "*p                     " paste from system clipboard
-" nmap cv o<esc>0D"*p                           " paste from system clipboard
-" vnoremap <leader>cy "*y                     " copy to system clipboard
-" set backupdir=$HOME\_vim\backup\\
-" set directory=$HOME\_vim\tmp\\
+  set backupdir=$HOME\_vim\backup\\
+  set directory=$HOME\_vim\tmp\\
 
-" }}}
+  " }}}
+else
+  " Linux {{{
 
-" Linux {{{
+  " move the backup and temp files somewhere else so they don't clutter up the
+  " current directory
+  set backupdir=$HOME/.vim/backup//
+  set directory=$HOME/.vim/tmp//
 
-" source .vimrc_linux
-" paste with ,p<Enter>
-" nnoremap <leader>p :r !xsel -p
-" copy to system clipboard with ,y
-vnoremap <leader>y :w !xsel -i -b<Enter><Enter>
-
-" move the backup and temp files somewhere else so they don't clutter up the
-" current directory
-set backupdir=$HOME/.vim/backup//
-set directory=$HOME/.vim/tmp//
-
-" }}}
+  " }}}
+endif
 
 " }}}
 
@@ -250,16 +267,26 @@ au BufWinEnter * silent! loadview           " maybe needs foldlevel or foldlevel
 set encoding=utf-8                          " force utf8 support
 syntax on                                   " syntax highlighting
 set t_Co=256                                " Use 256 colours
-set mouse=a                                 " enable mouse (only for resizing splits)
 set showmatch                               " highlight matching braces/parentheses/brackets
 set cursorline                              " highlight current line
 set modelines=1                             " last line of this file applies to just this file
 set autoindent
 set ruler                                   " show line and column number
+set display=lastline,uhex                   " show non printable as hex and long last line
+set nostartofline                           " keep cursor in column when jumping
+
+" enable mouse (only for resizing splits)
+set mouse=a
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end
 
 set shiftwidth=2 tabstop=2 softtabstop=2    " sets default tab size to 2 spaces
 autocmd Filetype css setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd Filetype python setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd Filetype c setlocal shiftwidth=4 tabstop=4 softtabstop=4
 "autocmd Filetype markdown setlocal shiftwidth=4 tabstop=4 softtabstop=4
 set expandtab                               " insert spaces when pressing tab
 
@@ -299,14 +326,14 @@ autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 match EvilTabs /\t/
 match ExtraWhitespace /\s\+\%#\@<!$/
 
-set background=dark
+execute "set background=".$BACKGROUND
 colorscheme solarized                       " colorscheme solarized
 
 " Show a lightgrey column at character position 80
 highlight ColorColumn guibg=#808080 ctermbg=8
 set colorcolumn=80
 
-set timeout timeoutlen=250                  "  low timeout for partial commands
+set timeout timeoutlen=500                  "  low timeout for partial commands
 
 " yank all matches of the previous search to register a
 function! YankMatches()
