@@ -1,36 +1,52 @@
-pacman -S
-lightdm                           # Login manager
+# Aptitude
+build-essential                   # Packages for application building
+
+# pip install
+py3status                         # i3 status bar in Python
+numpy pandas matplotlib           # Number & graphing libraries
+
+# pacman -S
+## server
 git                               # Source control
 python python2 pip-python         # Python 2&3 language and package manager
 vim                               # Commandline editor
 wget                              # Download files on the web
 openssh                           # ssh client & server
 tmux                              # Terminal multiplexer
+ranger                            # Console file browser
+jdk8-openjdk java-openjfx         # OpenJDK & JavaFX
+java-openjfx-src java-openjfx-doc # JavaFX sources and doc
+openjdk8-src openjdk8-doc         # Java JDK sources and doc
+npm                               # node.js package manager
+cloc                              # Count SLOCs
+vifm                              # Vi like command line file manager
+pdfgrep                           # grep for pdf files
+bc                                # calculator language
+ufw                               # Firewall
+fail2ban                          # Autoban ssh spammers
+
+## desktop/laptop
+lightdm                           # Login manager
 gnome-control-center              # Gnome "Control Panel"
 thunderbird                       # Thunderbird email client
-ranger                            # Console file browser
 nautilus                          # Graphical file browser
 xf86-input-synaptics              # Touchpad driver
 xsel                              # Clipboard manager
 i3-wm i3status i3lock             # i3 window manager
 xorg-xbacklight                   # Change LCD backlight
 intellij-idea-ultimate-edition    # IntelliJ Idea Ultimate
-jdk8-openjdk java-openjfx         # OpenJDK & JavaFX
-java-openjfx-src java-openjfx-doc # JavaFX sources and doc
-openjdk8-src openjdk8-doc         # Java JDK sources and doc
 evince                            # pdf Viewer
 libreoffice-still                 # LibreOffice
 chromium chromium-widevine        # Google Chrome & netflix player
 feh                               # Image viewer
-npm                               # node.js package manager
 arandr                            # GUI interface for XRandR
 pavucontrol                       # GUI interface for pulseaudio
-cloc                              # Count SLOCs
 keepass                           # Password manager
 libnotify                         # Notification sending library
 dunst                             # Notification server
+poppler                           # PDF to text (preview in vifm)
 
-pacaur -S
+# pacaur -S
 ttf-font-awesome                  # Font with icons
 ttf-fantasque-sans                # Pretty font
 xcape                             # Map e.g tab to escape
@@ -41,7 +57,4 @@ android-support                   # Android Support Library
 android-support-repository        # Android Support Library
 android-tools                     # Android Tools
 android-udev                      # Android Device...
-
-pip install
-py3status                         # i3 status bar in Python
-numpy pandas matplotlib           # Number & graphing libraries
+woof                              # Simple one-off HTTP file sharing
