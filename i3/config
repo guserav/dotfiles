@@ -30,6 +30,12 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
+# move workspace to other monitor
+bindsym $mod+Left move workspace to output left
+bindsym $mod+Down move workspace to output down
+bindsym $mod+Up move workspace to output up
+bindsym $mod+Right move workspace to output right
+
 # split in horizontal orientation
 bindsym $mod+i split h
 
@@ -67,6 +73,7 @@ bindsym $mod+7 workspace number 7
 bindsym $mod+8 workspace number 8
 bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
+bindsym $mod+odiaeresis workspace ""
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number 1
@@ -95,16 +102,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym odiaeresis resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym h resize grow width 5 px or 5 ppt
+        bindsym l resize shrink width 5 px or 5 ppt
+        bindsym k resize grow height 5 px or 5 ppt
+        bindsym j resize shrink height 5 px or 5 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -138,8 +139,8 @@ bindsym $mod+b exec "sleep 1; xset dpms force off"
 
 # screenshot
 # requires pip install escrotum
-bindsym control+Print exec "mv $(escrotum) ~/screenshots"
-bindsym $mod+Print exec "sleep1; mv $(escrotum -s) ~/screenshots"
+bindsym control+Print exec "mv $(escrotum) ~/screenshots; notify-send 'Screenshot taken'"
+bindsym $mod+Print exec "sleep1; mv $(escrotum -s) ~/screenshots; notify-send 'Screenshot taken'"
 
 # start bluetooth applet
 exec --no-startup-id blueman-applet
@@ -153,3 +154,19 @@ bindsym $mod+comma exec ~/.i3/rename_workspace
 
 # flip through containers
 bindsym $mod+Tab focus right
+
+# hide borders at screen edges
+hide_edge_borders both
+
+# Automatic back-and-forth when switching to the current workspace
+workspace_auto_back_and_forth yes
+
+# browser pop-ups
+for_window [window_role="pop-up"] floating enable
+
+# do not focus newly opened windows
+#no_focus [class="[.]*"]
+#for_window [class="zenity"] focus
+
+# no titlebars for i3 gaps
+for_window [class="^.*"] border pixel 0
