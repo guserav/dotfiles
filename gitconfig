@@ -9,7 +9,7 @@
 	default = simple
 
 [pull]
-	rebase = true
+	rebase = preserve
 
 [advice]
   # Disable “how to stage/unstage/add” hints
