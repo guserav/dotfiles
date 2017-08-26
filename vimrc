@@ -5,13 +5,6 @@ let mapleader=","                           " set leader to , (Comma)
 noremap <silent> <leader>ev :e $MYVIMRC<cr> " open .vimrc with <leader>ev
 noremap <silent> <leader>sv :so $MYVIMRC<cr>" open .vimrc with <leader>sv
 
-
-" move in split navigations with ^W prefix for tmux compatibility
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
 " Support indenting multiple times in visual mode
 vnoremap < <gv
 vnoremap > >gv
@@ -26,7 +19,6 @@ noremap <leader><space> :nohlsearch<cr><leader><space>                       " t
 nnoremap <space> za                         " toggle fold on spacebar
 nnoremap <silent><leader>w :%s/\s\+$//<cr>  " delete all trailing whitespace
 vnoremap <c-a> <esc>ggVG                         " select entire file
-nnoremap <leader>m `                        " jump to marker by pressing leader, m and the buffer
 
 " scroll 3 lines instead of one
 nmap <C-Y> <C-Y>3
