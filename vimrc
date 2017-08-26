@@ -24,6 +24,10 @@ vnoremap <c-a> <esc>ggVG                    " select entire file
 nmap <C-Y> <C-Y>3
 nmap <C-E> <C-E>3
 
+" scroll 10 cols instead of one
+nnoremap zh 10zh
+nnoremap zl 10zl
+
 " save as sudo
 cmap w!! w !sudo tee > /dev/null %
 
