@@ -308,14 +308,11 @@ else
     set ttymouse=xterm2
 end
 
-set shiftwidth=2 tabstop=2 softtabstop=2    " sets default tab size to 2 spaces
-autocmd Filetype css setlocal shiftwidth=4 tabstop=4 softtabstop=4
-autocmd Filetype python setlocal shiftwidth=4 tabstop=4 softtabstop=4
-autocmd Filetype c setlocal shiftwidth=4 tabstop=4 softtabstop=4
-"autocmd Filetype markdown setlocal shiftwidth=4 tabstop=4 softtabstop=4
+set shiftwidth=4 tabstop=4 softtabstop=4    " sets default tab size to 4 spaces
 set expandtab                               " insert spaces when pressing tab
+autocmd Filetype markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
-" move swapfiles somewhere else (directories decloared in OS specific
+" move swapfiles somewhere else (directories declared in OS specific)
 " Two path separators at the end to ensure file name uniqueness
 " in the preserve directory (see the :help docs)
 set swapfile
@@ -324,6 +321,7 @@ set backup
 set relativenumber                          " show relative line numbers
 set number                                  " but absolute of current line
 
+set ignorecase                              " make search case insensitive
 set smartcase                               " Case insensitive searches become sensitive with capitals
 set lazyredraw                              " redraw only when we need to
 set incsearch                               " search as characters are entered
@@ -343,17 +341,16 @@ highlight EvilTabs ctermbg=red guibg=red
 highlight ExtraWhitespace ctermbg=red guibg=red
 autocmd ColorScheme * highlight EvilTabs ctermbg=red guibg=red
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-match EvilTabs /\t/
 match ExtraWhitespace /\s\+\%#\@<!$/
-
-execute "set background=".$BACKGROUND
-colorscheme solarized                       " colorscheme solarized
+match EvilTabs /\t/
 
 " Show a lightgrey column at character position 80
 highlight ColorColumn guibg=#808080 ctermbg=8
 set colorcolumn=80
 
-set timeout timeoutlen=500                  "  low timeout for partial commands
+colorscheme solarized                       " colorscheme solarized
+" control background color with ENV variable
+execute "set background=".$BACKGROUND
 
 " yank all matches of the previous search to register a
 function! YankMatches()
