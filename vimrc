@@ -10,10 +10,15 @@ vnoremap < <gv
 vnoremap > >gv
 
 " move in wrapped line as if they were separate
+" flip meaning of j and gj, and k and gk
 nnoremap k gk
 nnoremap j gj
 vnoremap k gk
 vnoremap j gj
+nnoremap gk k
+nnoremap gj j
+vnoremap gk k
+vnoremap gj j
 
 noremap <leader><space> :nohlsearch<cr><leader><space> " turn off search highlight
 nnoremap <space> za                         " toggle fold on spacebar
