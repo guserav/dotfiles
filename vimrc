@@ -15,10 +15,10 @@ nnoremap j gj
 vnoremap k gk
 vnoremap j gj
 
-noremap <leader><space> :nohlsearch<cr><leader><space>                       " turn off search highlight
+noremap <leader><space> :nohlsearch<cr><leader><space> " turn off search highlight
 nnoremap <space> za                         " toggle fold on spacebar
 nnoremap <silent><leader>w :%s/\s\+$//<cr>  " delete all trailing whitespace
-vnoremap <c-a> <esc>ggVG                         " select entire file
+vnoremap <c-a> <esc>ggVG                    " select entire file
 
 " scroll 3 lines instead of one
 nmap <C-Y> <C-Y>3
@@ -51,14 +51,15 @@ set nocompatible
 filetype off
 
 " Vundle Plugin manager
+" install Vundle:
+" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 set rtp+=~/.vim/bundle/Vundle.vim
-if 1 " should check if vundle is installed
+if 1 " TODO: should check if vundle is installed
   call vundle#begin()
 
   " Plugins: In use {{{
 
   " let Vundle manage Vundle
-  " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   Plugin 'VundleVim/Vundle.vim'
 
   " solarized colorscheme
@@ -70,7 +71,7 @@ if 1 " should check if vundle is installed
 
   " cp to copy to system-Clipboard
   " cP to copy line and cv to paste to next line
-  " REQUIRES apt-get install xsel
+  " REQUIRES xsel to be installed or clip and paste on Windows
   Plugin 'christoomey/vim-system-copy'
 
   " surround with s
@@ -92,9 +93,6 @@ if 1 " should check if vundle is installed
   map <C-n> :NERDTreeToggle<CR>
   " Nerdtree file type highlighting
   Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
-
-  " New textobject i - same indent level
-  Plugin 'michaeljsmith/vim-indent-object'
 
   " Snippets
   Plugin 'SirVer/ultisnips'
@@ -131,6 +129,9 @@ if 1 " should check if vundle is installed
 
   " Automatically insert closing parentheses, brackets, etc.
   Plugin 'jiangmiao/auto-pairs'
+  " New textobject i - same indent level
+  Plugin 'michaeljsmith/vim-indent-object'
+
 
   " Align lines by symbol like |, = or :
   " and markdown table plugins
@@ -138,8 +139,8 @@ if 1 " should check if vundle is installed
   xmap ga <Plug>(EasyAlign)
   nmap ga <Plug>(EasyAlign)
   Plugin 'dhruvasagar/vim-table-mode'
-  let g:table_mode_corner_corner='+'
-  let g:table_mode_header_fillchar='='
+  "let g:table_mode_corner_corner='|'
+  "let g:table_mode_header_fillchar='-'
 
   " New textobject a - arguments of functions
   Plugin 'b4winckler/vim-angry'
@@ -267,6 +268,15 @@ set ruler                                   " show line and column number
 set display=lastline,uhex                   " show non printable as hex and long last line
 set nostartofline                           " keep cursor in column when jumping
 
+set nowrap                                  " just cut off lines that are too long
+set sidescroll=10                           " only scroll 10 cols to the side when reaching screen end
+set sidescrolloff=5                         " start scrolling 5 cols from the edge
+set textwidth=0                             " don't break lines at all if they are too long
+"set linebreak                               " wrap lines only on characters in 'breakat'
+"set breakat&vim                             " reset breakat to vims default
+set whichwrap+=<,>,h,l,[,]                  " moving beyound edge moves to adjacent line
+set backspace=indent,eol,start              " enable deleting newline from beginning of next line
+
 " enable mouse (only for resizing splits)
 set mouse=a
 if has("mouse_sgr")
@@ -291,23 +301,18 @@ set backup
 set relativenumber                          " show relative line numbers
 set number                                  " but absolute of current line
 
-set ignorecase                              " make search case insensitive
 set smartcase                               " Case insensitive searches become sensitive with capitals
 set lazyredraw                              " redraw only when we need to
 set incsearch                               " search as characters are entered
 set hlsearch                                " highlight matches
 
-set splitbelow                              " new splits on the right and on the botttom
+set splitbelow                              " new splits on the right and on the bottom
 set splitright                              " more intutitive for LTR languages
 
 set wildmenu                                " visual autocomplete for command menu
 set wildmode=list:full                      " autocomplete first match and show list
 
-set wrap                                    " wrap long lines
-set linebreak                               " wrap lines only on characters in 'breakat'
-" set breakat&vim                           " reset breakat to vims default
-set whichwrap+=<,>,h,l,[,]                  " moving beyound edge moves to adjacent line
-set backspace=indent,eol,start              " enable deleting newline from beginning of next line
+set timeout timeoutlen=500                  "  low timeout for partial commands
 
 " Highlight trailing whitespace when not in insert mode
 " and highlight all tabs
