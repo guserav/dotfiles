@@ -92,6 +92,7 @@ if 1 " TODO: should check if vundle is installed
   " Advanced powerline
   Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
   let g:Powerline_symbols = 'fancy'
+  let g:powerline_pycmd = 'py3'
 
   " File navigating plugin
   Plugin 'scrooloose/nerdtree'
@@ -116,31 +117,43 @@ if 1 " TODO: should check if vundle is installed
   " Dir for custom snippets
   set runtimepath+=~/dotfiles/vim/snippets/
 
-  " }}}
-
-  " Plugins: Testing {{{
+  " Automatically insert closing parentheses, brackets, etc.
+  Plugin 'jiangmiao/auto-pairs'
+  let g:AutoPairsFlyMode = 0
+  let g:AutoPairsShortcutBackInsert = '<C-u>'
 
   " fuzzy file finding
   Plugin 'ctrlpvim/ctrlp.vim'
   let g:ctrlp_map = '<c-p>'
   let g:ctrlp_cmd = 'CtrlP'
 
-  " HTML Plugin
-  Plugin 'alvan/vim-closetag'
+  " }}}
 
-  " JavaScript highlighting
-  Plugin 'pangloss/vim-javascript'
-  " JSX highlighting
-  Plugin 'mxw/vim-jsx'
+  " Plugins: Testing {{{
 
-  " Elixir highlighting
-  Plugin 'elixir-lang/vim-elixir'
+  " Language pack for all kinds of languages
+  Plugin 'sheerun/vim-polyglot'
 
-  " Automatically insert closing parentheses, brackets, etc.
-  Plugin 'jiangmiao/auto-pairs'
   " New textobject i - same indent level
   Plugin 'michaeljsmith/vim-indent-object'
 
+  " HTML Plugin
+  Plugin 'alvan/vim-closetag'
+
+  Plugin 'easymotion/vim-easymotion'
+  let g:EasyMotion_do_mapping = 0 " Disable default mappings
+  " Jump to anywhere you want with minimal keystrokes, with just one key binding.
+  " `s{char}{label}`
+  nmap s <Plug>(easymotion-overwin-f)
+  " or
+  " `s{char}{char}{label}`
+  " Need one more keystroke, but on average, it may be more comfortable.
+  nmap s <Plug>(easymotion-overwin-f2)
+  " Turn on case insensitive feature
+  let g:EasyMotion_smartcase = 1
+  " JK motions: Line motions
+  map <Leader>j <Plug>(easymotion-j)
+  map <Leader>k <Plug>(easymotion-k)
 
   " Align lines by symbol like |, = or :
   " and markdown table plugins
@@ -161,6 +174,7 @@ if 1 " TODO: should check if vundle is installed
   Plugin 'embear/vim-foldsearch'
 
   Plugin 'vimwiki/vimwiki'
+  " let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 
   "}}}
 
