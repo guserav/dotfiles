@@ -24,6 +24,7 @@ pdfgrep                           # grep for pdf files
 bc                                # calculator language
 ufw                               # Firewall
 fail2ban                          # Autoban ssh spammers
+libtinfo                          # symlink to ncurses for use in cuda and other packages (haskell stack)
 
 ## desktop/laptop
 lightdm                           # Login manager
@@ -45,6 +46,7 @@ keepass                           # Password manager
 libnotify                         # Notification sending library
 dunst                             # Notification server
 poppler                           # PDF to text (preview in vifm)
+playerctl                         # Control media applications
 
 # pacaur -S
 ttf-font-awesome                  # Font with icons
