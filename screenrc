@@ -1,0 +1,21 @@
+# show window bar always
+hardstatus alwayslastline '%{= G}[ %{G}%H %{g} ][%= %{= w}%?%-Lw%?%{= R}%n*%f %t%?%{= R}(%u)%?%{= w}%+Lw%?%= %{= g}][ %{y}Load: %l %{g} ][%{B}%Y-%m-%d %{W}%c:%s %{g}]'
+
+# bind prefix to tmux-like CTRL-b
+escape ^Bb
+
+# start window numbering at 1
+bind c screen 1
+bind ^c screen 1
+bind 0 select 10                                                            
+screen 1
+
+# disable default welcome message
+startup_message off
+
+# Use X scrolling mechanism
+termcapinfo xterm* ti@:te@
+
+# don't show editor contents after closing it
+altscreen on
+
