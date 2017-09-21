@@ -150,12 +150,16 @@ bindsym $mod+b exec "sleep 1; xset dpms force off"
 bindsym control+Print exec "mv $(escrotum) ~/screenshots; notify-send 'Screenshot taken'"
 bindsym $mod+Print exec "sleep1; mv $(escrotum -s) ~/screenshots; notify-send 'Screenshot taken'"
 
-# start bluetooth applet
-exec --no-startup-id blueman-applet
 # start wifi applet
 exec --no-startup-id nm-applet
 # set background picture
 exec --no-startup-id feh --bg-scale ~/.wallpaper
+# start dunst notification daemon
+exec --no-startup-id dunst
+
+#exec --no-startup-id i3-msg 'workspace "1:www"; exec /usr/bin/chromium'
+#exec --no-startup-id i3-msg 'workspace "10"; exec /usr/bin/xfce4-terminal'
+#exec --no-startup-id i3-msg 'workspace ""; exec /usr/bin/spotify'
 
 # rename workspace on the fly
 bindsym $mod+comma exec ~/.i3/rename_workspace
@@ -168,6 +172,7 @@ workspace_auto_back_and_forth yes
 
 # browser pop-ups
 for_window [window_role="pop-up"] floating enable
+for_window [class="Arandr"] floating enable
 
 # do not focus newly opened windows
 #no_focus [class="[.]*"]
