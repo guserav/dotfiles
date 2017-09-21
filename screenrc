@@ -1,3 +1,4 @@
+
 # show window bar always
 hardstatus alwayslastline '%{= G}[ %{G}%H %{g} ][%= %{= w}%?%-Lw%?%{= R}%n*%f %t%?%{= R}(%u)%?%{= w}%+Lw%?%= %{= g}][ %{y}Load: %l %{g} ][%{B}%Y-%m-%d %{W}%c:%s %{g}]'
 
@@ -19,3 +20,22 @@ termcapinfo xterm* ti@:te@
 # don't show editor contents after closing it
 altscreen on
 
+# move between splits with CTRL-[hkjl]
+bind h focus left
+bind j focus down
+bind k focus up
+bind l focus right
+
+# automatically detach on terminal hangup (so that one can attach again and
+# continue working)
+autodetach on
+
+# ignore case on searches in copy-mode
+ignorecase on
+
+# assume UTF-8 encoding
+defutf8 on
+
+# reload configuration file (note that this creates extra layout due to
+# `layout new initial` command)
+bind r source ~/.screenrc
