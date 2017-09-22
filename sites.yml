@@ -1,6 +1,6 @@
 ---
 - hosts: localhost
   roles:
-    - vim
     - git
+    - vim
     - tmux

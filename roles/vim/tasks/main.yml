@@ -13,6 +13,12 @@
     - tmp
     - backup
     - autoload
+    - colors
+
+- name: Install solarized colorscheme
+  get_url:
+    url: https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim
+    dest: ~/.vim/colors/solarized.vim
 
 - name: Install vim-plug plugin manager
   get_url:

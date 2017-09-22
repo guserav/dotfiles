@@ -67,9 +67,6 @@ if 1 " TODO: should check if vundle is installed
   " let Vundle manage Vundle
   Plug 'VundleVim/Vundle.vim'
 
-  " solarized colorscheme
-  Plug 'altercation/vim-colors-solarized'
-
   " show git diff +, -, ~ at the left
   Plug 'airblade/vim-gitgutter'
   "set updatetime=250
