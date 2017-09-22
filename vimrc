@@ -55,59 +55,52 @@ nnoremap <silent> <C-Z> :ZoomToggle<CR>
 
 " Section: Plugins {{{
 
-" needed for vundle to work
-set nocompatible
-filetype off
-
-" Vundle Plugin manager
-" install Vundle:
-" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-set rtp+=~/.vim/bundle/Vundle.vim
-if 1 " TODO: should check if vundle is installed
-  call vundle#begin()
+" vim-plug Plugin manager
+" install vim-plug:
+" $ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if 1 " TODO: should check if vim-plug is installed
+  call plug#begin()
 
   " Plugins: In use {{{
 
-  " let Vundle manage Vundle
-  Plugin 'VundleVim/Vundle.vim'
-
   " solarized colorscheme
-  Plugin 'altercation/vim-colors-solarized'
+  Plug 'altercation/vim-colors-solarized'
 
   " show git diff +, -, ~ at the left
-  Plugin 'airblade/vim-gitgutter'
+  Plug 'airblade/vim-gitgutter'
   "set updatetime=250
 
   " cp to copy to system-Clipboard
   " cP to copy line and cv to paste to next line
   " REQUIRES xsel to be installed or clip and paste on Windows
-  Plugin 'christoomey/vim-system-copy'
+  Plug 'christoomey/vim-system-copy'
 
   " surround with s
-  Plugin 'tpope/vim-surround'
+  Plug 'tpope/vim-surround'
 
   " repeat plugin commands
-  Plugin 'tpope/vim-repeat'
+  Plug 'tpope/vim-repeat'
 
   " Advanced powerline
-  Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+  Plug 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
   let g:Powerline_symbols = 'fancy'
   let g:powerline_pycmd = 'py3'
 
   " File navigating plugin
-  Plugin 'scrooloose/nerdtree'
+  Plug 'scrooloose/nerdtree'
   let NERDTreeQuitOnOpen=1  " close nerdtree on opening file
   " close vim if only window left is nerdtree
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
   " toggle nerdtree with ctrl+n
   map <C-n> :NERDTreeToggle<CR>
   " Nerdtree file type highlighting
-  Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
   " Snippets
-  Plugin 'SirVer/ultisnips'
+  Plug 'SirVer/ultisnips'
   " Snippets are separated from the engine
-  Plugin 'honza/vim-snippets'
+  Plug 'honza/vim-snippets'
   " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
   let g:UltiSnipsExpandTrigger="<tab>"
   let g:UltiSnipsJumpForwardTrigger="<c-m>"
@@ -118,12 +111,12 @@ if 1 " TODO: should check if vundle is installed
   set runtimepath+=~/dotfiles/vim/snippets/
 
   " Automatically insert closing parentheses, brackets, etc.
-  Plugin 'jiangmiao/auto-pairs'
+  Plug 'jiangmiao/auto-pairs'
   let g:AutoPairsFlyMode = 0
   let g:AutoPairsShortcutBackInsert = '<C-u>'
 
   " fuzzy file finding
-  Plugin 'ctrlpvim/ctrlp.vim'
+  Plug 'ctrlpvim/ctrlp.vim'
   let g:ctrlp_map = '<c-p>'
   let g:ctrlp_cmd = 'CtrlP'
 
@@ -132,15 +125,15 @@ if 1 " TODO: should check if vundle is installed
   " Plugins: Testing {{{
 
   " Language pack for all kinds of languages
-  Plugin 'sheerun/vim-polyglot'
+  Plug 'sheerun/vim-polyglot'
 
   " New textobject i - same indent level
-  Plugin 'michaeljsmith/vim-indent-object'
+  Plug 'michaeljsmith/vim-indent-object'
 
   " HTML Plugin
-  Plugin 'alvan/vim-closetag'
+  Plug 'alvan/vim-closetag'
 
-  Plugin 'easymotion/vim-easymotion'
+  Plug 'easymotion/vim-easymotion'
   let g:EasyMotion_do_mapping = 0 " Disable default mappings
   " Jump to anywhere you want with minimal keystrokes, with just one key binding.
   " `s{char}{label}`
@@ -157,23 +150,23 @@ if 1 " TODO: should check if vundle is installed
 
   " Align lines by symbol like |, = or :
   " and markdown table plugins
-  Plugin 'junegunn/vim-easy-align'
+  Plug 'junegunn/vim-easy-align'
   xmap ga <Plug>(EasyAlign)
   nmap ga <Plug>(EasyAlign)
-  Plugin 'dhruvasagar/vim-table-mode'
+  Plug 'dhruvasagar/vim-table-mode'
   "let g:table_mode_corner_corner='|'
   "let g:table_mode_header_fillchar='-'
 
   " New textobject a - arguments of functions
-  Plugin 'b4winckler/vim-angry'
+  Plug 'b4winckler/vim-angry'
 
-  Plugin 'chrisbra/Colorizer'
+  Plug 'chrisbra/Colorizer'
 
   " :Fp regex
   " fold every line not matching regex
-  Plugin 'embear/vim-foldsearch'
+  Plug 'embear/vim-foldsearch'
 
-  Plugin 'vimwiki/vimwiki'
+  Plug 'vimwiki/vimwiki'
   " let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 
   "}}}
@@ -181,16 +174,16 @@ if 1 " TODO: should check if vundle is installed
   " Plugins: Unused {{{
 
   "" Python folding plugin
-  "Plugin 'tmhedberg/SimpylFold'
+  "Plug 'tmhedberg/SimpylFold'
 
   "" Autocomplete plugin for all kinds of languages
   "" REQUIRES:
   "" sudo apt-get install build-essential cmake
   "" sudo apt-get install python-dev python3-dev
-  "Plugin 'Valloric/YouCompleteMe'
+  "Plug 'Valloric/YouCompleteMe'
 
   "" Syntax checker
-  "Plugin 'scrooloose/syntastic'
+  "Plug 'scrooloose/syntastic'
   "set statusline+=%#warningmsg#
   "set statusline+=%{SyntasticStatuslineFlag()}
   "set statusline+=%*
@@ -200,7 +193,7 @@ if 1 " TODO: should check if vundle is installed
   "let g:syntastic_check_on_wq = 0
 
   "" Python mode
-  "" TODOPlugin 'klen/python-mode'
+  "" Plug 'klen/python-mode'
   "" don't show error window - just the msg in the status bar
   "let g:pymode_lint_cwindow = 0
   "" close doc window after completion is done
@@ -208,19 +201,19 @@ if 1 " TODO: should check if vundle is installed
 
   "" A class outline viewer
   "" REQUIRES sudo apt-get install exuberant-ctags
-  "Plugin 'majutsushi/tagbar'
+  "Plug 'majutsushi/tagbar'
   "noremap <leader>t :TagbarOpenAutoClose<CR>
   "noremap <leader>T :TagbarToggle<CR>
 
   "" Requirement for ghc-mod
-  "Plugin 'Shougo/vimproc.vim'
+  "Plug 'Shougo/vimproc.vim'
 
   "" Move seamlessly between vim and tmux panes
-  "Plugin 'christoomey/vim-tmux-navigator'
+  "Plug 'christoomey/vim-tmux-navigator'
 
   " }}}
 
-  call vundle#end()
+  call plug#end()
 endif
 
 " }}}
