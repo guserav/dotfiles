@@ -1,0 +1,12 @@
+---
+- name: Install tmux
+  become: true
+  apt:
+    name: tmux
+    state: installed
+
+- name: Symlink config
+  file:
+    src: "{{ role_path }}/files/tmux.conf"
+    dest: "~/.tmux.conf"
+    state: link
