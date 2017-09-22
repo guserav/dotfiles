@@ -1,0 +1,15 @@
+---
+- name: Install less
+  become: true
+  apt:
+    name: less
+    state: installed
+
+- name: Symlink lesskey file (less config)
+  file:
+    src: "{{ role_path  }}/files/lesskey"
+    dest: "~/.lesskey"
+    state: link
+
+- name: Generate less config
+  shell: lesskey

@@ -1,0 +1,5 @@
+#env
+LESS = --ignore-case -R # ignore case in search when all lowercase
+#command
+h noaction 5\e(  # move left or right with h and l
+l noaction 5\e)
