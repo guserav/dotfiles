@@ -5,6 +5,10 @@
     name: vim-nox
     state: installed
 
+- name: Set vim as default editor
+  become: true
+  command: update-alternatives --set editor /usr/bin/vim.nox # TODO only on debian
+
 - name: Create directories for backup and temporary files
   file:
     path: "~/.vim/{{ item }}"
