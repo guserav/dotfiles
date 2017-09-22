@@ -1,6 +1,8 @@
 ---
 - hosts: localhost
   roles:
+    - fish
+    - zoid
     - git
     - vim
     - tmux

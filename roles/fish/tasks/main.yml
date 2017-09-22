@@ -1,0 +1,12 @@
+---
+- name: Install fish
+  become: true
+  apt:
+    name: fish
+    state: installed
+
+- name: Symlink fish config file
+  file:
+    src: "{{ role_path }}/files/config.fish"
+    dest: "~/.config/fish/config.fish"
+    state: link
