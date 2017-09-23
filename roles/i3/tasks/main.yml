@@ -1,0 +1,16 @@
+---
+- name: Install i3
+  become: true
+  apt:
+    name: i3
+    state: installed
+
+- name: Install py3status
+  pip:
+    name: py3status
+
+- name: Symlink i3 config
+  file:
+    src: "{{ role_path }}/files"
+    dest: "~/.i3"
+    state: link
