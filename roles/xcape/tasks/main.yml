@@ -1,0 +1,6 @@
+---
+- name: Install xcape
+  become: true
+  apt:
+    name: xcape
+    state: installed
