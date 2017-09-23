@@ -1,0 +1,39 @@
+---
+- name: Create temp font directory
+  file:
+    name: /tmp/fonts
+    state: directory
+
+- name: Download Fantasque Sans Mono
+  get_url:
+    url: https://github.com/belluzj/fantasque-sans/releases/download/v1.7.1/FantasqueSansMono.tar.gz
+    dest: /tmp/FantasqueSansMono.tar.gz
+
+- name: Extract Fantasque Sans Mono
+  unarchive:
+    src: /tmp/FantasqueSansMono.tar.gz
+    dest: /tmp/fonts
+
+- name: Install Fantasque Mono
+  become: true
+  copy:
+    src: "{{ item }}"
+    dest: /usr/share/fonts/
+  with_fileglob: "/tmp/*.ttf"
+
+- name: Download Font Awesome
+  get_url:
+    url: http://fontawesome.io/assets/font-awesome-4.7.0.zip
+    dest: /tmp/font-awesome-4.7.0.zip
+
+- name: Extract Font Awesome
+  unarchive:
+    src: /tmp/font-awesome-4.7.0.zip
+    dest: /tmp/fonts/
+
+- name: Install Font Awesome
+  become: true
+  copy:
+    src: "{{ item }}"
+    dest: /usr/share/fonts/
+  with_fileglob: "/tmp/fonts/font-awesome-4.7.0/fonts/*"

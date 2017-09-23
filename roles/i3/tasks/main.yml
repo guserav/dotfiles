@@ -6,6 +6,7 @@
     state: installed
 
 - name: Install py3status
+  become: true
   pip:
     name: py3status
 
