@@ -15,3 +15,13 @@
     src: "{{ role_path }}/files"
     dest: "~/.i3"
     state: link
+
+- name: Install pytz for status calendar
+  become: true
+  pip:
+    name: pytz
+
+- name: Install tzlocal for status calendar
+  become: true
+  pip:
+    name: tzlocal
