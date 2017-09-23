@@ -5,6 +5,11 @@
     name: fish
     state: installed
 
+- name: Create fish config directory
+  file:
+    path: "~/.config/fish"
+    state: directory
+
 - name: Symlink fish config file
   file:
     src: "{{ role_path }}/files/config.fish"
