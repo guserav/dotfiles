@@ -4,3 +4,9 @@
   apt:
     name: xcape
     state: installed
+
+- name: Symlink xcape fish config file
+  file:
+    src: "{{ role_path }}/files/xcape.config"
+    dest: "~/.config/fish/xcape.config"
+    state: link
