@@ -3,6 +3,7 @@
   roles:
     - fish
     - zoid
+    - python
     - git
     - vim
     - tmux
