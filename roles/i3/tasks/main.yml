@@ -1,0 +1,56 @@
+---
+- include_vars: "{{ item }}"
+  with_first_found:
+      - "../vars/{{ ansible_distribution }}-{{ ansible_distribution_major_version | int}}.yml"
+      - "../vars/{{ ansible_distribution }}.yml"
+      - "../vars/{{ ansible_os_family }}.yml"
+      - "../vars/default.yml"
+
+- name: Install i3
+  become: true
+  package:
+    name: "{{ i3_package_name }}"
+    state: installed
+
+- name: Clone py3status repo
+  become: True
+  git:
+    repo: "https://github.com/JohnAZoidberg/py3status.git"
+    version: zoid
+    dest: "/opt/.py3status"
+
+- name: Install custom py3status repo
+  become: True
+  pip:
+    chdir: "/opt/.py3status"
+    name: "."
+    state: present
+
+- name: Symlink i3 config
+  file:
+    src: "{{ role_path }}/files"
+    dest: "~/.i3"
+    state: link
+
+- name: Install pytz for status calendar
+  become: true
+  pip:
+    name: pytz
+
+- name: Install tzlocal for status calendar
+  become: true
+  pip:
+    name: tzlocal
+
+- name: Symlink wakelock file to lock on suspend and sleep
+  become: True
+  file:
+    src: "{{ role_path }}/files/wakelock.service"
+    dest: "/etc/systemd/system/wakelock.service"
+    state: link
+
+- name: Enable systemd wakelock service
+  become: True
+  systemd:
+    name: wakelock.service
+    enabled: True

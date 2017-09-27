@@ -1,0 +1,2 @@
+vim_package_name: vim-nox
+set_vim_default: update-alternatives --set editor /usr/bin/vim.nox

@@ -60,12 +60,9 @@ nnoremap <silent> <C-Z> :ZoomToggle<CR>
 " $ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 "     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 if 1 " TODO: should check if vim-plug is installed
-  call plug#begin()
+  call plug#begin('~/.vim/plugged')
 
   " Plugins: In use {{{
-
-  " solarized colorscheme
-  Plug 'altercation/vim-colors-solarized'
 
   " show git diff +, -, ~ at the left
   Plug 'airblade/vim-gitgutter'

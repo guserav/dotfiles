@@ -1,0 +1,5 @@
+- name: Create zoid with fish shell
+  become: true
+  user:
+    name: zoid
+    shell: /usr/bin/fish

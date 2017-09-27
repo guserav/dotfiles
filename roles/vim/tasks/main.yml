@@ -1,0 +1,46 @@
+---
+- include_vars: "{{ item }}"
+  with_first_found:
+      - "../vars/{{ ansible_distribution }}-{{ ansible_distribution_major_version | int}}.yml"
+      - "../vars/{{ ansible_distribution }}.yml"
+      - "../vars/{{ ansible_os_family }}.yml"
+      - "../vars/default.yml"
+
+- name: Install vim
+  become: true
+  package:
+    name: "{{ vim_package_name }}"
+    state: installed
+
+- name: Set vim as default editor
+  become: true
+  command: "{{ set_vim_default }}"
+
+- name: Create directories for backup and temporary files
+  file:
+    path: "~/.vim/{{ item }}"
+    state: directory
+  with_items:
+    - tmp
+    - backup
+    - autoload
+    - colors
+
+- name: Install solarized colorscheme
+  get_url:
+    url: https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim
+    dest: ~/.vim/colors/solarized.vim
+
+- name: Install vim-plug plugin manager
+  get_url:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: ~/.vim/autoload/plug.vim
+
+- name: Symlink vimrc
+  file:
+    src: "{{ role_path }}/files/vimrc"
+    dest: "~/.vimrc"
+    state: link
+
+- name: Install plugins
+  command: vim +PlugInstall +qall

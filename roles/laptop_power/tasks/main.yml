@@ -1,0 +1,7 @@
+---
+- name: Symlink logind.conf to disable power button and lid close sleep
+  become: True
+  file:
+    src: "{{ role_path }}/files/logind.conf"
+    dest: "/etc/systemd/logind.conf"
+    state: link

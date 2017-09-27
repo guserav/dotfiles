@@ -1,0 +1,7 @@
+---
+- name: Symlink Synaptics config file
+  become: true
+  file:
+    src: "{{ role_path }}/files/60-synaptics-options.conf"
+    dest: "/usr/share/X11/xorg.conf.d/60-synaptics-options.conf"
+    state: link

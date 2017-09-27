@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  roles:
+    - i3
+    - fonts
+    - dunst
