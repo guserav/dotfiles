@@ -1,13 +1,20 @@
 ---
+- include_vars: "{{ item }}"
+  with_first_found:
+      - "../vars/{{ ansible_distribution }}-{{ ansible_distribution_major_version | int}}.yml"
+      - "../vars/{{ ansible_distribution }}.yml"
+      - "../vars/{{ ansible_os_family }}.yml"
+      - "../vars/default.yml"
+
 - name: Install vim
   become: true
-  apt:
-    name: vim-nox
+  package:
+    name: "{{ vim_package_name }}"
     state: installed
 
 - name: Set vim as default editor
   become: true
-  command: update-alternatives --set editor /usr/bin/vim.nox # TODO only on debian
+  command: "{{ set_vim_default }}"
 
 - name: Create directories for backup and temporary files
   file:

@@ -1,7 +1,7 @@
 ---
 - name: Install pip
   become: true
-  apt:
+  package:
     name: python-pip
     state: installed
 

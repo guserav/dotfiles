@@ -1,0 +1,2 @@
+vim_package_name: vim
+set_vim_default: bash -c ":"  # TODO set EDITOR env variable

@@ -1,7 +1,7 @@
 ---
 - name: Install fish
   become: true
-  apt:
+  package:
     name: fish
     state: installed
 

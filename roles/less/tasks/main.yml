@@ -1,7 +1,7 @@
 ---
 - name: Install less
   become: true
-  apt:
+  package:
     name: less
     state: installed
 
