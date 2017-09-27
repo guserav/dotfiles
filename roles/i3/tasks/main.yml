@@ -12,10 +12,19 @@
     name: "{{ i3_package_name }}"
     state: installed
 
-- name: Install py3status
-  become: true
+- name: Clone py3status repo
+  become: True
+  git:
+    repo: "https://github.com/JohnAZoidberg/py3status.git"
+    version: zoid
+    dest: "/opt/.py3status"
+
+- name: Install custom py3status repo
+  become: True
   pip:
-    name: py3status
+    chdir: "/opt/.py3status"
+    name: "."
+    state: present
 
 - name: Symlink i3 config
   file:
