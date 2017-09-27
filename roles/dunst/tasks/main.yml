@@ -1,0 +1,12 @@
+---
+- name: Install dunst
+  become: True
+  package:
+    name: dunst
+    state: installed
+
+- name: Symlink dunst config
+  file:
+    src: "{{ role_path }}/files/dunstrc"
+    dest: "~/.dunstrc"
+    state: link
