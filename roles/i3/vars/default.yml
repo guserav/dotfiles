@@ -1,1 +1,3 @@
-i3_package_name: "i3-wm"
+i3_package_name:
+  - "i3-wm"
+  - "i3lock"

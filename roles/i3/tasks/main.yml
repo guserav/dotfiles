@@ -41,3 +41,16 @@
   become: true
   pip:
     name: tzlocal
+
+- name: Symlink wakelock file to lock on suspend and sleep
+  become: True
+  file:
+    src: "{{ role_path }}/files/wakelock.service"
+    dest: "/etc/systemd/system/wakelock.service"
+    state: link
+
+- name: Enable systemd wakelock service
+  become: True
+  systemd:
+    name: wakelock.service
+    enabled: True
