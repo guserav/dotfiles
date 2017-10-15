@@ -1,0 +1,6 @@
+---
+- name: Install xfce-terminal
+  become: true
+  package:
+    name: xfce4-terminal
+    state: installed
