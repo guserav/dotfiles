@@ -1,0 +1,6 @@
+---
+- name: Install links
+  become: true
+  package:
+    name: elinks
+    state: installed
