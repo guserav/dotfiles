@@ -19,6 +19,12 @@
     version: zoid
     dest: "/opt/.py3status"
 
+- name: Install i3status
+  become: True
+  package:
+    name: i3status
+    state: installed
+
 - name: Install custom py3status repo
   become: True
   pip:
