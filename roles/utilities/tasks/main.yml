@@ -1,0 +1,8 @@
+---
+- name: Install utilities
+  become: true
+  package:
+    name: "{{ item }}"
+  with_items:
+    - unzip
+    - wget
