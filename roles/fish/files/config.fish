@@ -7,6 +7,6 @@ alias ranger="ranger --choosedir=$HOME/.rangerdir; cd (cat $HOME/.rangerdir)"
 
 fish_vi_key_bindings
 
-if test -e xcape.config
-    source xcape.config
+if test -e ~/.config/fish/xcape.config
+    source ~/.config/fish/xcape.config
 end
