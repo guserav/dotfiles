@@ -6,4 +6,5 @@
     - dunst
     - chromium
     - dmenu
+    - gui-utilities
     - xcape

@@ -1,0 +1,8 @@
+---
+- name: Install gui-utilities
+  become: true
+  package:
+    name: "{{ item }}"
+  with_items:
+    - evince
+    - nautilus
