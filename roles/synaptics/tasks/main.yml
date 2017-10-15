@@ -1,4 +1,10 @@
 ---
+- name: Install synaptics
+  become: true
+  package:
+    name: xf86-input-synaptics
+    state: installed
+
 - name: Symlink Synaptics config file
   become: true
   file:
