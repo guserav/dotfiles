@@ -339,8 +339,6 @@ highlight ColorColumn guibg=#808080 ctermbg=8
 set colorcolumn=80
 
 colorscheme solarized                       " colorscheme solarized
-" control background color with ENV variable
-execute "set background=".$BACKGROUND
 
 " yank all matches of the previous search to register a
 function! YankMatches()
