@@ -1,0 +1,6 @@
+---
+- name: Install ranger
+  become: true
+  package:
+    name: ranger
+    state: installed
