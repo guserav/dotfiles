@@ -1,0 +1,6 @@
+---
+- name: Install PulseAudio
+  become: true
+  package:
+    name: pulseaudio
+    state: installed
