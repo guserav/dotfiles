@@ -5,4 +5,5 @@
     - fonts
     - dunst
     - chromium
+    - dmenu
     - xcape

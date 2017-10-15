@@ -1,0 +1,6 @@
+---
+- name: Install dmenu
+  become: true
+  package:
+    name: dmenu
+    state: installed
