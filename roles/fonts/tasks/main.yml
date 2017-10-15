@@ -19,7 +19,7 @@
   copy:
     src: "{{ item }}"
     dest: /usr/share/fonts/
-  with_fileglob: "/tmp/*.ttf"
+  with_fileglob: "/tmp/fonts/*.ttf"
 
 - name: Download Font Awesome
   get_url:
