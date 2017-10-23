@@ -38,15 +38,20 @@
     dest: "~/.i3"
     state: link
 
-- name: Install pytz for status calendar
+- name: Install python packages for status calendar
   become: true
   pip:
-    name: pytz
+    name: "{{ item }}"
+  with_items:
+    - pytz
+    - tzlocal
 
-- name: Install tzlocal for status calendar
+- name: Install python packages for rss aggregator
   become: true
   pip:
-    name: tzlocal
+    name: "{{ item }}"
+  with_items:
+    - requests
 
 - name: Symlink wakelock file to lock on suspend and sleep
   become: True
