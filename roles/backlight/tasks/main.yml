@@ -1,0 +1,9 @@
+---
+- name: Install xbacklight and intel driver to control backlight
+  become: true
+  package:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+    - xorg-xbacklight
+    - xf86-video-intel

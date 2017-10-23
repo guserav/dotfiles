@@ -130,8 +130,8 @@ bar {
 }
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec sudo xbacklight -inc 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec sudo xbacklight -dec 5 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
 
 # Volume controls
 bindsym XF86AudioRaiseVolume exec $HOME/.i3/increase_volume 5 #increase sound volume

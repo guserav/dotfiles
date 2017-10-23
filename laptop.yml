@@ -3,3 +3,4 @@
   roles:
     - synaptics
     - laptop_power
+    - backlight
