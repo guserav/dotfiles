@@ -4,3 +4,9 @@
   package:
     name: ranger
     state: installed
+
+- name: Symlink rifle config
+  - file:
+    src: "{{ role_path }}/files/rifle.conf"
+    dest: "~/.config/ranger/rifle.conf"
+    state: link
