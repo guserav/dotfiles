@@ -6,3 +6,8 @@
   with_items:
     - evince
     - nautilus
+    - xsel
+    - thunderbird
+    - keepass
+    - feh
+    - gtk3-print-backends
