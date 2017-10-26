@@ -1,0 +1,15 @@
+---
+- name: Install firefox
+  become: true
+  package:
+    name: firefox
+
+- name: Enable touch for firefox
+  become: true
+  file:
+    src: "{{ role_path }}/mozilla-touch.sh"
+    dest: "/etc/profile.d/mozilla-touch.sh"
+    state: link
+    owner: root
+    group: root
+    mode: 0761

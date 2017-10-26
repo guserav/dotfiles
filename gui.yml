@@ -5,6 +5,7 @@
     - fonts
     - dunst
     - chromium
+    - firefox
     - xfce-terminal
     - dmenu
     - gui-utilities
