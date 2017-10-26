@@ -1,0 +1,6 @@
+---
+- name: Install arandr
+  become: true
+  package:
+    name: arandr
+    state: installed

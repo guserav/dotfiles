@@ -91,8 +91,8 @@ bindsym $mod+Shift+0 move container to workspace number 10 
 bindsym $mod+Shift+odiaeresis move container to workspace ""
 
 # Monitor setup
-bindsym $mod+Control+1 exec $HOME/dotfiles/screenlayouts/singleMonitor.sh
-bindsym $mod+Control+2 exec $HOME/dotfiles/screenlayouts/doubleMonitor.sh
+bindsym $mod+Control+1 exec $HOME/dotfiles/roles/multiscreen/files/singleMonitor.sh
+bindsym $mod+Control+2 exec $HOME/dotfiles/roles/multiscreen/files/doubleMonitor.sh
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
