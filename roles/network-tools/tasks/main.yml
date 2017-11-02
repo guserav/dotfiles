@@ -1,0 +1,14 @@
+---
+- name: Install network debugging tools
+  become: True
+  package:
+    name: "{{ item }}"
+  with_items:
+    - ipcalc
+    - mtr
+    - traceroute
+    - whois
+    - bind-tools
+    - ldns
+    - iperf
+    - dnsutils
