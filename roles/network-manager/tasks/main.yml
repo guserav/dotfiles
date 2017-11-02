@@ -1,0 +1,14 @@
+---
+- name: Install NetworkManager and applet
+  become: true
+  package:
+    name: "{{ item }}"
+  with_items:
+    - NetworkManager
+    - network-manager-applet
+
+- name: Enable NetworkManager.service
+  systemd:
+    name: NetworkManager
+    enabled: true
+
