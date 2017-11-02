@@ -38,6 +38,12 @@
     dest: "~/.i3"
     state: link
 
+- name: Install gsimplecal for click on time in py3status
+  become: True
+  package:
+    name: gsimplecal
+    state: installed
+
 - name: Install python packages for status calendar
   become: true
   pip:
