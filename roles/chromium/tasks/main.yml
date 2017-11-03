@@ -8,5 +8,5 @@
 #- name: Install widevine DRM tool (for Netflix)
 #  become: true
 #  package:
-#    name: chrome-widevine
+#    name: chromium-widevine
 #    state: installed
