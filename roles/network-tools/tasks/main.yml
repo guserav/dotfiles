@@ -1,4 +1,11 @@
 ---
+- include_vars: "{{ item }}"
+  with_first_found:
+      - "../vars/{{ ansible_distribution }}-{{ ansible_distribution_major_version | int}}.yml"
+      - "../vars/{{ ansible_distribution }}.yml"
+      - "../vars/{{ ansible_os_family }}.yml"
+      - "../vars/default.yml"
+
 - name: Install network debugging tools
   become: True
   package:
@@ -8,7 +15,7 @@
     - mtr
     - traceroute
     - whois
-    - bind-tools
-    - ldns
+    - "{{ bind_tools_package_name }}"  # dig, nslookup
+    - "{{ ldns_package_name }}"  # drill
     - iperf
     - dnsutils
