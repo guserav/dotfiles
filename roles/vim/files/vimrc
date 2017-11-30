@@ -1,369 +1,91 @@
-" Section: Mappings {{{
-
 let mapleader=","                           " set leader to , (Comma)
 
-noremap <silent> <leader>ev :e $MYVIMRC<cr> " open .vimrc with <leader>ev
-noremap <silent> <leader>sv :so $MYVIMRC<cr>" open .vimrc with <leader>sv
+noremap <silent> <leader>ev :e $MYVIMRC<cr>  " open .vimrc with <leader>ev
+noremap <silent> <leader>sv :so $MYVIMRC<cr>  " open .vimrc with <leader>sv
+
+set mouse=a  " enable mouse control
 
 " Support indenting multiple times in visual mode
 vnoremap < <gv
 vnoremap > >gv
 
 " move in wrapped line as if they were separate
-" flip meaning of j and gj, and k and gk
-nnoremap k gk
-nnoremap j gj
-vnoremap k gk
-vnoremap j gj
 nnoremap gk k
 nnoremap gj j
 vnoremap gk k
 vnoremap gj j
 
-noremap <leader><space> :nohlsearch<cr><leader><space> " turn off search highlight
-nnoremap <space> za                         " toggle fold on spacebar
-nnoremap <silent><leader>w :%s/\s\+$//<cr>  " delete all trailing whitespace
-vnoremap <c-a> <esc>ggVG                    " select entire file
-
-" scroll 3 lines instead of one
-nmap <C-Y> <C-Y>3
-nmap <C-E> <C-E>3
-
-" scroll 10 cols instead of one
-nnoremap zh 10zh
-nnoremap zl 10zl
+nnoremap k gk
+nnoremap j gj
+vnoremap k gk
+vnoremap j gj
 
 " save as sudo
 cmap w!! w !sudo tee > /dev/null %
 
-" Zoom / Restore window.
-function! s:ZoomToggle() abort
-    if exists('t:zoomed') && t:zoomed
-        execute t:zoom_winrestcmd
-        let t:zoomed = 0
-    else
-        let t:zoom_winrestcmd = winrestcmd()
-        resize
-        vertical resize
-        let t:zoomed = 1
-    endif
-endfunction
-command! ZoomToggle call s:ZoomToggle()
-nnoremap <silent> <C-Z> :ZoomToggle<CR>
-
-" }}}
-
-" Section: Plugins {{{
-
-" vim-plug Plugin manager
-" install vim-plug:
-" $ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-"     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-if 1 " TODO: should check if vim-plug is installed
-  call plug#begin('~/.vim/plugged')
-
-  " Plugins: In use {{{
-
-  " show git diff +, -, ~ at the left
-  Plug 'airblade/vim-gitgutter'
-  "set updatetime=250
-
-  " cp to copy to system-Clipboard
-  " cP to copy line and cv to paste to next line
-  " REQUIRES xsel to be installed or clip and paste on Windows
-  Plug 'christoomey/vim-system-copy'
-
-  " surround with s
-  Plug 'tpope/vim-surround'
-
-  " repeat plugin commands
-  Plug 'tpope/vim-repeat'
-
-  " Advanced powerline
-  Plug 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-  let g:Powerline_symbols = 'fancy'
-  let g:powerline_pycmd = 'py3'
-
-  " File navigating plugin
-  Plug 'scrooloose/nerdtree'
-  let NERDTreeQuitOnOpen=1  " close nerdtree on opening file
-  " close vim if only window left is nerdtree
-  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-  " toggle nerdtree with ctrl+n
-  map <C-n> :NERDTreeToggle<CR>
-  " Nerdtree file type highlighting
-  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-
-  " Snippets
-  Plug 'SirVer/ultisnips'
-  " Snippets are separated from the engine
-  Plug 'honza/vim-snippets'
-  " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-  let g:UltiSnipsExpandTrigger="<tab>"
-  let g:UltiSnipsJumpForwardTrigger="<c-m>"
-  let g:UltiSnipsJumpBackwardTrigger="<c-n>"
-  " If you want :UltiSnipsEdit to split your window.
-  let g:UltiSnipsEditSplit="vertical"
-  " Dir for custom snippets
-  set runtimepath+=~/dotfiles/vim/snippets/
-
-  " Automatically insert closing parentheses, brackets, etc.
-  Plug 'jiangmiao/auto-pairs'
-  let g:AutoPairsFlyMode = 0
-  let g:AutoPairsShortcutBackInsert = '<C-u>'
-
-  " fuzzy file finding
-  Plug 'ctrlpvim/ctrlp.vim'
-  let g:ctrlp_map = '<c-p>'
-  let g:ctrlp_cmd = 'CtrlP'
-
-  " }}}
-
-  " Plugins: Testing {{{
-
-  " Language pack for all kinds of languages
-  Plug 'sheerun/vim-polyglot'
-
-  " New textobject i - same indent level
-  Plug 'michaeljsmith/vim-indent-object'
-
-  " HTML Plugin
-  Plug 'alvan/vim-closetag'
-
-  Plug 'easymotion/vim-easymotion'
-  let g:EasyMotion_do_mapping = 0 " Disable default mappings
-  " Jump to anywhere you want with minimal keystrokes, with just one key binding.
-  " `s{char}{label}`
-  nmap s <Plug>(easymotion-overwin-f)
-  " or
-  " `s{char}{char}{label}`
-  " Need one more keystroke, but on average, it may be more comfortable.
-  nmap s <Plug>(easymotion-overwin-f2)
-  " Turn on case insensitive feature
-  let g:EasyMotion_smartcase = 1
-  " JK motions: Line motions
-  map <Leader>j <Plug>(easymotion-j)
-  map <Leader>k <Plug>(easymotion-k)
-
-  " Align lines by symbol like |, = or :
-  " and markdown table plugins
-  Plug 'junegunn/vim-easy-align'
-  xmap ga <Plug>(EasyAlign)
-  nmap ga <Plug>(EasyAlign)
-  Plug 'dhruvasagar/vim-table-mode'
-  "let g:table_mode_corner_corner='|'
-  "let g:table_mode_header_fillchar='-'
-
-  " New textobject a - arguments of functions
-  Plug 'b4winckler/vim-angry'
-
-  Plug 'chrisbra/Colorizer'
-
-  " :Fp regex
-  " fold every line not matching regex
-  Plug 'embear/vim-foldsearch'
-
-  Plug 'vimwiki/vimwiki'
-  "let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-  let g:vimwiki_list = [{'syntax': 'markdown', 'ext': '.md'}]
-  let g:vimwiki_global_ext = 0
-
-  "}}}
-
-  " Plugins: Unused {{{
-
-  "" Python folding plugin
-  "Plug 'tmhedberg/SimpylFold'
-
-  "" Autocomplete plugin for all kinds of languages
-  "" REQUIRES:
-  "" sudo apt-get install build-essential cmake
-  "" sudo apt-get install python-dev python3-dev
-  "Plug 'Valloric/YouCompleteMe'
-
-  "" Syntax checker
-  "Plug 'scrooloose/syntastic'
-  "set statusline+=%#warningmsg#
-  "set statusline+=%{SyntasticStatuslineFlag()}
-  "set statusline+=%*
-  "let g:syntastic_always_populate_loc_list = 1
-  "let g:syntastic_auto_loc_list = 1
-  "let g:syntastic_check_on_open = 1
-  "let g:syntastic_check_on_wq = 0
-
-  "" Python mode
-  "" Plug 'klen/python-mode'
-  "" don't show error window - just the msg in the status bar
-  "let g:pymode_lint_cwindow = 0
-  "" close doc window after completion is done
-  "autocmd CompleteDone * pclose
-
-  "" A class outline viewer
-  "" REQUIRES sudo apt-get install exuberant-ctags
-  "Plug 'majutsushi/tagbar'
-  "noremap <leader>t :TagbarOpenAutoClose<CR>
-  "noremap <leader>T :TagbarToggle<CR>
-
-  "" Requirement for ghc-mod
-  "Plug 'Shougo/vimproc.vim'
-
-  "" Move seamlessly between vim and tmux panes
-  "Plug 'christoomey/vim-tmux-navigator'
-
-  " }}}
-
-  call plug#end()
-endif
-
-" }}}
-
-" Section: OS-Specific {{{
-
-if has("win32")
-  " Windows {{{
-
-  set backupdir=$HOME\_vim\backup\\
-  set directory=$HOME\_vim\tmp\\
-
-  " }}}
-else
-  " Linux {{{
-
-  " move the backup and temp files somewhere else so they don't clutter up the
-  " current directory
-  set backupdir=$HOME/.vim/backup//
-  set directory=$HOME/.vim/tmp//
-
-  " }}}
-endif
-
-" }}}
-
-" Section: LaTeX and Markdown{{{
-
-" compile markdown & latex
-autocmd FileType markdown nnoremap <leader>lc :w<Enter>:! pandoc -o %.pdf %<Enter><Enter>
-autocmd FileType markdown nnoremap <leader>lm :w<Enter>:!(setsid<Space>pandoc<Space>-o<Space>%.pdf<Space><C-R>%<Space>&><space>/dev/null&)<Enter><Enter>
-autocmd FileType markdown nnoremap <leader>ll :w<Enter>:!(setsid<Space>pandoc<Space>--latex-engine=xelatex<Space>-o<Space>%.pdf<Space><C-R>%<Space>&><space>/dev/null&)<Enter><Enter>
-autocmd FileType markdown nnoremap <leader>ls :!<Space>setsid<Space>evince<Space><C-R>%.pdf<Space>&><Space>/dev/null<Space>&<Enter><Enter>
-
-" compile latex
-autocmd FileType tex nnoremap <leader>lc :w<Enter>:! pdflatex --shell-escape %<Enter>
-autocmd FileType tex nnoremap <leader>ll :w<Enter>:!(setsid<Space>pdflatex<Space>--shell-escape<Space><C-R>%<Space>&><space>/dev/null&)<Enter><Enter>
-autocmd FileType tex nnoremap <leader>ls :!<Space>setsid<Space>evince<Space><C-R>%<Backspace><Backspace><Backspace>pdf<Space>&><Space>/dev/null<Space>&<Enter><Enter>
-
-" }}}
-
-" Section: Experimental {{{
-
-set foldmethod=syntax
-filetype plugin indent on                  " detect filetype specific indent, plugin, syntax...
-
-set foldlevel=99
-set foldlevelstart=99                       " open most folds by default
-
-set laststatus=2                            " Always show statusline
-" set iskeyword-=_                            " add _ (underscore) as word delimiter (eg. when navigating)
-
-au BufWinLeave * silent! mkview             " restore folds on load sadly throws errors
-au BufWinEnter * silent! loadview           " maybe needs foldlevel or foldlevelstart
-
-" }}}
-
-" Section: Options {{{
+" save temporary files not in current directory but there 
+set backupdir=$HOME/.vim/backup//
+set directory=$HOME/.vim/tmp//
 
 set encoding=utf-8                          " force utf8 support
 syntax on                                   " syntax highlighting
-set t_Co=256                                " Use 256 colours
+set t_Co=256                                " Use 256 colors
 set showmatch                               " highlight matching braces/parentheses/brackets
 set cursorline                              " highlight current line
 set modelines=1                             " last line of this file applies to just this file
 set autoindent
 set ruler                                   " show line and column number
 set display=lastline,uhex                   " show non printable as hex and long last line
-set nostartofline                           " keep cursor in column when jumping
-
-set nowrap                                  " just cut off lines that are too long
-set sidescroll=10                           " only scroll 10 cols to the side when reaching screen end
-set sidescrolloff=5                         " start scrolling 5 cols from the edge
-set textwidth=0                             " don't break lines at all if they are too long
-"set linebreak                               " wrap lines only on characters in 'breakat'
-"set breakat&vim                             " reset breakat to vims default
-set whichwrap+=<,>,h,l,[,]                  " moving beyound edge moves to adjacent line
-set backspace=indent,eol,start              " enable deleting newline from beginning of next line
-
-" enable mouse (only for resizing splits)
-set mouse=a
-if has("mouse_sgr")
-    set ttymouse=sgr
-else
-    set ttymouse=xterm2
-end
-
-set shiftwidth=4 tabstop=4 softtabstop=4    " sets default tab size to 4 spaces
-set expandtab                               " insert spaces when pressing tab
-autocmd Filetype markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
-
-" move swapfiles somewhere else (directories declared in OS specific)
-" Two path separators at the end to ensure file name uniqueness
-" in the preserve directory (see the :help docs)
-set swapfile
-set backup
-
+set splitbelow                              " new splits on the right and on the bottom
+set splitright                              " more intuitive for LTR languages
 set relativenumber                          " show relative line numbers
 set number                                  " but absolute of current line
-
-set ignorecase                              " make search case insensitive
 set smartcase                               " Case insensitive searches become sensitive with capitals
-set lazyredraw                              " redraw only when we need to
-set incsearch                               " search as characters are entered
 set hlsearch                                " highlight matches
 
-set splitbelow                              " new splits on the right and on the bottom
-set splitright                              " more intutitive for LTR languages
 
-set wildmenu                                " visual autocomplete for command menu
-set wildmode=list:full                      " autocomplete first match and show list
+noremap <leader><space> :nohlsearch<cr><leader><space>     " turn off search highlight
 
-set timeout timeoutlen=500                  "  low timeout for partial commands
+nnoremap <F5> :w<cr>:make<cr>                              " at F5 to run make
 
-" Highlight trailing whitespace when not in insert mode
-" and highlight all tabs
-highlight EvilTabs ctermbg=red guibg=red
-highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd ColorScheme * highlight EvilTabs ctermbg=red guibg=red
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+\%#\@<!$/
-match EvilTabs /\t/
+" Spell checking
+" set spellcapcheck  "[.?!]\_[\])'" \t]\+")                    " checks if the first word of the sentence is big
+nnoremap <leader>de :setlocal spell spelllang=de<cr>:set spellcapcheck<cr>       " add Spellcheck for German
+nnoremap <leader>en :setlocal spell spelllang=en<cr>:set spellcapcheck<cr>       " add Spellcheck for English
 
-" Show a lightgrey column at character position 80
-highlight ColorColumn guibg=#808080 ctermbg=8
-set colorcolumn=80
+call plug#begin('~/vimfiles/bundle')
 
-colorscheme solarized                       " colorscheme solarized
+" surround with parentheses, braces, ...
+Plug 'tpope/vim-surround'
 
-" yank all matches of the previous search to register a
-function! YankMatches()
-  let @a = ''
-  %s//\=setreg('A', submatch(0), 'V')/gn
-endfunction
+" repeat advanced plugin commands with .
+Plug 'tpope/vim-repeat'
 
-autocmd BufEnter * lcd %:p:h                " Set working directory to the current file
+" Automatically insert closing parentheses, brackets, etc.
+Plug 'jiangmiao/auto-pairs'
 
-" }}}
 
-" Section: To be reviewed {{{
+" Snippets
+Plug 'SirVer/ultisnips'
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-h>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" Snippets are separated from the engine
+Plug 'honza/vim-snippets'
 
-"" delete, change and paste without yanking
-"nnoremap <leader>d "_d
-"vnoremap <leader>d "_d
-"
-"nnoremap <leader>c "_c
-"vnoremap <leader>c "_c
-"
-"nnoremap <leader>p "_dP
-"vnoremap <leader>p "_dP
+" klen/python-mode
+" scrooloose/syntastic
+" Valloric/YouCompleteMe
+" matjutsushi/tagbar
 
-" }}}
+Plug 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+let g:Powerline_symbols = 'fanxy'
 
-" vim: foldmethod=marker
+" show git diff +, -, ~ at the left edge
+Plug 'airblade/vim-gitgutter'
+
+call plug#end()
+
+colorscheme solarized  " placed at ~/vimfiles/colors/solarized.vim for windows
+set background=dark
