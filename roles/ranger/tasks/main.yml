@@ -5,8 +5,13 @@
     name: ranger
     state: installed
 
+- name: Create ranger config directory
+  file:
+    path: "~/.config/ranger"
+    state: directory
+
 - name: Symlink rifle config
-  - file:
+  file:
     src: "{{ role_path }}/files/rifle.conf"
     dest: "~/.config/ranger/rifle.conf"
     state: link
