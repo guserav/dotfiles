@@ -12,7 +12,9 @@
     state: link
   with_items:
     - gitattributes
-    - gitconfig
     - gitfiles
 
-# TODO Ensure username and email are set
+- name: Copy templated gitconfig to final destination
+  template:
+    src: "{{ role_path }}/templates/gitconfig.j2"
+    dest: "~/.gitconfig"

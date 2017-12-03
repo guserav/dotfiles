@@ -1,15 +1,15 @@
 [user]
-	email = ds@struckmeierfliesen.de
-	name = Daniel Schäfer
+  email = {{ git_email }}
+  name = {{ git_name }}
 
 [commit]
-	template= ~/.gitfiles/COMMIT_EDITMSG
+  template= ~/.gitfiles/COMMIT_EDITMSG
 
 [push]
-	default = simple
+  default = simple
 
 [pull]
-	rebase = preserve
+  rebase = preserve
 
 [advice]
   # Disable “how to stage/unstage/add” hints
@@ -32,6 +32,8 @@
 [core]
   # global .gitignore
   excludesfile = '~/.gitignore'
+  # warn about trailing whitespace
+  whitespace = trailing-space,space-before-tab,indent-with-non-tab
 
 [alias]
   hide = update-index --assume-unchanged
