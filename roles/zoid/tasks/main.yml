@@ -1,5 +1,5 @@
-- name: Create zoid with fish shell
+- name: Create user with fish shell as default
   become: true
   user:
-    name: zoid
+    name: "{{ fish_user }}"
     shell: /usr/bin/fish
