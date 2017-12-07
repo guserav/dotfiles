@@ -15,3 +15,9 @@
     src: "{{ role_path }}/files/config.fish"
     dest: "~/.config/fish/config.fish"
     state: link
+
+- name: Symlink fish functions directory
+  file:
+    src: "{{ role_path }}/files/functions"
+    dest: "~/.config/fish/functions"
+    state: link
