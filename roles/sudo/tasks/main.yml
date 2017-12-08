@@ -1,0 +1,27 @@
+- name: Install sudo
+  become: yes
+  package:
+    name: sudo
+    state: installed
+
+- name: Ensure sudo group is present
+  become: yes
+  group:
+    name: sudo
+    state: present
+
+- name: Add user to sudo group
+  become: yes
+  user:
+    name: "{{ sudo_user }}"
+    groups: sudo
+    append: yes
+
+- name: Ensure user is in sudoers file
+  become: true
+  lineinfile:
+    path: /etc/sudoers
+    regexp: '^%sudo\s'
+    line: "%sudo ALL=(ALL) ALL"
+    state: present
+    validate: "/usr/sbin/visudo -cf %s"
