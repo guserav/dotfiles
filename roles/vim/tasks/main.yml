@@ -12,9 +12,24 @@
     name: "{{ vim_package_name }}"
     state: installed
 
-- name: Set vim as default editor
+- name: Set vim as default editor (Debian)
   become: true
-  command: "{{ set_vim_default }}"
+  command: "update-alternatives --set editor /usr/bin/vim.nox"
+  when: ansible_os_family == "Debian"
+
+- name: Set vim as default editor (global env)
+  become: true
+  lineinfile:
+    path: /etc/environment
+    regexp: "^{{ item.key }}="
+    line: "{{ item.key }}={{ item.val }}"
+    create: yes
+    mode: 644
+    owner: root
+    group: root
+  with_items:
+    - { "key": "EDITOR", "val": "vim" }
+    - { "key": "VISUAL", "val": "vim" }
 
 - name: Create directories for backup and temporary files
   file:
