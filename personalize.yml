@@ -3,3 +3,9 @@
   roles:
     - xcape
     - firefox
+  tasks:
+    - name: enable network-manager
+      systemd:
+        name: NetworkManager
+        enabled: yes
+        state: started
