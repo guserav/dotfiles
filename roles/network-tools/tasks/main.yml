@@ -18,4 +18,3 @@
     - "{{ bind_tools_package_name }}"  # dig, nslookup
     - "{{ ldns_package_name }}"  # drill
     - iperf
-    - dnsutils
