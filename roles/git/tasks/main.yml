@@ -14,6 +14,10 @@
     - gitattributes
     - gitfiles
 
+- fail:
+    msg: "Variable git_name or git_email is not defined."
+  when: git_name == "" or git_email == "" or git_name is undefined or git_email is undefined
+
 - name: Copy templated gitconfig to final destination
   template:
     src: "{{ role_path }}/templates/gitconfig.j2"
