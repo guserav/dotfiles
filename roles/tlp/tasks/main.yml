@@ -1,0 +1,40 @@
+---
+- name: Install TLP packages
+  become: true
+  package:
+    name: "{{ item }}"
+  with_items:
+    - tlp
+    - tlp-rdw
+
+- name: Enable TLP service in systemd
+  become: true
+  systemd:
+    enabled: yes
+    name: "{{ item }}"
+  with_items:
+    - tlp.service
+    - tlp-sleep.service
+    - NetworkManager-dispatcher.service
+
+- name: Mask services that conflict with TLP
+  become: true
+  systemd:
+    masked: yes
+    name: "{{ item }}"
+  with_items:
+    - systemd-rfkill.service
+    - systemd-rfkill.socket
+
+- name: Test for intel CPU
+  shell: "lscpu | grep -i intel"
+  register: isIntel
+  when_changed: false
+
+- name: Symlink tlp config file for intel CPUs
+  become: true
+  file:
+    src: "{{ role_path }}/files/tlp"
+    dest: "/etc/default/tlp"
+    state: link
+  when: isIntel.rc == 0
