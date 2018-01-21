@@ -1,4 +1,4 @@
-let mapleader=","                           " set leader to , (Comma)
+let mapleader=","                           " set leader to, (Comma)
 
 noremap <silent> <leader>ev :e $MYVIMRC<cr>  " open .vimrc with <leader>ev
 noremap <silent> <leader>sv :so $MYVIMRC<cr>  " open .vimrc with <leader>sv
@@ -20,10 +20,18 @@ nnoremap j gj
 vnoremap k gk
 vnoremap j gj
 
+" scroll 3 lines instead of one
+nmap <C-Y> <C-Y>3
+nmap <C-E> <C-E>3
+
+" scroll 10 cols instead of one
+nnoremap zh 10zh
+nnoremap zl 10zl
+
 " save as sudo
 cmap w!! w !sudo tee > /dev/null %
 
-" save temporary files not in current directory but there 
+" save temporary files not in current directory but there
 set backupdir=$HOME/.vim/backup//
 set directory=$HOME/.vim/tmp//
 
@@ -45,6 +53,7 @@ set hlsearch                                " highlight matches
 
 
 noremap <leader><space> :nohlsearch<cr><leader><space>     " turn off search highlight
+nnoremap <silent><leader>w :%s/\s\+$//<cr>  " delete all trailing whitespace"
 
 nnoremap <F5> :w<cr>:make<cr>                              " at F5 to run make
 
@@ -74,6 +83,8 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " Snippets are separated from the engine
 Plug 'honza/vim-snippets'
 
+set runtimepath+=~/dotfiles/vim/snippets/
+
 " klen/python-mode
 " scrooloose/syntastic
 " Valloric/YouCompleteMe
@@ -88,4 +99,4 @@ Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 colorscheme solarized  " placed at ~/vimfiles/colors/solarized.vim for windows
-set background=dark
+set background=light
