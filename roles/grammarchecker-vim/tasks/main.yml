@@ -1,0 +1,26 @@
+---
+- name: Create vim plugin directory
+  file:
+    path: "~/.vim/plugin"
+    state: directory
+
+- name: Create languagetool directory
+  file:
+    path: "~/.vim/plugin/languagetool"
+    state: directory
+
+- name: Dowload and unarchive language tool 4.0
+  unarchive:
+    src: https://www.languagetool.org/download/LanguageTool-4.0.zip
+    dest: "~/.vim/plugin/languagetool"
+    remote_src: yes
+
+
+- name: Symlink fish config file
+  file:
+    src: "{{ role_path }}/files/languagetool.vim"
+    dest: "~/.vim/plugin/languagetool.vim"
+    state: link
+
+- name: Install vim plugins
+  command: vim +PlugInstall +qall
