@@ -2,3 +2,4 @@
 dependencies:
   - { role: vim }
   - { role: utilities }
+  - { role: java }
