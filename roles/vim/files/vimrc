@@ -61,6 +61,7 @@ nnoremap <F5> :w<cr>:make<cr>                              " at F5 to run make
 " set spellcapcheck  "[.?!]\_[\])'" \t]\+")                    " checks if the first word of the sentence is big
 nnoremap <leader>de :setlocal spell spelllang=de<cr>:set spellcapcheck<cr>       " add Spellcheck for German
 nnoremap <leader>en :setlocal spell spelllang=en<cr>:set spellcapcheck<cr>       " add Spellcheck for English
+nnoremap <leader>no :set nospell<cr>						" remove spellchecking
 
 call plug#begin('~/vimfiles/bundle')
 
@@ -100,3 +101,9 @@ call plug#end()
 
 colorscheme solarized  " placed at ~/vimfiles/colors/solarized.vim for windows
 set background=light
+
+" Change Spellcheck highlighting to be visible on every console
+"hi! link SpellBad ErrorMsg
+"hi! link SpellCap Search
+hi SpellBad cterm=underline term=underline ctermbg=Red
+hi SpellCap ctermbg=Red
