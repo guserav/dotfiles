@@ -1,0 +1,37 @@
+---
+- name: Fail when not Arch
+  when: ansible_os_family != "Archlinux"
+  fail:
+    msg: "This role is only usable on Arch"
+
+- name: Enable multilib
+  become: true
+  blockinfile:
+    path: "/etc/pacman.conf"
+    insertafter: "^#\\[multilib\\]"
+    block: |
+      [multilib]
+      Include = /etc/pacman.d/mirrorlist
+  register: steam_multilib
+
+- name: Pacman Upgrade
+  become: true
+  command: pacman -Syu --noconfirm
+  when: steam_multilib.changed
+
+- name: Enable locales for en_us
+  become: true
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
+
+- name: Install Steam package
+  become: true
+  package:
+    name: steam
+    state: installed
+
+- name: Install fonts required for steam
+  aur:
+    name: steam-fonts
+    user: "{{ steam_user }}"

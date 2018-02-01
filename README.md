@@ -19,6 +19,7 @@ To run for example base.yml perform the following command
 - `fish_user`: The user to create and give fish as shell
 - `sudo_user`: The user to create and add as a sudoer
 - `android_user`: The user to use to install android-studio. (Shouldn't be root)
+- `steam_user`: The user to use to install steam with. (Schouldn't be root)
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
