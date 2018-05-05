@@ -11,6 +11,7 @@
   package:
     name: "{{ vim_package_name }}"
     state: installed
+  when: only_config is not defined
 
 - name: Set vim as default editor (Debian)
   become: true
@@ -27,6 +28,7 @@
     mode: 644
     owner: root
     group: root
+  when: ansible_os_family != "NixOS"
   with_items:
     - { "key": "EDITOR", "val": "vim" }
     - { "key": "VISUAL", "val": "vim" }

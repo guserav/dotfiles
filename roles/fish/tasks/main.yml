@@ -4,6 +4,7 @@
   package:
     name: fish
     state: installed
+  when: only_config is not defined
 
 - name: Create fish config directory
   file:

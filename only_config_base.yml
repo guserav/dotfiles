@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  vars:
+    only_config: true
+  roles:
+    - fish
+    - python
+    - git
+    - vim
+    - tmux
+    - ranger

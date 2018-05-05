@@ -4,6 +4,7 @@
   package:
     name: ranger
     state: installed
+  when: only_config is not defined
 
 - name: Create ranger config directory
   file:
