@@ -28,6 +28,14 @@ nmap <C-E> <C-E>3
 nnoremap zh 10zh
 nnoremap zl 10zl
 
+" Prevent vim from playing an error sound and flashing the screen
+set noerrorbells 	" Only play error bells on error with no error text
+set visualbell		" Only flash the screen on such errors
+set t_vb=		" Flash screen with no color -> don't flash screen
+if has('autocmd')	" Do the above on initialising the GUI because it could be reset by entering the GUI
+  autocmd GUIEnter * set visualbell t_vb=
+endif
+
 " save as sudo
 cmap w!! w !sudo tee > /dev/null %
 
