@@ -28,6 +28,10 @@ nmap <C-E> <C-E>3
 nnoremap zh 10zh
 nnoremap zl 10zl
 
+" Prevent <c-u> from deleting line without undo possibility
+inoremap <c-u> <c-g>u<c-u>
+inoremap <c-w> <c-g>u<c-w>
+
 " Prevent vim from playing an error sound and flashing the screen
 set noerrorbells 	" Only play error bells on error with no error text
 set visualbell		" Only flash the screen on such errors
