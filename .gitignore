@@ -1,2 +1,5 @@
 *.retry
 test.yml
+*.json
+!guserav.json
+!vars.json
