@@ -21,8 +21,8 @@ vnoremap k gk
 vnoremap j gj
 
 " scroll 3 lines instead of one
-nmap <C-Y> <C-Y>3
-nmap <C-E> <C-E>3
+nnoremap <C-Y> 3<C-Y>
+nnoremap <C-E> 3<C-E>
 
 " scroll 10 cols instead of one
 nnoremap zh 10zh
