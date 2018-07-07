@@ -81,9 +81,16 @@ set splitbelow                              " new splits on the right and on the
 set splitright                              " more intuitive for LTR languages
 set relativenumber                          " show relative line numbers
 set number                                  " but absolute of current line
+set ignorecase                              " make search case insensitive
 set smartcase                               " Case insensitive searches become sensitive with capitals
 set hlsearch                                " highlight matches
+set shiftwidth=4 tabstop=4 softtabstop=4    " Make a tab only 4 instead of 8 spaces
+set expandtab                               " insert spaces when pressing tab
+set foldmethod=syntax                       " Make it possible to fold lines with comments
+set foldlevel=99 foldlevelstart=99          " open most folds by default
 
+set wildmenu                                " visual autocomplete for command menu
+set wildmode=list:full                      " autocomplete first match and show list
 
 " }}}
 " Plugins {{{
@@ -122,6 +129,9 @@ let g:Powerline_symbols = 'fanxy'
 Plug 'airblade/vim-gitgutter'
 
 call plug#end()
+" }}}
+" FIle Format dependend {{{
+autocmd FileType tex let g:tex_fold_enabled=1
 " }}}
 " Highlighting and color scheme {{{
 
