@@ -43,6 +43,14 @@ nnoremap <F5> :w<cr>:make<cr>                              " at F5 to run make
 nnoremap <leader>de :setlocal spell spelllang=de<cr>:set spellcapcheck<cr>       " add Spellcheck for German
 nnoremap <leader>en :setlocal spell spelllang=en<cr>:set spellcapcheck<cr>       " add Spellcheck for English
 nnoremap <leader>no :set nospell<cr>						" remove spellchecking
+
+if has("win32")
+
+    " Map use of clipboard for easior use on windows
+    nnoremap Y "*y
+    vnoremap Y "*y
+    " Not for P since it has an usefull meaning
+endif
 " }}}
 " Options {{{
 " Prevent vim from playing an error sound and flashing the screen
