@@ -11,6 +11,7 @@
   package:
     name: "{{ i3_package_name }}"
     state: installed
+  when: only_config is not defined
 
 - name: Clone py3status repo
   become: True
@@ -24,6 +25,7 @@
   package:
     name: i3status
     state: installed
+  when: only_config is not defined
 
 - name: Install custom py3status repo
   become: True
@@ -37,12 +39,14 @@
     src: "{{ role_path }}/files"
     dest: "~/.i3"
     state: link
+    force: true
 
 - name: Install gsimplecal for click on time in py3status
   become: True
   package:
     name: gsimplecal
     state: installed
+  when: only_config is not defined
 
 - name: Install python packages for status calendar
   become: true
@@ -51,6 +55,7 @@
   with_items:
     - pytz
     - tzlocal
+  when: only_config is not defined
 
 - name: Install python packages for rss aggregator
   become: true
@@ -58,6 +63,7 @@
     name: "{{ item }}"
   with_items:
     - requests
+  when: only_config is not defined
 
 - name: Symlink wakelock file to lock on suspend and sleep
   become: True
@@ -65,9 +71,20 @@
     src: "{{ role_path }}/files/wakelock.service"
     dest: "/etc/systemd/system/wakelock.service"
     state: link
+  when: only_config is not defined
 
 - name: Enable systemd wakelock service
   become: True
   systemd:
     name: wakelock.service
     enabled: True
+  when: only_config is not defined
+
+- name: Run i3 on Xorg startup
+  become: yes
+  lineinfile:
+    path: /root/.xinitrc
+    line: exec i3
+    insertafter: EOF
+    create: yes
+  when: only_config is not defined

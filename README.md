@@ -23,10 +23,12 @@ To run for example base.yml perform the following command
 
 # Playbooks
 base:             Everything essential that I need on all my systems.
-only_config_base: The same essentials configs but without installing any programs
+only_config_base: The same essential homedir configs but without installing any programs.
                   Use this if your distro is not compatible with the installation procedure.
 laptop:           Basic config for touchpad, wifi and backlight.
 gui:              Everything else you would need on a system that is more than a terminal.
+only_config_base: The same essential homedir configs but without installing any programs.
+                  Use this if your distro is not compatible with the installation procedure.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

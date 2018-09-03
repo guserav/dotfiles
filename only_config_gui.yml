@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+  vars:
+    only_config: true
+  roles:
+    - i3
+    - dunst
+    - xfce-terminal

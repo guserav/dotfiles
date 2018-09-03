@@ -4,3 +4,15 @@
   package:
     name: xfce4-terminal
     state: installed
+  when: only_config is not defined
+
+- name: Ensure xfce4 config dir is present
+  file:
+    path: "~/.config/xfce4"
+    state: directory
+
+- name: Symlink xfce4-terminal config
+  file:
+    src: "{{ role_path }}/files"
+    dest: "~/.config/xfce4/terminal"
+    state: link
