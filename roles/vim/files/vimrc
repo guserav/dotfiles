@@ -43,6 +43,8 @@ nnoremap <leader>or :browse oldfiles<cr>                    " browse recently us
 
 " Spell checking
 " set spellcapcheck  "[.?!]\_[\])'" \t]\+")                    " checks if the first word of the sentence is big
+" set spell language to english by default press ,no to disable
+setlocal spell spelllang=en
 nnoremap <leader>de :setlocal spell spelllang=de<cr>:set spellcapcheck<cr>       " add Spellcheck for German
 nnoremap <leader>en :setlocal spell spelllang=en<cr>:set spellcapcheck<cr>       " add Spellcheck for English
 nnoremap <leader>no :set nospell<cr>						" remove spellchecking
