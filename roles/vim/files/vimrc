@@ -38,6 +38,9 @@ nnoremap <silent><leader>w :%s/\s\+$//<cr>  " delete all trailing whitespace"
 
 nnoremap <F5> :w<cr>:make<cr>                              " at F5 to run make
 
+nnoremap <leader>cwd :lcd %:p:h<cr>:lcd<cr>                 " change working directory to current file
+nnoremap <leader>or :browse oldfiles<cr>                    " browse recently used files
+
 " Spell checking
 " set spellcapcheck  "[.?!]\_[\])'" \t]\+")                    " checks if the first word of the sentence is big
 nnoremap <leader>de :setlocal spell spelllang=de<cr>:set spellcapcheck<cr>       " add Spellcheck for German
