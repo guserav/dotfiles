@@ -69,6 +69,11 @@ if has('autocmd')	" Do the above on initialising the GUI because it could be res
   autocmd GUIEnter * set visualbell t_vb=
 endif
 
+" Set Fontsize to 11 in GUI
+if has('gui_running')
+  set guifont=:h11
+endif
+
 " save as sudo
 cmap w!! w !sudo tee > /dev/null %
 
