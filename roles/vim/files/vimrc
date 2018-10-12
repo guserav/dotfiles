@@ -25,6 +25,9 @@ vnoremap j gj
 nnoremap <C-Y> 3<C-Y>
 nnoremap <C-E> 3<C-E>
 
+" scroll only 5 line on fast scolling with <C-D/U>
+set scroll=5
+
 " scroll 10 cols instead of one
 nnoremap zh 10zh
 nnoremap zl 10zl
