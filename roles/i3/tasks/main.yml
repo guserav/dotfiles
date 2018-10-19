@@ -13,26 +13,12 @@
     state: installed
   when: only_config is not defined
 
-- name: Clone py3status repo
-  become: True
-  git:
-    repo: "https://github.com/JohnAZoidberg/py3status.git"
-    version: zoid
-    dest: "/opt/.py3status"
-
 - name: Install i3status
   become: True
   package:
     name: i3status
     state: installed
   when: only_config is not defined
-
-- name: Install custom py3status repo
-  become: True
-  pip:
-    chdir: "/opt/.py3status"
-    name: "."
-    state: present
 
 - name: Symlink i3 config
   file:
