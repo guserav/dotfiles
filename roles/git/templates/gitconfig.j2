@@ -1,6 +1,11 @@
 [user]
+{% if git_email is defined and git_email != "" %}
   email = {{ git_email }}
   name = {{ git_name }}
+{% endif %}
+  # Prevent git from guessing the user name and email
+  # This prevents any command needing this information from running
+  useConfigOnly = true
 
 [commit]
   template= ~/.gitfiles/COMMIT_EDITMSG

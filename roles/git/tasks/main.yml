@@ -15,8 +15,8 @@
     - gitattributes
     - gitfiles
 
-- fail:
-    msg: "Variable git_name or git_email is not defined."
+- debug:
+    msg: "Variable git_name or git_email is not defined. Creating gitconfig without user.email and user.name specified."
   when: git_name == "" or git_email == "" or git_name is undefined or git_email is undefined
 
 - name: Copy templated gitconfig to final destination
