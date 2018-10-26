@@ -8,6 +8,7 @@ function fish_prompt --description 'Write out the prompt'
     end
 
 
+    set git_info ""
     if [ (_git_branch_name) ]
         set -l git_branch (set_color -o blue)(_git_branch_name)
         if [ (_is_git_dirty) ]
@@ -35,31 +36,33 @@ function fish_prompt --description 'Write out the prompt'
         else
             set git_status (set_color green):
         end
-        set git_info "(git$git_status$git_branch"(set_color black)")"
+        set git_info (set_color black)"(git$git_status$git_branch"(set_color black)")"
     end
-    printf '%s[%s] %s%s%s%s%s%s%s%s%s'\
-    (set_color normal)                  \
-    (date "+%H:%M:%S")              \
-    (set_color blue)                  \
-    $USER                              \
-    (set_color normal)                  \
-    '  '                                \
-    (set_color green)                 \
-    (echo $PWD | sed -e "s|^$HOME|~|") \
-    (set_color black)                  \
-    $git_info                          \
-    (set_color black)
+
     if test $laststatus -eq 0
-        printf "%s %s%s \f\r>%s "  \
-        (set_color -o green)\
-	$laststatus         \
-        (set_color black)   \
-        (set_color normal)
+        set laststatus_info (set_color green)$laststatus
     else
-        printf "%s %s%s \f\r>%s "  \
-        (set_color -o red)  \
-	$laststatus         \
-        (set_color black)   \
-        (set_color normal)
+        set laststatus_info (set_color -o red)$laststatus
     end
+
+    # //copied from https://github.com/JohnAZoidberg/dotfiles
+    set -l nix_shell_info (
+        # Variable can be empty, "impure" or "pure"
+        if test -n "$IN_NIX_SHELL"
+            echo -n (set_color red)"nix"
+        end
+    )
+
+    set -l new_line_prompt "$nix_shell_info"(set_color normal)">"(set_color normal)
+    set -l user_info (set_color blue)"$USER"
+    set -l dir_info (echo -n (set_color green)(echo $PWD | sed -e "s|^$HOME|~|"))
+
+    printf '%s[%s] %s %s%s %s\f\r%s '\
+    (set_color normal)          \
+    (date "+%H:%M:%S")          \
+    $user_info                  \
+    $dir_info                   \
+    $git_info                   \
+    $laststatus_info            \
+    $new_line_prompt
 end
