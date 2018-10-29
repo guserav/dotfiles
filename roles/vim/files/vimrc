@@ -150,12 +150,8 @@ autocmd FileType tex let g:tex_fold_enabled=1
 " Highlighting and color scheme {{{
 " Highlight trailing whitespace when not in insert mode
 " and highlight all tabs
-highlight EvilTabs ctermbg=red guibg=red
-highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd ColorScheme * highlight EvilTabs ctermbg=red guibg=red
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-match EvilTabs /\t/
-2match ExtraWhitespace /\s\+\%#\@<!$/
+syntax match EvilTabs /\t/ display
+syntax match ExtraWhitespace /\s\+\%#\@<!$/ display
 
 colorscheme solarized  " placed at ~/vimfiles/colors/solarized.vim for windows
 set background=light
@@ -165,6 +161,9 @@ set background=light
 "hi! link SpellCap Search
 highlight SpellBad cterm=underline term=underline ctermbg=Red
 highlight SpellCap ctermbg=Red
+" highlight the custom groups
+highlight EvilTabs ctermbg=red guibg=red
+highlight ExtraWhitespace ctermbg=red guibg=red
 " }}}
 
 " vim: foldmethod=marker
