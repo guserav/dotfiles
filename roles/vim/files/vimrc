@@ -164,6 +164,8 @@ highlight SpellCap ctermbg=Red
 " highlight the custom groups
 highlight EvilTabs ctermbg=red guibg=red
 highlight ExtraWhitespace ctermbg=red guibg=red
+" Small command to debug syntax highlighting http://vim.wikia.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor
+map <leader>hi :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' .synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 " }}}
 
 " vim: foldmethod=marker
