@@ -1,0 +1,15 @@
+---
+- name: Install gnupg
+  become: true
+  package:
+    name: gnupg
+    state: installed
+  when: only_config is not defined
+
+- name: Symlink config files
+  file:
+    src: "{{ role_path }}/files/{{ item }}"
+    dest: "~/.gnupg/{{ item }}"
+    state: link
+  with_items:
+    - gpg.conf
