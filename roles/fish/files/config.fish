@@ -7,7 +7,7 @@ alias ranger="ranger --choosedir=$HOME/.rangerdir; cd (cat $HOME/.rangerdir)"
 
 
 # Allow easy mount of shared folders in vm
-alias mountVM="vmhgfs-fuse /mnt"
+alias mountVM="vmhgfs-fuse /mnt -o umask=22"
 
 fish_vi_key_bindings
 
