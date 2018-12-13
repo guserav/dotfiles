@@ -58,6 +58,10 @@ if has("win32")
     nnoremap Y "*y
     vnoremap Y "*y
     " Not for P since it has an usefull meaning
+else
+    " Map use of clipboard for easier use on linux
+    nnoremap Y "+y
+    vnoremap Y "+y
 endif
 " }}}
 " Options {{{
