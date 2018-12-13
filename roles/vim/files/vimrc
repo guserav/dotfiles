@@ -110,6 +110,10 @@ set backspace=indent,start                  " allow backspace to work even over 
 set wildmenu                                " visual autocomplete for command menu
 set wildmode=list:full                      " autocomplete first match and show list
 
+" Change cursor when changing between modes
+"let &t_SR = "\e[4 q"
+let &t_SI = "\e[6 q"                        " Bar on entering insert mode
+let &t_EI = "\e[2 q"                        " Block on leaving insert mode
 " }}}
 " Plugins {{{
 call plug#begin('~/vimfiles/bundle')
