@@ -1,3 +1,13 @@
+function toggle_git_info --description 'Toggle the git info part of the prompt'
+    if set -q _show_git_status
+        echo "Git status will now be hidden"
+        set -g -e _show_git_status
+    else
+        echo "Git status will now be shown"
+        set -g _show_git_status "show"
+    end
+end
+
 function fish_prompt --description 'Write out the prompt'
 	set laststatus $status
     function _git_branch_name
@@ -9,34 +19,36 @@ function fish_prompt --description 'Write out the prompt'
 
 
     set git_info ""
-    if [ (_git_branch_name) ]
-        set -l git_branch (set_color -o blue)(_git_branch_name)
-        if [ (_is_git_dirty) ]
-            for i in (git branch -qv --no-color| string match -r '\*'|cut -d' ' -f4-|cut -d] -f1|tr , '\n')\
-                (git status --porcelain | cut -c 1-2 | uniq)
-                switch $i
-                    case "*[ahead *"
-                        set git_status "$git_status"(set_color red)⬆
-                    case "*behind *"
-                        set git_status "$git_status"(set_color red)⬇
-                    case "."
-                        set git_status "$git_status"(set_color green)✚
-                    case " D"
-                        set git_status "$git_status"(set_color red)✖
-                    case "*M*"
-                        set git_status "$git_status"(set_color green)✱
-                    case "*R*"
-                        set git_status "$git_status"(set_color purple)➜
-                    case "*U*"
-                        set git_status "$git_status"(set_color brown)═
-                    case "??"
-                        set git_status "$git_status"(set_color red)≠
-                end
-            end
-        else
-            set git_status (set_color green):
-        end
-        set git_info (set_color black)"(git$git_status$git_branch"(set_color black)")"
+    if set -q _show_git_status
+       if [ (_git_branch_name) ]
+           set -l git_branch (set_color -o blue)(_git_branch_name)
+           if [ (_is_git_dirty) ]
+               for i in (git branch -qv --no-color| string match -r '\*'|cut -d' ' -f4-|cut -d] -f1|tr , '\n')\
+                   (git status --porcelain | cut -c 1-2 | uniq)
+                   switch $i
+                       case "*[ahead *"
+                           set git_status "$git_status"(set_color red)⬆
+                       case "*behind *"
+                           set git_status "$git_status"(set_color red)⬇
+                       case "."
+                           set git_status "$git_status"(set_color green)✚
+                       case " D"
+                           set git_status "$git_status"(set_color red)✖
+                       case "*M*"
+                           set git_status "$git_status"(set_color green)✱
+                       case "*R*"
+                           set git_status "$git_status"(set_color purple)➜
+                       case "*U*"
+                           set git_status "$git_status"(set_color brown)═
+                       case "??"
+                           set git_status "$git_status"(set_color red)≠
+                   end
+               end
+           else
+               set git_status (set_color green):
+           end
+           set git_info (set_color black)"(git$git_status$git_branch"(set_color black)")"
+       end
     end
 
     if test $laststatus -eq 0
