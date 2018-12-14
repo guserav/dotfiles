@@ -8,6 +8,32 @@ function toggle_git_info --description 'Toggle the git info part of the prompt'
     end
 end
 
+function shortened_pwd --description 'Print the working directory in short form with n directories spelled out'
+    set -l short (prompt_pwd)
+    set -l realhome ~
+    set -l long (string replace -r '^'"$realhome"'($|/)' '~$1' (pwd))
+
+    set -q showDirs # default to not collapsing any dirs
+    or set -l showDirs 0
+
+    if test $showDirs -eq 0 # when showDirs is 0 don't collapse anything
+        echo $long
+    else
+        if test $showDirs -gt 0
+            # ((/.*){0,n})$
+            set -l short (string replace -r '^(~?)((/[^/]*)*?)((/[^/]*){0,'"$showDirs"'})$' '$1$2' $short)
+            set -l long (string replace -r '^(~?)((/[^/]*)*?)((/[^/]*){0,'"$showDirs"'})$' '$4' $long)
+            echo $short$long
+        else
+            set -l showDirs (expr -1 \* $showDirs)
+            set -l short (string replace -r '^(~?)((/[^/]*){'"$showDirs"'})((/[^/]*)*?)$' '$1$2' $short)
+            set -l long (string replace -r '^(~?)((/[^/]*){'"$showDirs"'})((/[^/]*)*?)$' '$4' $long)
+            echo $short$long
+            # TODO implement
+        end
+    end
+end
+
 function fish_prompt --description 'Write out the prompt'
 	set laststatus $status
     function _git_branch_name
@@ -67,7 +93,7 @@ function fish_prompt --description 'Write out the prompt'
 
     set -l new_line_prompt "$nix_shell_info"(set_color normal)">"(set_color normal)
     set -l user_info (set_color blue)"$USER"
-    set -l dir_info (echo -n (set_color green)(echo $PWD | sed -e "s|^$HOME|~|"))
+    set -l dir_info (echo -n (set_color green)(shortened_pwd))
     set -l shell_level (
         #indicate when shell level is higher then 4: sh, tmux (not counting), sh, nix-shell, sh
         if [ $SHLVL -gt 4 ]
