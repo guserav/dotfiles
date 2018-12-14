@@ -154,6 +154,7 @@ call plug#end()
 " }}}
 " FIle Format dependend {{{
 autocmd FileType tex let g:tex_fold_enabled=1
+autocmd FileType fish set syntay=shell
 " }}}
 " Highlighting and color scheme {{{
 " Highlight trailing whitespace when not in insert mode
