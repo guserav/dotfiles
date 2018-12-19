@@ -22,7 +22,7 @@
 
 - name: Symlink i3 config
   file:
-    src: "{{ role_path }}/files"
+    src: "{{ role_path }}/files/i3"
     dest: "~/.i3"
     state: link
     force: true
