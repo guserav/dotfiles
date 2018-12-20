@@ -3,10 +3,10 @@
   become: true
   package:
     name: chromium
-    state: installed
+    state: present
 
 #- name: Install widevine DRM tool (for Netflix)
 #  become: true
 #  package:
 #    name: chromium-widevine
-#    state: installed
+#    state: present

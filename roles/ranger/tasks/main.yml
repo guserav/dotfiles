@@ -3,7 +3,7 @@
   become: true
   package:
     name: ranger
-    state: installed
+    state: present
   when: only_config is not defined
 
 - name: Create ranger config directory

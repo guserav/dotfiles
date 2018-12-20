@@ -3,4 +3,4 @@
   become: true
   package:
     name: arandr
-    state: installed
+    state: present

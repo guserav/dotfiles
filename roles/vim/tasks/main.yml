@@ -10,7 +10,7 @@
   become: true
   package:
     name: "{{ vim_package_name }}"
-    state: installed
+    state: present
   when: only_config is not defined
 
 - name: Set vim as default editor (Debian)

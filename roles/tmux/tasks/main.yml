@@ -3,7 +3,7 @@
   become: true
   package:
     name: tmux
-    state: installed
+    state: present
   when: only_config is not defined
 
 - name: Symlink config

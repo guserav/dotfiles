@@ -3,7 +3,7 @@
   become: true
   package:
     name: less
-    state: installed
+    state: present
 
 - name: Symlink lesskey file (less config)
   file:

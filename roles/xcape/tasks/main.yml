@@ -3,7 +3,7 @@
   become: true
   package:
     name: xcape
-    state: installed
+    state: present
 
 - name: Symlink xcape fish config file
   file:

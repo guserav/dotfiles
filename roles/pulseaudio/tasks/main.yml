@@ -3,4 +3,4 @@
   become: true
   package:
     name: pulseaudio
-    state: installed
+    state: present

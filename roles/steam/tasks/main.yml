@@ -29,7 +29,7 @@
   become: true
   package:
     name: steam
-    state: installed
+    state: present
 
 - name: Install fonts required for steam
   aur:

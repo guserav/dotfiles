@@ -10,4 +10,4 @@
   become: true
   package:
     name: "{{ jdk9_package_name }}"
-    state: installed
+    state: present

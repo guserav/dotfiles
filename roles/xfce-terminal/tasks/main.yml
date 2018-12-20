@@ -3,7 +3,7 @@
   become: true
   package:
     name: xfce4-terminal
-    state: installed
+    state: present
   when: only_config is not defined
 
 - name: Ensure xfce4 config dir is present

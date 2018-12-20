@@ -10,14 +10,14 @@
   become: true
   package:
     name: "{{ i3_package_name }}"
-    state: installed
+    state: present
   when: only_config is not defined
 
 - name: Install i3status
   become: True
   package:
     name: i3status
-    state: installed
+    state: present
   when: only_config is not defined
 
 - name: Symlink i3 config
@@ -31,7 +31,7 @@
   become: True
   package:
     name: gsimplecal
-    state: installed
+    state: present
   when: only_config is not defined
 
 - name: Install python packages for status calendar

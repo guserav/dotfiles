@@ -3,7 +3,7 @@
   become: true
   package:
     name: xf86-input-synaptics
-    state: installed
+    state: present
 
 - name: Symlink Synaptics config file
   become: true

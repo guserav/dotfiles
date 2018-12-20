@@ -3,4 +3,4 @@
   become: true
   package:
     name: dmenu
-    state: installed
+    state: present
