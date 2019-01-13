@@ -21,6 +21,12 @@ nnoremap j gj
 vnoremap k gk
 vnoremap j gj
 
+" Move the same as in tmux with Vi bindings
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
 " scroll 3 lines instead of one
 nnoremap <C-Y> 3<C-Y>
 nnoremap <C-E> 3<C-E>
