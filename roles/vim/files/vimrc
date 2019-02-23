@@ -167,8 +167,11 @@ autocmd FileType fish set syntay=shell
 " and highlight all tabs
 syntax match EvilTabs containedin=ALL /\t/ display
 syntax match ExtraWhitespace containedin=ALL /\s\+\%#\@<!$/ display
-"autocmd ColorScheme * highlight EvilTabs ctermbg=red guibg=red
-"autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+" Ensure that after reading a syntax this gets set again as it sees to be cleared for
+" a new file type. If there is a way to have a syntax file for all file types
+" this should be set there.
+autocmd Syntax * syntax match EvilTabs containedin=ALL /\t/ display
+autocmd Syntax * syntax match ExtraWhitespace containedin=ALL /\s\+\%#\@<!$/ display
 
 colorscheme solarized  " placed at ~/vimfiles/colors/solarized.vim for windows
 set background=light
