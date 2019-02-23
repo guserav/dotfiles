@@ -14,8 +14,6 @@ set -g showDirs 6
 # Allow easy mount of shared folders in vm
 alias mountVM="vmhgfs-fuse /mnt -o umask=22"
 
-fish_vi_key_bindings
-
 if test -e ~/.config/fish/xcape.config
     source ~/.config/fish/xcape.config
 end
