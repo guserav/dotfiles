@@ -14,6 +14,15 @@ set -g showDirs 6
 # Allow easy mount of shared folders in vm
 alias mountVM="vmhgfs-fuse /mnt -o umask=22"
 
+# Ensure rm is asking before deleting large files
+function rm
+  rm -I $argv
+end
+
+# Run nix-shell with fish as shell
+function ns
+  nix-shell --run fish $argv
+end
 if test -e ~/.config/fish/xcape.config
     source ~/.config/fish/xcape.config
 end
