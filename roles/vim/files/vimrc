@@ -156,6 +156,9 @@ let g:Powerline_symbols = 'fanxy'
 " show git diff +, -, ~ at the left edge
 Plug 'airblade/vim-gitgutter'
 
+" Latex syntax highlighting and completion
+Plug 'lervag/vimtex'
+
 call plug#end()
 " }}}
 " FIle Format dependend {{{
