@@ -3,3 +3,4 @@
   user:
     name: "{{ fish_user }}"
     shell: /usr/bin/fish
+  when: ansible_os_family != "NixOS"

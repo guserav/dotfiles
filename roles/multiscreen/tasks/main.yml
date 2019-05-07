@@ -4,3 +4,4 @@
   package:
     name: arandr
     state: present
+  when: only_config is not defined

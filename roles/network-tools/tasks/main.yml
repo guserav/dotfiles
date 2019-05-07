@@ -18,3 +18,6 @@
     - "{{ bind_tools_package_name }}"  # dig, nslookup
     - "{{ ldns_package_name }}"  # drill
     - iperf
+    - gnu-netcat
+    - nmap
+  when: only_config is not defined

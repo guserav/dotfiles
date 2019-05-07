@@ -11,3 +11,4 @@
     - keepass
     - feh
     - gtk3-print-backends
+  when: only_config is not defined

@@ -4,6 +4,7 @@
   package:
     name: "{{ item }}"
     state: present
+  when: only_config is not defined
   with_items:
     - xorg-xbacklight
     - xf86-video-intel

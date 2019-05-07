@@ -4,3 +4,4 @@
   package:
     name: dmenu
     state: present
+  when: only_config is not defined

@@ -11,6 +11,8 @@
     src: "{{ role_path  }}/files/lesskey"
     dest: "~/.lesskey"
     state: link
+  when: ansible_os_family != "NixOS"
 
 - name: Generate less config
   shell: lesskey
+  when: ansible_os_family != "NixOS"

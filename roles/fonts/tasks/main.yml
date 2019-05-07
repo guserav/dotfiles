@@ -3,6 +3,7 @@
   file:
     name: /tmp/fonts
     state: directory
+  when: ansible_os_family != "NixOS"
 
 - name: Download Fantasque Sans Mono
   get_url:

@@ -2,5 +2,10 @@
 - name: Install PulseAudio
   become: true
   package:
-    name: pulseaudio
+    name: "{{ item }}"
     state: present
+  with_items:
+    - pulseaudio
+    - pavucontrol
+    - playerctl  # not available for Debian
+  when: only_config is not defined

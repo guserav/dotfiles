@@ -4,6 +4,7 @@
   package:
     name: xf86-input-synaptics
     state: present
+  when: only_config is not defined
 
 - name: Symlink Synaptics config file
   become: true
@@ -11,3 +12,4 @@
     src: "{{ role_path }}/files/60-synaptics-options.conf"
     dest: "/usr/share/X11/xorg.conf.d/60-synaptics-options.conf"
     state: link
+  when: ansible_os_family != "NixOS"

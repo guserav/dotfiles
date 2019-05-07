@@ -3,4 +3,4 @@
   become: true
   package:
     name: firefox
-
+  when: only_config is not defined

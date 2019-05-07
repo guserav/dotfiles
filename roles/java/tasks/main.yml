@@ -11,3 +11,4 @@
   package:
     name: "{{ jdk9_package_name }}"
     state: present
+  when: ansible_os_family != "NixOS"
