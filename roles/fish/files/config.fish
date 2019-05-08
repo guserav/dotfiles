@@ -15,9 +15,7 @@ set -g showDirs 6
 alias mountVM="vmhgfs-fuse /mnt -o umask=22"
 
 # Ensure rm is asking before deleting large files
-function rm
-  rm -I $argv
-end
+alias rm="rm -I"
 
 # Run nix-shell with fish as shell
 function ns
