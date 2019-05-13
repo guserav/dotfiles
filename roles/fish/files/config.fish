@@ -17,6 +17,12 @@ alias mountVM="vmhgfs-fuse /mnt -o umask=22"
 # Ensure rm is asking before deleting large files
 alias rm="rm -I"
 
+# Proxy stuff
+# Enable corp proxy
+alias useCorpPoxy="sudo systemctl stop noproxy.service; and sudo systemctl start corpproxy.service"
+# no proxy
+alias useNoProxy="sudo systemctl stop corpproxy.service; and sudo systemctl start noproxy.service"
+
 # Run nix-shell with fish as shell
 function ns
   nix-shell --run fish $argv
