@@ -1,0 +1,32 @@
+---
+- name: Install ssh
+  become: true
+  package:
+    name: ssh
+    state: present
+  when: only_config is not defined
+
+- name: Create ssh directory
+  file:
+    path: "~/.ssh"
+    state: directory
+
+- name: Symlink ssh config file
+  file:
+    src: "{{ role_path }}/files/config"
+    dest: "~/.ssh/config"
+    state: link
+
+- name: Create ssh config directory
+  file:
+    path: "~/.ssh/config.d"
+    state: directory
+
+- name: Symlink ssh config parts
+  file:
+    src: "{{ role_path }}/files/config.d/{{ item.src }}"
+    dest: "~/.ssh/config.d/{{ item.dest }}"
+    state: link
+  with_items:
+    - { src: 'github', dest: 'github' }
+    - { src: 'selfnet', dest: 'selfnet' }
