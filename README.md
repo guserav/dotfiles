@@ -22,13 +22,11 @@ To run for example base.yml perform the following command
 - `steam_user`: The user to use to install steam with. (Schouldn't be root)
 
 # Playbooks
-base:             Everything essential that I need on all my systems.
-only_config_base: The same essential homedir configs but without installing any programs.
-                  Use this if your distro is not compatible with the installation procedure.
-laptop:           Basic config for touchpad, wifi and backlight.
-gui:              Everything else you would need on a system that is more than a terminal.
-only_config_base: The same essential homedir configs but without installing any programs.
-                  Use this if your distro is not compatible with the installation procedure.
+- base:             Everything essential that I need on all my systems.
+- only_config_base: The same essential homedir configs but without installing any programs. Use this if your distro is not compatible with the installation procedure.
+- laptop:           Basic config for touchpad, wifi and backlight.
+- gui:              Everything else you would need on a system that is more than a terminal.
+- base_toolkit.yml: Basic tools to work on a server that you don't want to pollute that much
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
