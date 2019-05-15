@@ -93,6 +93,7 @@ function fish_prompt --description 'Write out the prompt'
 
     set -l new_line_prompt "$nix_shell_info"(set_color normal)">"(set_color normal)
     set -l user_info (set_color blue)"$USER"
+    set -l host_info (set_color normal)"@"(hostname --short)
     set -l dir_info (echo -n (set_color green)(shortened_pwd))
     set -l shell_level (
         #indicate when shell level is higher then 4: sh, tmux (not counting), sh, nix-shell, sh
@@ -104,11 +105,12 @@ function fish_prompt --description 'Write out the prompt'
         echo -n "$SHLVL"
     )
 
-    printf '%s %s[%s] %s %s%s %s\f\r%s '\
+    printf '%s %s[%s] %s%s %s%s %s\f\r%s '\
     $shell_level                \
     (set_color normal)          \
     (date "+%H:%M:%S")          \
     $user_info                  \
+    $host_info                  \
     $dir_info                   \
     $git_info                   \
     $laststatus_info            \
