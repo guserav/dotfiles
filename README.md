@@ -13,6 +13,12 @@ Change the variable in vars.json to fit you. See section Variable for further ex
 To run for example base.yml perform the following command
 '''ansible-playbook base.yml --ask-become-pass --extra-vars "@vars.json"'''
 
+Note: On some systems (e.g. CentOS) root doesn't have overall access thus it could be vise to specify an other tmp dir then the default one. This can be done by adding the following to your ~/.ansible.cfg:
+'''
+[defaults]
+remote_tmp = /tmp/ansible-$USER
+'''
+
 ## Variables
 - `git_name`: The value to set for user.name in the gitconfig
 - `git_email`: The value to set for user.email in the gitconfig
