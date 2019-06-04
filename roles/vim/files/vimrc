@@ -92,7 +92,6 @@ set backupdir=$HOME/.vim/backup//
 set directory=$HOME/.vim/tmp//
 
 set encoding=utf-8                          " force utf8 support
-syntax on                                   " syntax highlighting
 set t_Co=256                                " Use 256 colors
 set showmatch                               " highlight matching braces/parentheses/brackets
 set cursorline                              " highlight current line
@@ -166,6 +165,7 @@ autocmd FileType tex let g:tex_fold_enabled=1
 autocmd FileType fish set syntay=shell
 " }}}
 " Highlighting and color scheme {{{
+syntax on                                   " syntax highlighting
 " Match syntax groups for trailing whitespace and tabs in the file
 syntax match EvilTabs containedin=ALL /\t/ display
 syntax match ExtraWhitespace containedin=ALL /\s\+\%#\@<!$/ display
