@@ -30,6 +30,26 @@ alias ssh="env TERM=\"xterm-256color\" ssh"
 function ns
   nix-shell --run fish $argv
 end
+
+# Should display a smooth gradient of colors from red over green to blue
+# If your terminal doesn't support 16mil colors but only 256 the gradient isn't smooth
+# If it's not a gradient at all, your terminal is broken
+function check-colors
+  awk 'BEGIN{
+      s="aaaaaaaaaaaaaaaaa"; s=s s s s s s s s;
+      for (colnum = 0; colnum<77; colnum++) {
+        r = 255-(colnum*255/76);
+        g = (colnum*510/76);
+        b = (colnum*255/76);
+        if (g>255) g = 510-g;
+        printf "\033[48;2;%d;%d;%dm", r,g,b;
+        printf "\033[38;2;%d;%d;%dm", 255-r,255-g,255-b;
+        printf "%s\033[0m", substr(s,colnum+1,1);
+      }
+      printf "\n";
+    }'
+end
+
 if test -e ~/.config/fish/xcape.config
     source ~/.config/fish/xcape.config
 end
