@@ -22,6 +22,3 @@
     src: "{{ role_path }}/files/functions"
     dest: "~/.config/fish/functions"
     state: link
-
-- name: Set fish to use VI keybindings
-  command: fish -c fish_vi_key_bindings
