@@ -4,6 +4,7 @@
   package:
     name: less
     state: present
+  when: only_config is not defined
 
 - name: Symlink lesskey file (less config)
   file:
