@@ -31,6 +31,18 @@ function ns
   nix-shell --run fish $argv
 end
 
+# rebuild cscope and ctags in the current directory
+function rebuild-cscope
+  if test -f ./cscope.files
+   echo "Warning: rebuilding ./cscope.files"
+    rm -f ./cscope.files
+  end
+  find . ! -type l -and \( -name "*.h" -o -name "*.c" -o -name "*.cc" -o -name "*.cc" -o -name "*.cpp" \) > cscope.files
+  cscope -Rbkq -i cscope.files
+  ctags -R *
+end
+
+
 # Should display a smooth gradient of colors from red over green to blue
 # If your terminal doesn't support 16mil colors but only 256 the gradient isn't smooth
 # If it's not a gradient at all, your terminal is broken
