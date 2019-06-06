@@ -96,6 +96,7 @@ set t_Co=256                                " Use 256 colors
 set showmatch                               " highlight matching braces/parentheses/brackets
 set cursorline                              " highlight current line
 set modelines=1                             " last line of this file applies to just this file
+set laststatus=2                            " Always show status line not only on split windows
 set autoindent
 set ruler                                   " show line and column number
 set display=lastline,uhex                   " show non printable as hex and long last line
