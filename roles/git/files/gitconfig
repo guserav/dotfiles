@@ -32,7 +32,7 @@
 
 [core]
   # global .gitignore
-  excludesfile = '~/.gitignore'
+  excludesfile = ~/.gitignore
   # warn about trailing whitespace and usage of tab
   whitespace = trailing-space,space-before-tab,tab-in-indent
   # don't get confused about different lineendings. But still checkout to unix lineendings
@@ -51,5 +51,6 @@
   lg = !"git lg1"
   wdiff = diff --color-words
   s = status
+  sAll = status --ignored=matching
 
 # vim: set filetype=gitconfig
