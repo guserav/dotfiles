@@ -164,6 +164,54 @@ call plug#end()
 autocmd FileType tex let g:tex_fold_enabled=1
 autocmd FileType fish set syntay=shell
 " }}}
+" C C++ cscope ctags mappings{{{
+if has("cscope")
+
+    set cscopetag                   " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
+    set csto=0                      " check cscope for definition of a symbol before checking ctags
+
+    " add any cscope database in current directory
+    if filereadable("cscope.out")
+        cs add cscope.out
+    " else add the database pointed to by environment variable
+    elseif $CSCOPE_DB != ""
+        cs add $CSCOPE_DB
+    endif
+
+    set cscopeverbose               " show msg when any other cscope db added
+
+    " See :h cscope-suggestions for explanations
+    nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-_>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-_>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+    nmap <C-_>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+    " Do horizontal split for search
+    nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
+    nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    nmap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>
+
+
+    " Do a vertical split for search
+    nmap <C-@><C-@>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@><C-@>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@><C-@>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@><C-@>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@><C-@>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@><C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
+    nmap <C-@><C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    nmap <C-@><C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+endif
+" }}}
 " Highlighting and color scheme {{{
 syntax on                                   " syntax highlighting
 " Match syntax groups for trailing whitespace and tabs in the file
