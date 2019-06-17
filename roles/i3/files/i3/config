@@ -124,7 +124,8 @@ bindsym $mod+r mode "resize"
 # set up the i3bar
 bar {
   # requires pip install py3status
-  status_command py3status -c ~/.i3/i3status.conf
+  #status_command py3status -c ~/.i3/i3status.conf
+  status_command i3status-rs ~/.i3/i3status-rust.toml
   font pango: FantasqueMono, FontAwesome, 10
   separator_symbol " "
 }

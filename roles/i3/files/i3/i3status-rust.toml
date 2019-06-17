@@ -1,0 +1,51 @@
+[theme]
+name = "slick"
+
+[icons]
+name = "awesome"
+
+[[block]]
+block = "custom"
+command = "xsel -o"
+on_click = "xsel -c"
+interval = 1
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "{SUg}+{MUg}GB ({MUp}%)"
+
+[[block]]
+block = "cpu"
+interval = 1
+
+[[block]]
+block = "sound"
+
+[[block]]
+block = "net"
+device = "ens33"
+ip = true
+ssid = false
+speed_up = false
+speed_down = false
+
+[[block]]
+block = "battery"
+device = "BAT1"
+
+[[block]]
+block = "disk_space"
+path = "/"
+alias = "/"
+info_type = "available"
+unit = "GB"
+interval = 20
+warning = 5
+alert = 1
+
+[[block]]
+block = "time"
+interval = 60
+format = "%a %d.%m %R"
+on_click = "gsimplecal"
