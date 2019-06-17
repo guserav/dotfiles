@@ -11,14 +11,17 @@
     path: "~/.config/fish"
     state: directory
 
-- name: Symlink fish config file
+- name: Create directory for fish functions
   file:
-    src: "{{ role_path }}/files/config.fish"
-    dest: "~/.config/fish/config.fish"
-    state: link
+    path: "~/.config/fish/functions"
+    state: directory
 
-- name: Symlink fish functions directory
+- name: Symlink fish config files
   file:
-    src: "{{ role_path }}/files/functions"
-    dest: "~/.config/fish/functions"
+    src: "{{ role_path }}/files/{{ item }}"
+    dest: "~/.config/fish/{{ item }}"
     state: link
+  with_items:
+    - config.fish
+    - "functions/fish_prompt.fish"
+    - "functions/fish_user_key_bindings.fish"
