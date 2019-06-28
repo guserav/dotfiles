@@ -24,3 +24,15 @@ MiscHighlightUrls=TRUE
 TabActivityColor=#dc322f
 FontName=Fantasque Sans Mono 11
 ScrollingBar=TERMINAL_SCROLLBAR_NONE
+MiscBellUrgent=FALSE
+MiscMouseWheelZoom=TRUE
+MiscMiddleClickOpensUri=FALSE
+MiscCopyOnSelect=TRUE
+MiscShowRelaunchDialog=TRUE
+MiscRewrapOnResize=TRUE
+MiscUseShiftArrowsToScroll=FALSE
+MiscSlimTabs=FALSE
+MiscNewTabAdjacent=FALSE
+ShortcutsNoHelpkey=TRUE
+ShortcutsNoMnemonics=TRUE
+
