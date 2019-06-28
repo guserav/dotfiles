@@ -30,3 +30,4 @@
   with_items:
     - { src: 'github', dest: 'github' }
     - { src: 'selfnet', dest: 'selfnet' }
+    - { src: 'general', dest: 'general' }
