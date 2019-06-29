@@ -63,6 +63,13 @@ else
     nnoremap Y "+y
     vnoremap Y "+y
 endif
+
+nnoremap <silent> <leader>hc :call ClearAllHighlightWord()<cr>
+nnoremap <silent> <leader>1 :call HighlightWord(1)<cr>
+nnoremap <silent> <leader>2 :call HighlightWord(2)<cr>
+nnoremap <silent> <leader>3 :call HighlightWord(3)<cr>
+nnoremap <silent> <leader>4 :call HighlightWord(4)<cr>
+nnoremap <silent> <leader>5 :call HighlightWord(5)<cr>
 " }}}
 " Options {{{
 " Prevent vim from playing an error sound and flashing the screen
@@ -114,6 +121,24 @@ set wildmode=list:full                      " autocomplete first match and show 
 "let &t_SR = "\e[4 q"
 let &t_SI = "\e[6 q"                        " Bar on entering insert mode
 let &t_EI = "\e[2 q"                        " Block on leaving insert mode
+" }}}
+" Functions {{{
+function! HighlightWord(n)
+    let mid = 7890 + a:n
+    try
+        call matchdelete(mid) " When match exists just delete it
+    catch 'E803' " When matchid does not exist yet it will be toggled on
+        " Match only complete word under the cursor
+        let pat = '\V\<' . expand('<cword>') . '\>'
+        call matchadd("WordHighlight" . a:n, pat, 10, mid)
+    endtry
+endfunction
+
+function! ClearAllHighlightWord()
+    for i in range(1,5)
+        silent! call matchdelete(7890 + i)
+    endfor
+endfunction
 " }}}
 " Plugins {{{
 call plug#begin('~/vimfiles/bundle')
@@ -243,6 +268,11 @@ highlight SpellCap ctermbg=Red
 " highlight the custom groups
 highlight EvilTabs ctermbg=red guibg=red
 highlight ExtraWhitespace ctermbg=red guibg=red
+hi def WordHighlight1 ctermbg=2
+hi def WordHighlight2 ctermbg=6
+hi def WordHighlight3 ctermbg=12
+hi def WordHighlight4 ctermbg=9
+hi def WordHighlight5 ctermbg=13
 " Small command to debug syntax highlighting http://vim.wikia.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor
 map <leader>hi :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' .synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 " }}}
