@@ -156,11 +156,13 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'christoomey/vim-tmux-navigator'
 let g:tmux_navigator_disable_when_zoomed = 1
 
-
 " klen/python-mode
 " scrooloose/syntastic
 " Valloric/YouCompleteMe
 " matjutsushi/tagbar
+
+" Better syntax highlighting
+Plug 'sheerun/vim-polyglot'
 
 " Have a custom statusline
 Plug 'vim-airline/vim-airline'
@@ -187,7 +189,6 @@ endif
 " }}}
 " FIle Format dependend {{{
 autocmd FileType tex let g:tex_fold_enabled=1
-autocmd FileType fish set syntay=shell
 " }}}
 " C C++ cscope ctags mappings{{{
 if has("cscope")
