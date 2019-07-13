@@ -162,8 +162,9 @@ let g:tmux_navigator_disable_when_zoomed = 1
 " Valloric/YouCompleteMe
 " matjutsushi/tagbar
 
-Plug 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-let g:Powerline_symbols = 'fanxy'
+" Have a custom statusline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " show git diff +, -, ~ at the left edge
 Plug 'airblade/vim-gitgutter'
