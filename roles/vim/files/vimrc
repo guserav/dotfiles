@@ -156,16 +156,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'christoomey/vim-tmux-navigator'
 let g:tmux_navigator_disable_when_zoomed = 1
 
-" Snippets
-Plug 'SirVer/ultisnips'
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-h>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-" Snippets are separated from the engine
-Plug 'honza/vim-snippets'
-
-set runtimepath+=~/dotfiles/vim/snippets/
 
 " klen/python-mode
 " scrooloose/syntastic
