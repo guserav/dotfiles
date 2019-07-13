@@ -113,11 +113,13 @@ set number                                  " but absolute of current line
 set ignorecase                              " make search case insensitive
 set smartcase                               " Case insensitive searches become sensitive with capitals
 set hlsearch                                " highlight matches
+set incsearch                               " Jump to first match while typing
 set shiftwidth=4 tabstop=4 softtabstop=4    " Make a tab only 4 instead of 8 spaces
 set expandtab                               " insert spaces when pressing tab
 set foldmethod=syntax                       " Make it possible to fold lines with comments
 set foldlevel=99 foldlevelstart=99          " open most folds by default
 set backspace=indent,start                  " allow backspace to work even over the start of the insert and automaticall added indents Let eol out of it to don't allow it to work over line breals
+set updatetime=1000                         " Time to trigger Keyhold Event (Also updates tagbar)
 
 set wildmenu                                " visual autocomplete for command menu
 set wildmode=list:full                      " autocomplete first match and show list
