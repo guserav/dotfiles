@@ -166,10 +166,13 @@ let g:tmux_navigator_disable_when_zoomed = 1
 " klen/python-mode
 " scrooloose/syntastic
 " Valloric/YouCompleteMe
-" matjutsushi/tagbar
 
 " Better syntax highlighting
 Plug 'sheerun/vim-polyglot'
+
+" Tagbar for class and function outline
+Plug 'majutsushi/tagbar'
+highlight link TagbarHighlight Special
 
 " Have a custom statusline
 Plug 'vim-airline/vim-airline'
