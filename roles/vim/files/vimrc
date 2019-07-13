@@ -247,14 +247,6 @@ endif
 " }}}
 " Highlighting and color scheme {{{
 syntax on                                   " syntax highlighting
-" Match syntax groups for trailing whitespace and tabs in the file
-syntax match EvilTabs containedin=ALL /\t/ display
-syntax match ExtraWhitespace containedin=ALL /\s\+\%#\@<!$/ display
-" Ensure that after reading a syntax this gets set again as it sees to be cleared for
-" a new file type. If there is a way to have a syntax file for all file types
-" this should be set there.
-autocmd Syntax * syntax match EvilTabs containedin=ALL /\t/ display
-autocmd Syntax * syntax match ExtraWhitespace containedin=ALL /\s\+\%#\@<!$/ display
 
 colorscheme solarized  " placed at ~/vimfiles/colors/solarized.vim for windows
 set background=light
@@ -274,6 +266,39 @@ hi def WordHighlight4 ctermbg=9
 hi def WordHighlight5 ctermbg=13
 " Small command to debug syntax highlighting http://vim.wikia.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor
 map <leader>hi :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' .synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+" Match syntax groups for trailing whitespace and tabs in the file
+function! AddMatches()
+    try
+        call matchadd("EvilTabs", '\t', 10, 8910)
+    catch 'E801'
+    endtry
+    try
+        call matchadd("ExtraWhitespace", '\s\+\%#\@<!$', 10, 8911)
+    catch 'E801'
+    endtry
+endfunction
+
+function! DeleteMatches()
+    try
+        call matchdelete(8910)
+    catch 'E803'
+    endtry
+    try
+    catch 'E803'
+        call matchdelete(8911)
+    endtry
+endfunction
+
+if ! exists("g:vimrc_match_autocmds_added")
+    let g:vimrc_match_autocmds_added = 1
+    " Has to be called in every window as matches are window specific
+    autocmd WinNew * call AddMatches()
+    " WinNew is not triggered for the first window
+    autocmd VimEnter * call AddMatches()
+    " Don't highlight tabs in the help window
+    autocmd FileType help call DeleteMatches()
+end
 " }}}
 
 " vim: foldmethod=marker
