@@ -21,6 +21,7 @@
   renames = copies
   # use mnemonic prefixes (index, work tree, commit, object) instead of a & b
   mnemonicprefix = true
+  wsErrorHighlight = all
 
 [branch]
   # When branching off a remote branch, automatically let the local branch track the remote branch
