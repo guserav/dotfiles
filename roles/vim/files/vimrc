@@ -251,22 +251,28 @@ endif
 " Highlighting and color scheme {{{
 syntax on                                   " syntax highlighting
 
+" When setting the background the colorscheme gets relouded and thus these
+" values have to reset FIXME: Move that to own color scheme
+if ! exists("g:vimrc_colorscheme_autocmds_added")
+    let g:vimrc_colorscheme_autocmds_added = 1
+    autocmd ColorScheme * hi def WordHighlight1 ctermbg=2
+    autocmd ColorScheme * hi def WordHighlight2 ctermbg=6
+    autocmd ColorScheme * hi def WordHighlight3 ctermbg=12
+    autocmd ColorScheme * hi def WordHighlight4 ctermbg=9
+    autocmd ColorScheme * hi def WordHighlight5 ctermbg=13
+    " Change Spellcheck highlighting to be visible on every console
+    "hi! link SpellBad ErrorMsg
+    "hi! link SpellCap Search
+    autocmd ColorScheme * highlight SpellBad cterm=underline term=underline ctermbg=Red
+    autocmd ColorScheme * highlight SpellCap ctermbg=Red
+    " highlight the custom groups
+    autocmd ColorScheme * highlight EvilTabs ctermbg=red guibg=red
+    autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+end
+
 colorscheme solarized  " placed at ~/vimfiles/colors/solarized.vim for windows
 set background=light
 
-" Change Spellcheck highlighting to be visible on every console
-"hi! link SpellBad ErrorMsg
-"hi! link SpellCap Search
-highlight SpellBad cterm=underline term=underline ctermbg=Red
-highlight SpellCap ctermbg=Red
-" highlight the custom groups
-highlight EvilTabs ctermbg=red guibg=red
-highlight ExtraWhitespace ctermbg=red guibg=red
-hi def WordHighlight1 ctermbg=2
-hi def WordHighlight2 ctermbg=6
-hi def WordHighlight3 ctermbg=12
-hi def WordHighlight4 ctermbg=9
-hi def WordHighlight5 ctermbg=13
 " Small command to debug syntax highlighting http://vim.wikia.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor
 map <leader>hi :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' .synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
