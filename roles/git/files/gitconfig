@@ -10,7 +10,7 @@
   default = simple
 
 [pull]
-  rebase = preserve
+  rebase = merges
 
 [advice]
   # Disable “how to stage/unstage/add” hints
