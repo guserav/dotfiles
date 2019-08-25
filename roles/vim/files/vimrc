@@ -294,8 +294,8 @@ function! DeleteMatches()
     catch 'E803'
     endtry
     try
-    catch 'E803'
         call matchdelete(8911)
+    catch 'E803'
     endtry
 endfunction
 

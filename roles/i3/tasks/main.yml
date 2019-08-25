@@ -37,7 +37,7 @@
 - name: Install python packages for status calendar
   become: true
   pip:
-    name: [ 'pytz' 'tzlocal' ]
+    name: [ 'pytz', 'tzlocal' ]
   when: only_config is not defined
 
 - name: Install python packages for rss aggregator
