@@ -124,6 +124,9 @@ set updatetime=1000                         " Time to trigger Keyhold Event (Als
 set wildmenu                                " visual autocomplete for command menu
 set wildmode=list:full                      " autocomplete first match and show list
 
+set hidden                                  " Allow abandoned buffers. TODO: Work with them (https://stackoverflow.com/questions/21331664/how-to-show-tab-close-button-in-gvim/21338192#21338192)
+set switchbuf=useopen,usetab
+
 " Change cursor when changing between modes
 "let &t_SR = "\e[4 q"
 let &t_SI = "\e[6 q"                        " Bar on entering insert mode
