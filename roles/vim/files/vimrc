@@ -114,7 +114,7 @@ set ignorecase                              " make search case insensitive
 set smartcase                               " Case insensitive searches become sensitive with capitals
 set hlsearch                                " highlight matches
 set incsearch                               " Jump to first match while typing
-set shiftwidth=4 tabstop=4 softtabstop=4    " Make a tab only 4 instead of 8 spaces
+set shiftwidth=4 tabstop=8 softtabstop=4    " Make a tab only 4 instead of 8 spaces
 set expandtab                               " insert spaces when pressing tab
 set foldmethod=syntax                       " Make it possible to fold lines with comments
 set foldlevel=99 foldlevelstart=99          " open most folds by default
