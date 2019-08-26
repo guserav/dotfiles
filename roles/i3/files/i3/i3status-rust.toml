@@ -45,6 +45,16 @@ warning = 5
 alert = 1
 
 [[block]]
+block = "disk_space"
+path = "/data"
+alias = "D"
+info_type = "available"
+unit = "GB"
+interval = 20
+warning = 5
+alert = 1
+
+[[block]]
 block = "time"
 interval = 60
 format = "%a %d.%m %R"
