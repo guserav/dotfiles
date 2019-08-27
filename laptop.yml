@@ -1,7 +1,0 @@
----
-- hosts: localhost
-  roles:
-    - synaptics
-    - laptop_power
-    - network-manager
-    - backlight

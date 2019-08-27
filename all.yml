@@ -1,0 +1,72 @@
+- name: Set only_config
+  hosts: localhost
+  connection: local
+  tags:
+    - always
+    - only_config
+  tasks:
+    - set_fact:
+        only_config: true
+
+# Base Configuration that I want on every machine
+- name: Base Toolkit
+  hosts: localhost
+  connection: local
+  tags:
+    - always
+    - base
+    - toolkit
+  roles:
+    - fish
+    - git
+    - vim
+    - tmux
+
+- name: Base
+  hosts: localhost
+  connection: local
+  tags:
+    - never
+    - base
+  roles:
+    - python
+    - links
+    - less
+    - ranger
+    - network-tools
+    - utilities
+    - user
+    - sudo
+    - ssh
+    - gnupg
+    - less
+
+- name: GUI
+  hosts: localhost
+  tags:
+    - never
+    - gui
+  roles:
+    - i3
+    - fonts
+    - dunst
+    - chromium
+    - firefox
+    - xfce-terminal
+    - dmenu
+    - gui-utilities
+    - xcape
+    - pulseaudio
+    - multiscreen
+
+- name: Laptop (deprecated)
+  hosts: localhost
+  tags:
+    - never
+    - laptop
+    - deprecated
+  roles:
+    - synaptics
+    - laptop_power
+    - network-manager
+    - backlight

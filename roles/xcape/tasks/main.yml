@@ -4,6 +4,7 @@
   package:
     name: xcape
     state: present
+  when: only_config is not defined
 
 - name: Symlink xcape fish config file
   file:
