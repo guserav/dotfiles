@@ -2,14 +2,20 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
-# Stay in the folger navigated to when exiting ranger
-alias ranger="ranger --choosedir=$HOME/.rangerdir; cd (cat $HOME/.rangerdir)"
+# Stay in the folder navigated to when exiting ranger
+function ranger
+    command ranger --choosedir=$HOME/.rangerdir $argv ; or return
+    cd (cat $HOME/.rangerdir)
+end
 
 # Show git status per default
 set -g _show_git_status "show"
 
 # show only 6 dirs in full length
-set -g showDirs 6
+set -q showDirs
+if test $status -ne 0
+    set -x showDirs 6
+end
 
 # Allow easy mount of shared folders in vm
 alias mountVM="vmhgfs-fuse /mnt -o umask=22"
