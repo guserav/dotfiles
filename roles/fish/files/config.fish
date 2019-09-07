@@ -68,6 +68,10 @@ function check-colors
     }'
 end
 
+function git-blame-counter --description 'Generate a nice summary of people that have commited the specified pattern'
+    git grep -n $argv | perl -F':' -ape '$_=`git blame --line-porcelain -L$F[1],+1 $F[0]`;' | grep -E "^committer " | grep -oE " .*\$" | sort | uniq -c
+end
+
 if test -e ~/.config/fish/xcape.config
     source ~/.config/fish/xcape.config
 end
