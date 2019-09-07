@@ -1,6 +1,10 @@
+- debug:
+    msg: fish_user is not set
+  when: (ansible_os_family != "NixOS") and (fish_user is not defined) and (only_config is not defined)
+
 - name: Create user with fish shell as default
   become: true
   user:
     name: "{{ fish_user }}"
     shell: /usr/bin/fish
-  when: (ansible_os_family != "NixOS") and (fish_user is defined)
+  when: (ansible_os_family != "NixOS") and (fish_user is defined) and (only_config is not defined)
