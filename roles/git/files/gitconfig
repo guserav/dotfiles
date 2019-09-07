@@ -31,6 +31,9 @@
   # Always show a diffstat at the end of a merge
   stat = true
 
+[rerere]
+  enabled = true
+
 [core]
   # global .gitignore
   excludesfile = ~/.gitignore
