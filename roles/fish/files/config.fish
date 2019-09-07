@@ -72,6 +72,10 @@ function git-blame-counter --description 'Generate a nice summary of people that
     git grep -n $argv | perl -F':' -ape '$_=`git blame --line-porcelain -L$F[1],+1 $F[0]`;' | grep -E "^committer " | grep -oE " .*\$" | sort | uniq -c
 end
 
+function tmux-find-pane --description 'Find a tmux pane from a given PID'
+    tmux list-panes -F "#{session_name}:#{window_index}.#{pane_index} #{pane_tty}" | grep (ps -h -o tty $argv)
+end
+
 if test -e ~/.config/fish/xcape.config
     source ~/.config/fish/xcape.config
 end
