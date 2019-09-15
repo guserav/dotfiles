@@ -52,7 +52,10 @@ nnoremap <leader>or :browse oldfiles<cr>                    " browse recently us
 " choose BufRead as this should cover every creating of a buffer from an
 " existing file. The creation of a new empty buffer is not covered.
 " press ,no to disable when in buffer
-autocmd BufRead * setlocal spell spelllang=en
+augroup Spell
+    au!
+    autocmd BufRead * setlocal spell spelllang=en
+augroup END
 nnoremap <leader>de :setlocal spell spelllang=de<cr>:set spellcapcheck<cr>      " add Spellcheck for German
 nnoremap <leader>en :setlocal spell spelllang=en<cr>:set spellcapcheck<cr>      " add Spellcheck for English
 nnoremap <leader>no :set nospell<cr>                                            " remove spellchecking
@@ -86,9 +89,11 @@ com! WDiff w !diff % -
 set noerrorbells 	" Only play error bells on error with no error text
 set visualbell		" Only flash the screen on such errors
 set t_vb=		" Flash screen with no color -> don't flash screen
-if has('autocmd')	" Do the above on initialising the GUI because it could be reset by entering the GUI
-  autocmd GUIEnter * set visualbell t_vb=
-endif
+" Do the above on initialising the GUI because it could be reset by entering the GUI
+augroup Bells
+    au!
+    autocmd GUIEnter * set visualbell t_vb=
+augroup END
 
 " Set Fontsize to 11 in GUI
 if has('gui_running')
@@ -199,7 +204,6 @@ let g:gutentags_cscope_build_inverted_index = 1
 
 " Tagbar for class and function outline
 Plug 'majutsushi/tagbar'
-highlight link TagbarHighlight Special
 
 " Have a custom statusline
 Plug 'vim-airline/vim-airline'
@@ -284,6 +288,8 @@ if ! exists("g:vimrc_colorscheme_autocmds_added")
     " highlight the custom groups
     autocmd ColorScheme * highlight EvilTabs ctermbg=red guibg=red
     autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+    " Plugin specific
+    autocmd ColorScheme * highlight link TagbarHighlight Special
 end
 
 colorscheme solarized  " placed at ~/vimfiles/colors/solarized.vim for windows
