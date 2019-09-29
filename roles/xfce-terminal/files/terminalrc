@@ -1,4 +1,6 @@
 [Configuration]
+MiscSearchDialogOpacity=100
+MiscShowUnsafePasteDialog=FALSE
 ColorForeground=#555557575353
 ColorBackground=#fdf6e3
 ColorCursor=#073642
