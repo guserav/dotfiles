@@ -1,10 +1,11 @@
 [Configuration]
-ColorForeground=#657b83
+ColorForeground=#555557575353
 ColorBackground=#fdf6e3
-ColorCursor=#586e75
-ColorBold=#586e75
+ColorCursor=#073642
+ColorBold=#073642
 ColorBoldUseDefault=FALSE
-ColorPalette=#eee8d5;#dc322f;#859900;#b58900;#268bd2;#d33682;#2aa198;#073642;#fdf6e3;#cb4b16;#93a1a1;#839496;#657b83;#6c71c4;#586e75;#002b36
+ColorPalette=#073642;#dc322f;#859900;#b58900;#268bd2;#d33682;#2aa198;#eee8d5;#002b36;#cb4b16;#586e75;#657b83;#839496;#6c71c4;#93a1a1;#fdf6e3
+TabActivityColor=#dc322f
 MiscAlwaysShowTabs=FALSE
 MiscBell=FALSE
 MiscBordersDefault=FALSE
@@ -21,7 +22,6 @@ MiscTabCloseButtons=TRUE
 MiscTabCloseMiddleClick=TRUE
 MiscTabPosition=GTK_POS_TOP
 MiscHighlightUrls=TRUE
-TabActivityColor=#dc322f
 FontName=Fantasque Sans Mono 11
 ScrollingBar=TERMINAL_SCROLLBAR_NONE
 MiscBellUrgent=FALSE
