@@ -4,11 +4,10 @@
   package:
     name: tmux
     state: present
-  when: only_config is not defined
+  when: only_config is not defined or ansible_os_family != "NixOS"
 
 - name: Symlink config
   file:
     src: "{{ role_path }}/files/tmux.conf"
     dest: "~/.tmux.conf"
     state: link
-  when: ansible_os_family != "NixOS"

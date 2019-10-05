@@ -8,6 +8,11 @@
 
 - name: Symlink config files
   file:
+    dest: "~/.gnupg/"
+    state: directory
+
+- name: Symlink config files
+  file:
     src: "{{ role_path }}/files/{{ item }}"
     dest: "~/.gnupg/{{ item }}"
     state: link
