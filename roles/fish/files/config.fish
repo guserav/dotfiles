@@ -76,6 +76,11 @@ function tmux-find-pane --description 'Find a tmux pane from a given PID'
     tmux list-panes -F "#{session_name}:#{window_index}.#{pane_index} #{pane_tty}" | grep (ps -h -o tty $argv)
 end
 
+# Find out how much disk space is used from the specified directory subdirectories
+function disk-usage --description 'Determine disk usage of specified folder subdirs'
+    sudo du -h -c -d 1 $argv 2> /dev/null
+end
+
 if test -e ~/.config/fish/xcape.config
     source ~/.config/fish/xcape.config
 end
