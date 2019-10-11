@@ -44,24 +44,7 @@ nnoremap <F5> :w<cr>:make<cr>                              " at F5 to run make
 nnoremap <leader>cwd :lcd %:p:h<cr>:lcd<cr>                 " change working directory to current file
 nnoremap <leader>or :browse oldfiles<cr>                    " browse recently used files
 
-" Spell checking
-" set spellcapcheck  "[.?!]\_[\])'" \t]\+")                    " checks if the first word of the sentence is big
-" set spell language to English by default
-" As spell is local to a window and spelllang is local to a buffer they have
-" to be set on creating every buffer. BufCreate didn't seem to work so I
-" choose BufRead as this should cover every creating of a buffer from an
-" existing file. The creation of a new empty buffer is not covered.
-" press ,no to disable when in buffer
-augroup Spell
-    au!
-    autocmd BufRead * setlocal spell spelllang=en
-augroup END
-nnoremap <leader>de :setlocal spell spelllang=de<cr>:set spellcapcheck<cr>      " add Spellcheck for German
-nnoremap <leader>en :setlocal spell spelllang=en<cr>:set spellcapcheck<cr>      " add Spellcheck for English
-nnoremap <leader>no :set nospell<cr>                                            " remove spellchecking
-
 if has("win32")
-
     " Map use of clipboard for easior use on windows
     nnoremap Y "*y
     vnoremap Y "*y
@@ -71,13 +54,6 @@ else
     nnoremap Y "+y
     vnoremap Y "+y
 endif
-
-nnoremap <silent> <leader>hc :call ClearAllHighlightWord()<cr>
-nnoremap <silent> <leader>1 :call HighlightWord(1)<cr>
-nnoremap <silent> <leader>2 :call HighlightWord(2)<cr>
-nnoremap <silent> <leader>3 :call HighlightWord(3)<cr>
-nnoremap <silent> <leader>4 :call HighlightWord(4)<cr>
-nnoremap <silent> <leader>5 :call HighlightWord(5)<cr>
 
 " Show diff between current buffer content and file
 " Copied from https://vim.fandom.com/wiki/Diff_current_buffer_and_the_original_file
@@ -135,7 +111,7 @@ set completeopt=preview,menuone,longest     " Only insert the longest common par
 set wildmenu                                " visual autocomplete for command menu
 set wildmode=longest:full,list:full         " autocomplete first match and show list
 
-set hidden                                  " Allow abandoned buffers. TODO: Work with them (https://stackoverflow.com/questions/21331664/how-to-show-tab-close-button-in-gvim/21338192#21338192)
+set hidden                                  " Allow abandoned buffers. (https://stackoverflow.com/questions/21331664/how-to-show-tab-close-button-in-gvim/21338192#21338192)
 set switchbuf=useopen,usetab
 
 " Change cursor when changing between modes
@@ -143,81 +119,24 @@ set switchbuf=useopen,usetab
 let &t_SI = "\e[6 q"                        " Bar on entering insert mode
 let &t_EI = "\e[2 q"                        " Block on leaving insert mode
 " }}}
-" Functions {{{
-function! HighlightWord(n)
-    let mid = 7890 + a:n
-    try
-        call matchdelete(mid) " When match exists just delete it
-    catch 'E803' " When matchid does not exist yet it will be toggled on
-        " Match only complete word under the cursor
-        let pat = '\V\<' . expand('<cword>') . '\>'
-        call matchadd("WordHighlight" . a:n, pat, 10, mid)
-    endtry
-endfunction
 
-function! ClearAllHighlightWord()
-    for i in range(1,5)
-        silent! call matchdelete(7890 + i)
-    endfor
-endfunction
-" }}}
+let g:vimrc_directory=$HOME . "/.vim/vimrc.d/"
+if filereadable(g:vimrc_directory . "spell_check.vim")
+    exec "source" . g:vimrc_directory . "spell_check.vim"
+else
+    echomsg "Couldn't load: " . g:vimrc_directory . "spell_check.vim"
+end
+if filereadable(g:vimrc_directory . "whitespace.vim")
+    exec "source" . g:vimrc_directory . "whitespace.vim"
+end
+if filereadable(g:vimrc_directory . "highlithing.vim")
+    exec "source" . g:vimrc_directory . "highlithing.vim"
+end
 " Plugins {{{
-call plug#begin('~/vimfiles/bundle')
+if filereadable(g:vimrc_directory . "plugins.vim")
+    exec "source" . g:vimrc_directory . "plugins.vim"
+end
 
-" surround with parentheses, braces, ...
-Plug 'tpope/vim-surround'
-
-" repeat advanced plugin commands with .
-Plug 'tpope/vim-repeat'
-
-" Automatically insert closing parentheses, brackets, etc.
-Plug 'jiangmiao/auto-pairs'
-
-" Allow movement integration with tmux
-Plug 'christoomey/vim-tmux-navigator'
-let g:tmux_navigator_disable_when_zoomed = 1
-
-" klen/python-mode
-" scrooloose/syntastic
-
-" Better syntax highlighting
-Plug 'sheerun/vim-polyglot'
-" Conflicts with lervag/vimtex
-let g:polyglot_disabled = ['latex']
-
-" Very powerful code completion TODO after some usage go through configuration values
-Plug 'ycm-core/YouCompleteMe'
-let g:ycm_max_diagnostics_to_display = 0 " Infinite number of diagnostics to display
-let g:ycm_autoclose_preview_window_after_insertion = 1
-" YCM needs a .ycm_extra_conf.py in order to get the correct compile options.
-" This tool helps generating this. :YcmGenerateConfig --help for more info.
-" Probably :YcmGenerateConfig -bmake is the way to got especially when running
-" with autoconf scripts. (Run normal build first so autoconf was called)
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-
-Plug 'ludovicchabant/vim-gutentags'
-let g:gutentags_modules = ['ctags', 'cscope']
-let g:gutentags_project_root = ['.git']
-let g:gutentags_cache_dir = expand('~/.cache/tags') " Here the databases are created so the project dir is not polluted
-let g:gutentags_define_advanced_commands = 1 " Enable debugging via :GutentagsToggleTrace
-let g:gutentags_cscope_build_inverted_index = 1
-
-" Tagbar for class and function outline
-Plug 'majutsushi/tagbar'
-
-" Have a custom statusline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-" show git diff +, -, ~ at the left edge
-Plug 'airblade/vim-gitgutter'
-
-" Latex syntax highlighting and completion
-Plug 'lervag/vimtex'
-
-call plug#end()
-
-" Plugins dependent {{{
 if !exists("g:loaded_tmux_navigator")
     " Move the same as in tmux with Vi bindings
     nnoremap <C-h> <C-w>h
@@ -225,111 +144,21 @@ if !exists("g:loaded_tmux_navigator")
     nnoremap <C-k> <C-w>k
     nnoremap <C-l> <C-w>l
 endif
-
 " }}}
-" }}}
+if filereadable(g:vimrc_directory . "c_dev.vim")
+    exec "source" . g:vimrc_directory . "c_dev.vim"
+end
 " FIle Format dependend {{{
 let g:tex_fold_enabled=1
 " }}}
-" C C++ cscope ctags mappings{{{
-if has("cscope")
-    " See :h cscope-suggestions for explanations
-    nmap <C-_>a :cs find a <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-_>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-    nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-_>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-    nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-_>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-
-    " Do horizontal split for search
-    nmap <C-@>a :scs find a <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
-    nmap <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-    nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>
-
-
-    " Do a vertical split for search
-    nmap <C-@><C-@>a :vert scs find a <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@><C-@>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@><C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@><C-@>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@><C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
-    nmap <C-@><C-@>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@><C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-    nmap <C-@><C-@>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@><C-@>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
-endif
-" }}}
 " Highlighting and color scheme {{{
 syntax on                                   " syntax highlighting
-
-" When setting the background the colorscheme gets relouded and thus these
-" values have to reset FIXME: Move that to own color scheme
-if ! exists("g:vimrc_colorscheme_autocmds_added")
-    let g:vimrc_colorscheme_autocmds_added = 1
-    autocmd ColorScheme * hi def WordHighlight1 ctermbg=2
-    autocmd ColorScheme * hi def WordHighlight2 ctermbg=6
-    autocmd ColorScheme * hi def WordHighlight3 ctermbg=12
-    autocmd ColorScheme * hi def WordHighlight4 ctermbg=9
-    autocmd ColorScheme * hi def WordHighlight5 ctermbg=13
-    " Change Spellcheck highlighting to be visible on every console
-    "hi! link SpellBad ErrorMsg
-    "hi! link SpellCap Search
-    autocmd ColorScheme * highlight SpellBad cterm=underline term=underline ctermbg=Red
-    autocmd ColorScheme * highlight SpellCap ctermbg=Red
-    " highlight the custom groups
-    autocmd ColorScheme * highlight EvilTabs ctermbg=red guibg=red
-    autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-    " Plugin specific
-    autocmd ColorScheme * highlight link TagbarHighlight Special
-end
 
 colorscheme solarized  " placed at ~/vimfiles/colors/solarized.vim for windows
 set background=light
 
 " Small command to debug syntax highlighting http://vim.wikia.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor
 map <leader>hi :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' .synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
-" Match syntax groups for trailing whitespace and tabs in the file
-function! AddMatches()
-    try
-        call matchadd("EvilTabs", '\t', 10, 8910)
-    catch 'E801'
-    endtry
-    try
-        call matchadd("ExtraWhitespace", '\s\+\%#\@<!$', 10, 8911)
-    catch 'E801'
-    endtry
-endfunction
-
-function! DeleteMatches()
-    try
-        call matchdelete(8910)
-    catch 'E803'
-    endtry
-    try
-        call matchdelete(8911)
-    catch 'E803'
-    endtry
-endfunction
-
-if ! exists("g:vimrc_match_autocmds_added")
-    let g:vimrc_match_autocmds_added = 1
-    " Has to be called in every window as matches are window specific
-    autocmd WinNew * call AddMatches()
-    " WinNew is not triggered for the first window
-    autocmd VimEnter * call AddMatches()
-    " Don't highlight tabs in the help window
-    autocmd FileType help call DeleteMatches()
-end
 " }}}
 
 " vim: foldmethod=marker
