@@ -42,3 +42,9 @@
     - backup
     - autoload
     - colors
+
+- name: Symlink vimrc
+  file:
+    src: "{{ role_path }}/files/vimrc"
+    dest: "~/.vimrc"
+    state: link
