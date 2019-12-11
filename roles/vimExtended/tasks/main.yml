@@ -1,10 +1,5 @@
 ---
-- name: Set vim as default editor (Debian)
-  become: true
-  command: "update-alternatives --set editor /usr/bin/vim.nox"
-  when: ansible_os_family == "Debian"
-
-- name: Create vimrc direocty
+- name: Create vimrc directory
   file:
     path: "~/.vim/vimrc.d"
     state: directory
