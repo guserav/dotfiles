@@ -124,17 +124,23 @@ let g:vimrc_directory=$HOME . "/.vim/vimrc.d/"
 if filereadable(g:vimrc_directory . "spell_check.vim")
     exec "source" . g:vimrc_directory . "spell_check.vim"
 else
-    echomsg "Couldn't load: " . g:vimrc_directory . "spell_check.vim"
+    echoerr "Couldn't load: " . g:vimrc_directory . "spell_check.vim"
 end
 if filereadable(g:vimrc_directory . "whitespace.vim")
     exec "source" . g:vimrc_directory . "whitespace.vim"
+else
+    echoerr "Couldn't load: " . g:vimrc_directory . "whitespace.vim"
 end
-if filereadable(g:vimrc_directory . "highlithing.vim")
-    exec "source" . g:vimrc_directory . "highlithing.vim"
+if filereadable(g:vimrc_directory . "highlighting.vim")
+    exec "source" . g:vimrc_directory . "highlighting.vim"
+else
+    echoerr "Couldn't load: " . g:vimrc_directory . "highlighting.vim"
 end
 " Plugins {{{
 if filereadable(g:vimrc_directory . "plugins.vim")
     exec "source" . g:vimrc_directory . "plugins.vim"
+else
+    echoerr "Couldn't load: " . g:vimrc_directory . "plugins.vim"
 end
 
 if !exists("g:loaded_tmux_navigator")
