@@ -6,8 +6,8 @@ name = "awesome"
 
 [[block]]
 block = "custom"
-command = "xsel -o"
-on_click = "xsel -c"
+command = "xsel -o -b"
+on_click = "xsel -c -b"
 interval = 1
 
 [[block]]
