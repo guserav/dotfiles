@@ -180,4 +180,4 @@ for_window [class="Arandr"] floating enable
 #for_window [class="zenity"] focus
 
 # no titlebars for i3 gaps
-for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border normal 0
