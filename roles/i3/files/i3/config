@@ -179,5 +179,7 @@ for_window [class="Arandr"] floating enable
 #no_focus [class="[.]*"]
 #for_window [class="zenity"] focus
 
-# no titlebars for i3 gaps
+# titlebars for all windows except terminals and firefox
 for_window [class="^.*"] border normal 0
+for_window [class="^.*terminal.*"] border pixel 0
+for_window [class="^.*Firefox.*"] border pixel 0
