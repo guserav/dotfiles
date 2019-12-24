@@ -157,6 +157,8 @@ exec --no-startup-id nm-applet
 exec --no-startup-id feh --bg-scale ~/.wallpaper
 # start dunst notification daemon
 exec --no-startup-id dunst
+# start flameshot (for screenshots)
+exec --no-startup-id flameshot
 
 #exec --no-startup-id i3-msg 'workspace "1:www"; exec /usr/bin/chromium'
 #exec --no-startup-id i3-msg 'workspace "10"; exec /usr/bin/xfce4-terminal'
