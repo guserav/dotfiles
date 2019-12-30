@@ -143,7 +143,7 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle # amixer -q
 # suspend screen
 bindsym XF86Sleep exec systemctl suspend
 # lock screen
-bindsym $mod+m exec "i3lock -c 000000; sleep 1; pgrep i3lock && xset dpms force off"
+bindsym $mod+m exec "i3lock -c 113311; sleep 1; pgrep i3lock && xset dpms force off"
 bindsym $mod+b exec "sleep 1; xset dpms force off"
 
 # screenshot
