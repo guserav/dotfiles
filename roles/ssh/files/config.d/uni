@@ -1,0 +1,5 @@
+Host git.marko10-000.de
+    User git
+    IdentityFile ~/.ssh/uni
+
+# vim: syntax=sshconfig

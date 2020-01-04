@@ -31,3 +31,4 @@
     - { src: 'github', dest: 'github' }
     - { src: 'selfnet', dest: 'selfnet' }
     - { src: 'general', dest: 'general' }
+    - { src: 'uni', dest: 'uni' }
