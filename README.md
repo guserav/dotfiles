@@ -48,5 +48,15 @@ If you want to exclude default tags use `--skip-tags`. For further explanation a
 - `gui`:              Everything else you would need on a system that is more than a terminal.
 - `deprecated`:       Marks plays that are not currently used and thus not maintained.
 
+## Git filters
+Because some config files are resorted by the program they use I use git filters to reduce the amount of diff I see.
+
+If you want to reuse them please add the following to your `.git/config` in this repository.
+```
+[filter "sort"]
+    clean=sort
+    smudge=cat
+```
+
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
