@@ -60,4 +60,4 @@
   f = fetch --all --prune
   a = add -p
 
-# vim: set filetype=gitconfig
+# vim: filetype=gitconfig shiftwidth=2 softtabstop=2
