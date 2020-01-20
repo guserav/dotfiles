@@ -56,5 +56,8 @@
   wdiff = diff --color-words
   s = status
   sAll = status --ignored=matching
+  c = commit -v
+  f = fetch --all --prune
+  a = add -p
 
 # vim: set filetype=gitconfig
