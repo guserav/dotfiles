@@ -10,6 +10,7 @@
   file:
     dest: "~/.gnupg/"
     state: directory
+    mode: "0700"
 
 - name: Symlink config files
   file:
