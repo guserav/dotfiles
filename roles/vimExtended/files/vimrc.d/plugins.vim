@@ -38,6 +38,11 @@ let g:gutentags_cache_dir = expand('~/.cache/tags') " Here the databases are cre
 let g:gutentags_define_advanced_commands = 1 " Enable debugging via :GutentagsToggleTrace
 let g:gutentags_cscope_build_inverted_index = 1
 
+Plug 'guserav/ShowMarks'
+let g:showmarks_textlower = ""
+let g:showmarks_textuper = ""
+let g:showmarks_textother = ""
+
 " Tagbar for class and function outline
 Plug 'majutsushi/tagbar'
 
