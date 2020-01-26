@@ -1,0 +1,6 @@
+---
+- name: Symlink gdbinit
+  file:
+    src: "{{ role_path }}/files/gdbinit"
+    dest: "~/.gdbinit"
+    state: link

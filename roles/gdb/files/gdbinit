@@ -1,0 +1,23 @@
+# set to 0 if you have problems with the colorized prompt - reported by Plouj with Ubuntu gdb 7.2
+set $COLOREDPROMPT = 1
+# set to 1 to enable display of stack (default is 0)
+set $SHOWSTACK = 1
+# set to 0 to disable colored display of changed registers
+set $SHOWREGCHANGES = 1
+# use colorized output or not
+set $USECOLOR = 1
+
+set history filename ~/.gdb_history
+set history save
+
+set $SHOW_CONTEXT = 1
+set $SHOW_NEST_INSN = 0
+
+set $CONTEXTSIZE_STACK = 6
+set $CONTEXTSIZE_DATA  = 4
+set $CONTEXTSIZE_CODE  = 6
+
+# can't use the color functions because we are using the set command
+if $COLOREDPROMPT == 1
+    set prompt \033[32m(gdb) \033[0m
+end
