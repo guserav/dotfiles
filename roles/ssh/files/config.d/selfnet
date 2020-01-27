@@ -26,7 +26,7 @@ Host git.selfnet.de
 
 # Tunnelt alle auf Verbindungen, die auf *.wh-stuttgart.net bzw. selfnet.de" enden.
 Host !login !login-1 !login-2 !login-1.server.selfnet.de !login-2.server.selfnet.de !login.selfnet.de *.selfnet.de *.wh-stuttgart.net
-    ProxyCommand ssh -q login -W %h:%p
+    ProxyJump login
     User erik
     IdentityFile ~/.ssh/selfnet
 
