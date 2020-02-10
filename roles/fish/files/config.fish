@@ -2,12 +2,6 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
-# Stay in the folder navigated to when exiting ranger
-function ranger
-    command ranger --choosedir=$HOME/.rangerdir $argv ; or return
-    cd (cat $HOME/.rangerdir)
-end
-
 # Show git status per default
 set -g _show_git_status "show"
 
