@@ -13,7 +13,7 @@ function attachGDB
         end
 
         echo "attaching to: $pnum"
-        sudo -E gdb -p $pnum
+        gdb -p $pnum
     else
         set -l HOSTFILE $argv[2]
         for line in (cat $HOSTFILE)
@@ -29,8 +29,8 @@ function attachGDB
                     break
                 end
                 echo "attaching to: $pnum"
-                echo "ssh -t $host sudo -E gdb -p $pnum"
-                ssh -t $host sudo -E gdb -p $pnum
+                echo "ssh -t $host gdb -p $pnum"
+                ssh -t $host gdb -p $pnum
                 break
             else
                 set ORDER (math $ORDER - $slots)
