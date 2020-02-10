@@ -6,13 +6,8 @@
     state: present
   when: only_config is not defined
 
-- name: Create ranger config directory
+- name: Symlink ranger config dir
   file:
-    path: "~/.config/ranger"
-    state: directory
-
-- name: Symlink rifle config
-  file:
-    src: "{{ role_path }}/files/rifle.conf"
-    dest: "~/.config/ranger/rifle.conf"
+    src: "{{ role_path }}/files/ranger"
+    dest: "~/.config/ranger"
     state: link
