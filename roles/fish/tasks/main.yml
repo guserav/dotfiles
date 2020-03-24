@@ -26,4 +26,5 @@
     - "functions/fish_prompt.fish"
     - "functions/fish_user_key_bindings.fish"
     - "functions/attachGDB.fish"
+    - "functions/prepareTmuxDebug.fish"
     - "functions/tmux_program_finder.fish"
