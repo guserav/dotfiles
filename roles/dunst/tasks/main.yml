@@ -6,8 +6,13 @@
     state: present
   when: only_config is not defined
 
+- name: Create dunst config directory
+  file:
+    dest: "~/.config/dunst"
+    state: directory
+
 - name: Symlink dunst config
   file:
     src: "{{ role_path }}/files/dunstrc"
-    dest: "~/.dunstrc"
+    dest: "~/.config/dunst/dunstrc"
     state: link
