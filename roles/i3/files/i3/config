@@ -161,6 +161,8 @@ exec --no-startup-id dunst
 exec --no-startup-id flameshot
 # on screen keyboard
 exec --no-startup-id onboard &
+# bluetooth controls
+exec --no-startup-id blueman-applet
 
 #exec --no-startup-id i3-msg 'workspace "1:www"; exec /usr/bin/chromium'
 #exec --no-startup-id i3-msg 'workspace "10"; exec /usr/bin/xfce4-terminal'
