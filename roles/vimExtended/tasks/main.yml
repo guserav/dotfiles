@@ -27,5 +27,11 @@
     - c_dev.vim
     - coc.nvim.vim
 
+- name: Symlink coc-settings.json
+  file:
+    src: "{{ role_path }}/files/coc-settings.json"
+    dest: "~/.vim/coc-settings.json"
+    state: link
+
 - name: Install plugins
   command: vim +PlugInstall +qall

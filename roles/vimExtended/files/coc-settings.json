@@ -1,0 +1,17 @@
+{
+  "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp", "h", "hpp"],
+      "rootPatterns": [".ccls-root", "compile_commands.json", ".git", ".root"],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/.ccls-cache"
+        },
+        "client": {
+          "snippetSupport": true
+        }
+      }
+    }
+  }
+}
