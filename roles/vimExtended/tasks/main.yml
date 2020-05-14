@@ -25,6 +25,7 @@
     - whitespace.vim
     - highlighting.vim
     - c_dev.vim
+    - coc.nvim.vim
 
 - name: Install plugins
   command: vim +PlugInstall +qall

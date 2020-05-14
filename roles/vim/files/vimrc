@@ -100,6 +100,7 @@ set ignorecase                              " make search case insensitive
 set smartcase                               " Case insensitive searches become sensitive with capitals
 set hlsearch                                " highlight matches
 set incsearch                               " Jump to first match while typing
+set shortmess-=S                            " Display count of match while searching
 set shiftwidth=4 tabstop=8 softtabstop=4    " Make a tab only 4 instead of 8 spaces
 set expandtab                               " insert spaces when pressing tab
 set foldmethod=syntax                       " Make it possible to fold lines with comments
@@ -121,27 +122,24 @@ let &t_EI = "\e[2 q"                        " Block on leaving insert mode
 " }}}
 
 let g:vimrc_directory=$HOME . "/.vim/vimrc.d/"
-if filereadable(g:vimrc_directory . "spell_check.vim")
-    exec "source" . g:vimrc_directory . "spell_check.vim"
-else
-    echoerr "Couldn't load: " . g:vimrc_directory . "spell_check.vim"
-end
-if filereadable(g:vimrc_directory . "whitespace.vim")
-    exec "source" . g:vimrc_directory . "whitespace.vim"
-else
-    echoerr "Couldn't load: " . g:vimrc_directory . "whitespace.vim"
-end
-if filereadable(g:vimrc_directory . "highlighting.vim")
-    exec "source" . g:vimrc_directory . "highlighting.vim"
-else
-    echoerr "Couldn't load: " . g:vimrc_directory . "highlighting.vim"
-end
+function! s:source_vimrc_d_file(file)
+    if filereadable(g:vimrc_directory . a:file)
+        exec "source" . g:vimrc_directory . a:file
+    else
+        echoerr "Couldn't load: " . g:vimrc_directory . a:file
+    end
+endfunction
+
+call s:source_vimrc_d_file("spell_check.vim")
+call s:source_vimrc_d_file("whitespace.vim")
+call s:source_vimrc_d_file("highlighting.vim")
 " Plugins {{{
-if filereadable(g:vimrc_directory . "plugins.vim")
-    exec "source" . g:vimrc_directory . "plugins.vim"
-else
-    echoerr "Couldn't load: " . g:vimrc_directory . "plugins.vim"
-end
+call s:source_vimrc_d_file("plugins.vim")
+" Because Plug is behaving strangely and is not sourcing the plugin right away
+augroup source_coc_nvim
+    autocmd!
+    autocmd VimEnter * call s:source_vimrc_d_file("coc.nvim.vim")
+augroup end
 
 if !exists("g:loaded_tmux_navigator")
     " Move the same as in tmux with Vi bindings
