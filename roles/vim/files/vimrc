@@ -1,6 +1,6 @@
 let mapleader=","                           " set leader to, (Comma)
 
-" Mapings {{{
+" Mappings {{{
 noremap <silent> <leader>ev :e $MYVIMRC<cr>  " open .vimrc with <leader>ev
 noremap <silent> <leader>sv :so $MYVIMRC<cr>  " open .vimrc with <leader>sv
 
@@ -35,6 +35,10 @@ nnoremap zl 10zl
 " Prevent <c-u> from deleting line without undo possibility
 inoremap <c-u> <c-g>u<c-u>
 inoremap <c-w> <c-g>u<c-w>
+
+" scroll 3 lines instead of one
+nnoremap <C-n> :bn<cr>
+nnoremap <C-p> :bp<cr>
 
 noremap <leader><space> :nohlsearch<cr><leader><space>     " turn off search highlight
 nnoremap <silent><leader>w :%s/\s\+$//<cr>  " delete all trailing whitespace"
