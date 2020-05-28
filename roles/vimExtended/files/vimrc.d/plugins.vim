@@ -16,15 +16,11 @@ let g:tmux_navigator_disable_when_zoomed = 1
 " klen/python-mode
 " scrooloose/syntastic
 
-" Better syntax highlighting
-Plug 'sheerun/vim-polyglot'
-" Conflicts with lervag/vimtex
-let g:polyglot_disabled = ['latex']
-
 " Prevent annoying popup at start of vim
 " To use this the easiest way is to use bear (in order to generate compile_commands.json)
 if executable('node') || executable('ccls')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    let g:coc_global_extensions = [ 'coc-vimtex' ]
 else
     if v:vim_did_enter
         echohl Error | echom 'node or ccls not in path. For vim highlighting please add node to path.' | echohl None
