@@ -36,6 +36,13 @@ let g:gutentags_cache_dir = expand('~/.cache/tags') " Here the databases are cre
 let g:gutentags_define_advanced_commands = 1 " Enable debugging via :GutentagsToggleTrace
 let g:gutentags_cscope_build_inverted_index = 1
 
+Plug 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_match_current_file = 1
+" Remap <c-p> as this is already used by buffer change
+let g:ctrlp_map = '<c-e>'
+nnoremap <c-s> :CtrlPBuffer<cr>
+
 Plug 'guserav/ShowMarks'
 let g:showmarks_textlower = ""
 let g:showmarks_textuper = ""
