@@ -2,4 +2,36 @@ Host git.marko10-000.de
     User git
     IdentityFile ~/.ssh/uni
 
+Host ipvslogin.informatik.uni-stuttgart.de ipvslogin
+    HostName ipvslogin.informatik.uni-stuttgart.de
+    ForwardX11 yes
+    User zeiskeek
+    IdentityFile ~/.ssh/uni
+
+Host pchal
+    HostName pchal
+    ForwardX11 yes
+    User zeiskeek
+    ProxyJump ipvslogin
+    IdentityFile ~/.ssh/uni
+
+Host visgs*
+    User zeiskeek
+    ProxyJump ipvslogin
+    IdentityFile ~/.ssh/uni
+
+Host sgscl1
+    User zeiskeek
+    ProxyJump ipvslogin
+    IdentityFile ~/.ssh/uni
+
+Host git.currently.online
+    User git
+    IdentityFile ~/.ssh/selfnet
+
+Host *.uni-stuttgart.de
+    User zeiskeek
+    IdentityFile ~/.ssh/uni
+
+
 # vim: syntax=sshconfig
