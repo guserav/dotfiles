@@ -1,6 +1,18 @@
 let mapleader=","                           " set leader to, (Comma)
 
 " Mappings {{{
+" How to find a mapping that doesn't conflict with anything:
+" Useful commands:
+"   :map  " To make these command searchable consider :redir! > file.txt and
+"           :redir! END afterwards
+"   :map!
+"   :help map-which-keys
+"   :help $KEY<c-D> " Note that this command needs the key in ^(for
+"   control) Key syntax.
+"   :mapcheck " Look into help of this command
+"   This is a tldr of
+"   https://stackoverflow.com/questions/2483849/detect-if-a-key-is-bound-to-something-in-vim
+
 noremap <silent> <leader>ev :e $MYVIMRC<cr>  " open .vimrc with <leader>ev
 noremap <silent> <leader>sv :so $MYVIMRC<cr>  " open .vimrc with <leader>sv
 

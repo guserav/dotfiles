@@ -40,7 +40,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_match_current_file = 1
 " Remap <c-p> as this is already used by buffer change
-let g:ctrlp_map = '<c-e>'
+let g:ctrlp_map = '<c-f>'
 nnoremap <c-s> :CtrlPBuffer<cr>
 
 Plug 'guserav/ShowMarks'
