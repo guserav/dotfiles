@@ -24,6 +24,11 @@ Host git.selfnet.de
     User git
     IdentityFile ~/.ssh/selfnet
 
+#Host nat-1.server.selfnet.de
+#    Hostname 192.168.0.1
+#    ProxyJump nat-2.server.selfnet.de
+#    User erik
+
 Host siam-dev-1.server.selfnet.de
     LocalForward localhost:8085 localhost:8225
     IdentityFile ~/.ssh/selfnet
