@@ -1,5 +1,20 @@
 let mapleader=","                           " set leader to, (Comma)
 
+" Utils {{{
+" Function to echo during sourcing the vimrc without interrupting the user
+function! EchoNoLoadPrompt(highlighting, message)
+    if v:vim_did_enter
+        exec 'echohl ' . a:highlighting
+        echomsg a:message
+        echohl NONE
+    else
+        augroup vimrcEchos
+            exec 'autocmd VimEnter * echohl ' . a:highlighting . ' | echomsg ' . string(a:message) . ' | echohl NONE'
+        augroup END
+    endif
+endfunction
+" }}}
+
 " Mappings {{{
 " How to find a mapping that doesn't conflict with anything:
 " Useful commands:

@@ -33,5 +33,5 @@ if exists('g:did_coc_loaded')
         autocmd CursorHold * silent call CocActionAsync('highlight')
     augroup end
 else
-    echoerr "Coc didn't load"
+    call EchoNoLoadPrompt('Error', "Coc didn't load")
 endif

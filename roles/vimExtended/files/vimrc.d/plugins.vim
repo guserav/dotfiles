@@ -22,11 +22,7 @@ if executable('node') || executable('ccls')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     let g:coc_global_extensions = [ 'coc-vimtex' ]
 else
-    if v:vim_did_enter
-        echohl Error | echom 'node or ccls not in path. For vim highlighting please add node to path.' | echohl None
-    else
-        autocmd VimEnter *.cpp,*.h echohl Error | echom 'node or ccls not in path. For vim highlighting please add node to path.' | echohl None
-    endif
+    call EchoNoLoadPrompt('Error', 'node or ccls not in path. For vim highlighting please add node to path.')
 endif
 
 Plug 'ludovicchabant/vim-gutentags'
