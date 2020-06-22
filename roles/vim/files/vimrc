@@ -183,6 +183,29 @@ endif
 if filereadable(g:vimrc_directory . "c_dev.vim")
     exec "source" . g:vimrc_directory . "c_dev.vim"
 end
+
+" File recovery from swap {{{
+function! DiffOrig()
+    vert new
+    set bt=nofile
+    r #
+    0d_
+    diffthis
+    wincmd p
+    diffthis
+endfunction
+
+function! DoneRecover()
+    call delete(b:swapname)
+    qall
+endfunction
+
+augroup FileRecoveryFromSwap
+    " Store name of swapfile for later reference
+    autocmd SwapExists  * let b:swapchoice = '?' | let b:swapname = v:swapname
+augroup END
+" }}}
+
 " FIle Format dependend {{{
 let g:tex_fold_enabled=1
 " }}}
