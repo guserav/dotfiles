@@ -62,4 +62,9 @@ Plug 'airblade/vim-gitgutter'
 " Latex syntax highlighting and completion
 Plug 'lervag/vimtex'
 
+Plug 'dpelle/vim-LanguageTool'
+let g:languagetool_jar='$HOME/.vim/plugin/languagetool/LanguageTool-4.9.1/languagetool-commandline.jar'
+nnoremap <leader>lc :LanguageToolCheck<cr>      " Check with the current set Language in spelllang default en_us
+nnoremap <leader>lno :LanguageToolClear<cr>     " Clear Highlighting of LanguageTool
+
 call plug#end()
