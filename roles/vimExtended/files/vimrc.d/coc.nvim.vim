@@ -10,11 +10,15 @@ if exists('g:did_coc_loaded')
     nmap <silent> gr <Plug>(coc-references)
 
     " Close completion window on hitting enter
-    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    inoremap <expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 
     " Use K to show documentation in preview window.
     " This is the indented behaviour of K
     nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+    imap <C-l> <C-g>u<Plug>(coc-snippets-expand)
+    " Use <C-j> for select text for visual placeholder of snippet.
+    vmap <C-j> <Plug>(coc-snippets-select)
 
     function! s:show_documentation()
         if (index(['vim','help'], &filetype) >= 0)

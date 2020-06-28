@@ -20,9 +20,23 @@ let g:tmux_navigator_disable_when_zoomed = 1
 " To use this the easiest way is to use bear (in order to generate compile_commands.json)
 if executable('node') || executable('ccls')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    let g:coc_global_extensions = [ 'coc-vimtex' ]
+    let g:coc_global_extensions = [ 'coc-vimtex', 'coc-ultisnips', 'coc-snippets' ]
+    " Use <C-j> for jump to next placeholder, it's default of coc.nvim
+    let g:coc_snippet_next = '<c-j>'
+    " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+    let g:coc_snippet_prev = '<c-k>'
+
 else
     call EchoNoLoadPrompt('Error', 'node or ccls not in path. For vim highlighting please add node to path.')
+endif
+
+if has('python3') " ultisnips needs python3 support. And without it it will generate an error on every button press
+    " Add engine for snippets
+    Plug 'SirVer/ultisnips'
+    " Snippets for ultisnips
+    Plug 'honza/vim-snippets'"
+else
+    call EchoNoLoadPrompt('Error', "vim has no python3 support. Can\'t use ultisnips")
 endif
 
 Plug 'ludovicchabant/vim-gutentags'
