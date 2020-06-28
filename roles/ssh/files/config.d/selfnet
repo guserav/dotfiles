@@ -28,6 +28,10 @@ Host siam-dev-1.server.selfnet.de
     LocalForward localhost:8085 localhost:8225
     IdentityFile ~/.ssh/selfnet
 
+Host nat-*.server.selfnet.de
+    User root
+    IdentityFile ~/.ssh/selfnet
+
 # Tunnelt alle auf Verbindungen, die auf *.wh-stuttgart.net bzw. selfnet.de" enden.
 Host !login !login-1 !login-2 !login-1.server.selfnet.de !login-2.server.selfnet.de !login.selfnet.de *.selfnet.de *.wh-stuttgart.net
     ProxyJump login
