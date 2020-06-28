@@ -1,0 +1,14 @@
+---
+- name: Create applications directory
+  file:
+    path: "~/.local/share/applications"
+    state: directory
+
+- name: Symlink application files
+  file:
+    src: "{{ role_path }}/files/{{item}}"
+    dest: "~/.local/share/applications/{{item}}"
+    state: link
+  with_items:
+    - evince.desktop
+

@@ -59,6 +59,7 @@
     - gui-utilities
     - pulseaudio
     - multiscreen
+    - gnome
 
 - name: Laptop (deprecated)
   hosts: localhost

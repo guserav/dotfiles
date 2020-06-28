@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=evince
+Exec=evince %f
