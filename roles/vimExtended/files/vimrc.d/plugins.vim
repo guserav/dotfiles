@@ -40,11 +40,12 @@ else
 endif
 
 Plug 'ludovicchabant/vim-gutentags'
-let g:gutentags_modules = ['ctags', 'cscope']
+"let g:gutentags_modules = ['ctags', 'cscope']
+let g:gutentags_modules = ['ctags']
 let g:gutentags_project_root = ['.git', '.root']
 let g:gutentags_cache_dir = expand('~/.cache/tags') " Here the databases are created so the project dir is not polluted
 let g:gutentags_define_advanced_commands = 1 " Enable debugging via :GutentagsToggleTrace
-let g:gutentags_cscope_build_inverted_index = 1
+"let g:gutentags_cscope_build_inverted_index = 1
 
 Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_working_path_mode = 'ra'
