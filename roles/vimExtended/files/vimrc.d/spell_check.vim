@@ -16,6 +16,6 @@ augroup SpellCheck
     " Change Spellcheck highlighting to be visible on every console
     "hi! link SpellBad ErrorMsg
     "hi! link SpellCap Search
-    autocmd ColorScheme * highlight SpellBad cterm=underline term=underline ctermbg=Red
+    autocmd ColorScheme * highlight SpellBad term=reverse ctermbg=224 gui=undercurl guisp=Red
     autocmd ColorScheme * highlight SpellCap ctermbg=Red
 augroup END
