@@ -33,5 +33,11 @@
     dest: "~/.vim/coc-settings.json"
     state: link
 
+- name: Symlink my-snippets
+  file:
+    src: "{{ role_path }}/files/my-snippets"
+    dest: "~/.vim/my-snippets"
+    state: link
+
 - name: Install plugins
   command: vim +PlugInstall +qall

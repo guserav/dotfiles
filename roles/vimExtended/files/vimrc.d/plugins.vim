@@ -9,6 +9,9 @@ Plug 'tpope/vim-repeat'
 " Automatically insert closing parentheses, brackets, etc.
 Plug 'jiangmiao/auto-pairs'
 
+" Open buffers at same location they left of at
+Plug 'guserav/vim-lastplace'
+
 " Allow movement integration with tmux
 Plug 'christoomey/vim-tmux-navigator'
 let g:tmux_navigator_disable_when_zoomed = 1
@@ -33,6 +36,7 @@ endif
 if has('python3') " ultisnips needs python3 support. And without it it will generate an error on every button press
     " Add engine for snippets
     Plug 'SirVer/ultisnips'
+    let g:UltiSnipsSnippetDirectories=["UltiSnips", "my-snippets"]
     " Snippets for ultisnips
     Plug 'honza/vim-snippets'"
 else
@@ -74,7 +78,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'lervag/vimtex'
 
 Plug 'dpelle/vim-LanguageTool'
-let g:languagetool_jar='$HOME/.vim/plugin/languagetool/LanguageTool-4.9.1/languagetool-commandline.jar'
+let g:languagetool_jar='$HOME/.vim/plugin/languagetool/LanguageTool-5.0/languagetool-commandline.jar'
 nnoremap <leader>lc :LanguageToolCheck<cr>      " Check with the current set Language in spelllang default en_us
 nnoremap <leader>lno :LanguageToolClear<cr>     " Clear Highlighting of LanguageTool
 
