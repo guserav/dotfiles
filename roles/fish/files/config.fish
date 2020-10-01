@@ -24,7 +24,9 @@ alias useCorpPoxy="sudo systemctl stop noproxy.service; and sudo systemctl start
 alias useNoProxy="sudo systemctl stop corpproxy.service; and sudo systemctl start noproxy.service"
 
 # Set proper TERM varibale as this seems to brake a lot...
-alias ssh="env TERM=\"xterm-256color\" ssh"
+function ssh
+    TERM=screen-256color command ssh $argv
+end
 
 # Run nix-shell with fish as shell
 function ns
