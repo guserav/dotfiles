@@ -77,6 +77,9 @@ Plug 'airblade/vim-gitgutter'
 " Latex syntax highlighting and completion
 Plug 'lervag/vimtex'
 
+" Syntax highlighting for Powershell
+Plug 'pprovost/vim-ps1'
+
 Plug 'dpelle/vim-LanguageTool'
 let g:languagetool_jar='$HOME/.vim/plugin/languagetool/LanguageTool-5.0/languagetool-commandline.jar'
 nnoremap <leader>lc :LanguageToolCheck<cr>      " Check with the current set Language in spelllang default en_us

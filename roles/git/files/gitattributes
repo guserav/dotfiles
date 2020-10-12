@@ -1,1 +1,2 @@
 *.tex diff=tex
+*.ps1 eol=clrf
