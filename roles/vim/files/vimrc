@@ -205,6 +205,39 @@ augroup FileRecoveryFromSwap
     autocmd SwapExists  * let b:swapchoice = '?' | let b:swapname = v:swapname
 augroup END
 " }}}
+"
+" Save window position on switching between hidden buffers {{{
+
+" Save current view settings on a per-window, per-buffer basis. Inspired by https://vim.fandom.com/wiki/Avoid_scrolling_when_switch_buffers
+function! AutoSaveWinView()
+    if !exists("w:SavedBufView")
+        let w:SavedBufView = {}
+    endif
+    let w:SavedBufView[bufnr("%")] = winsaveview()
+endfunction
+
+" Restore current view settings.
+function! AutoRestoreWinView()
+    let buf = bufnr("%")
+    if exists("w:SavedBufView") && has_key(w:SavedBufView, buf)
+        let v = winsaveview()
+        " Prevent this from running when switching into buffer at specific
+        " position e.g. going to tag or clicking on buffer in nonfocused
+        " window
+        let atStartOfFile = v.lnum == 1 && v.col == 0
+        if atStartOfFile && !&diff
+            call winrestview(w:SavedBufView[buf])
+        endif
+        unlet w:SavedBufView[buf]
+    endif
+endfunction
+
+" When switching buffers, preserve window view.
+augroup RestoreViewOnBuffSwitch
+    autocmd BufLeave * call AutoSaveWinView()
+    autocmd BufEnter * call AutoRestoreWinView()
+augroup END
+" }}}
 
 " FIle Format dependend {{{
 let g:tex_fold_enabled=1
