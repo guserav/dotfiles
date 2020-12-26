@@ -1,5 +1,8 @@
 call plug#begin('~/.vim/bundle')
 
+" Do less when opening large files
+Plug 'vim-scripts/LargeFile'
+
 " surround with parentheses, braces, ...
 Plug 'tpope/vim-surround'
 
@@ -76,6 +79,7 @@ Plug 'airblade/vim-gitgutter'
 
 " Latex syntax highlighting and completion
 Plug 'lervag/vimtex'
+let g:tex_flavor = 'latex'
 
 " Syntax highlighting for Powershell
 Plug 'pprovost/vim-ps1'

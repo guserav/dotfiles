@@ -33,5 +33,9 @@ Host *.uni-stuttgart.de
     User zeiskeek
     IdentityFile ~/.ssh/uni
 
+Host git.ksat-stuttgart.de
+    User git
+    IdentityFile ~/.ssh/uni
+
 
 # vim: syntax=sshconfig
