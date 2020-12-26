@@ -69,3 +69,14 @@
     insertafter: EOF
     create: yes
   when: only_config is not defined
+
+- name: Create gsimplecal directory
+  file:
+    path: ~/.config/gsimplecal/
+    state: directory
+
+- name: Symlink gsimplecal config
+  file:
+    src: "{{ role_path }}/files/gsimplecal_config"
+    dest: "~/.config/gsimplecal/config"
+    state: link
