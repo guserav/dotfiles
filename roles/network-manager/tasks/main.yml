@@ -9,6 +9,7 @@
   when: only_config is not defined
 
 - name: Enable NetworkManager.service
+  become: true
   systemd:
     name: NetworkManager
     enabled: true

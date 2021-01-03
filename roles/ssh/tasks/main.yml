@@ -2,7 +2,7 @@
 - name: Install ssh
   become: true
   package:
-    name: ssh
+    name: openssh
     state: present
   when: only_config is not defined
 

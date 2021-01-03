@@ -1,8 +1,10 @@
 ---
-- name: Install dunst
+- name: Install dunst and useful tools
   become: True
   package:
-    name: dunst
+    name:
+      - dunst
+      - libnotify
     state: present
   when: only_config is not defined
 

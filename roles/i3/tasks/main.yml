@@ -6,6 +6,27 @@
       - "../vars/{{ ansible_os_family }}.yml"
       - "../vars/default.yml"
 
+- name: Install lightdm
+  become: true
+  package:
+    name:
+      - xorg-xinit
+      - xorg-server
+      - xf86-video-ati
+      - mesa
+      - lightdm
+      - lightdm-gtk-greeter
+      - alsa-utils
+    state: present
+  when: only_config is not defined
+
+- name: Enable lightdm
+  become: true
+  service:
+    name: lightdm
+    enabled: yes
+  when: only_config is not defined
+
 - name: Install i3
   become: true
   package:
@@ -16,7 +37,9 @@
 - name: Install i3status
   become: True
   package:
-    name: i3status
+    name:
+      - i3status
+      - i3status-rust
     state: present
   when: only_config is not defined
 

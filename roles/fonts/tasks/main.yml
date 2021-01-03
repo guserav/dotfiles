@@ -27,7 +27,7 @@
 
 - name: Download Font Awesome
   get_url:
-    url: http://fontawesome.io/assets/font-awesome-4.7.0.zip
+    url: https://fontawesome.com/v4.7.0/assets/font-awesome-4.7.0.zip
     dest: /tmp/font-awesome-4.7.0.zip
   when: ansible_os_family != "NixOS" and only_config is not defined
 

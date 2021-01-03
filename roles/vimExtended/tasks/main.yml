@@ -1,4 +1,19 @@
 ---
+- name: Install required tools
+  become: true
+  package:
+    name:
+      - nodejs
+      - ctags
+    state: present
+  when: only_config is not defined
+
+- name: Install required tools from AUR
+  aur:
+    name: bear
+    user: "{{ vim_user }}"
+  when: ansible_os_family == "Archlinux" and only_config is not defined
+
 - name: Create vimrc directory
   file:
     path: "~/.vim/vimrc.d"

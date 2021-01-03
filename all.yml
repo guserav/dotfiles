@@ -60,6 +60,7 @@
     - pulseaudio
     - multiscreen
     - gnome
+    - network-manager
 
 - name: Laptop (deprecated)
   hosts: localhost

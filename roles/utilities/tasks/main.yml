@@ -14,10 +14,11 @@
     - unzip
     - wget
     - "{{ openssh_package_name }}"
-    - openssh
     - units
     - htop
-    - "{{ base_devel_package_name }}"
     - rsync
     - zip
+    - base-devel
+    - pkgfile
+    - inetutils
   when: only_config is not defined

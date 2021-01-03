@@ -8,4 +8,6 @@
     - pulseaudio
     - pavucontrol
     - playerctl  # not available for Debian
+    - paprefs
+    - pulseeffects
   when: only_config is not defined

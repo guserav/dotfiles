@@ -11,4 +11,18 @@
     - keepass
     - feh
     - gtk3-print-backends
+    - flameshot
+    - dino
+    - xournalpp
+    - libreoffice
+    - signal-desktop
+    - discord
+    - vlc
+    - solaar
   when: only_config is not defined
+
+#- name: Install gui-utilities from AUR
+#aur:
+#name: spotify
+#user: "{{ aur_user }}"
+#when: ansible_os_family == "Archlinux" and only_config is not defined

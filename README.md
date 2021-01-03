@@ -35,6 +35,8 @@ remote_tmp = /tmp/ansible-$USER
 - `sudo_user`: The user to create and add as a sudoer
 - `android_user`: The user to use to install android-studio. (Shouldn't be root)
 - `steam_user`: The user to use to install steam with. (Schouldn't be root)
+- `vim_user`: The user to use to install vim with. (Schouldn't be root)
+- `aur_user`: The user to use to install all aur packages with. (Schouldn't be root) TODO replace the other aur roles with that
 
 # Tags
 Tags can be specified with the `--tags` option in a comma separated list (e.g. `--tags "base,gui"`).

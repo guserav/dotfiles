@@ -4,5 +4,7 @@
     "fish_user": "",
     "sudo_user": "",
     "android_user": "",
-    "steam_user": ""
+    "steam_user": "",
+    "vim_user": "",
+    "aur_user": ""
 }

@@ -25,15 +25,11 @@ on_click="pavucontrol"
 
 [[block]]
 block = "net"
-device = "ens33"
+device = "eno1"
 ip = true
 ssid = false
 speed_up = false
 speed_down = false
-
-[[block]]
-block = "battery"
-device = "BAT1"
 
 [[block]]
 block = "disk_space"
@@ -47,8 +43,8 @@ alert = 1
 
 [[block]]
 block = "disk_space"
-path = "/data"
-alias = "D"
+path = "/home"
+alias = "~"
 info_type = "available"
 unit = "GB"
 interval = 20
