@@ -58,5 +58,10 @@ If you want to reuse them please add the following to your `.git/config` in this
     smudge=cat
 ```
 
+## Arch setup
+```
+pacstrap /mnt base linux linux-firmware ntfs-3g e2fsprogs lvm2 vim tmux man-db man-pages texinfo git grub efibootmgr dhcpcd
+```
+
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
