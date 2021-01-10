@@ -1,3 +1,7 @@
 [submodule "library/ansible-aur"]
 	path = library/ansible-aur
 	url = https://github.com/pigmonkey/ansible-aur.git
+[submodule "library/ansible-gpg-key"]
+	path = library/ansible-gpg-key
+	url = https://github.com/netson/ansible-gpg-key.git
+	branch = master
