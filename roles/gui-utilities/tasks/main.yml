@@ -24,24 +24,18 @@
     - flatpak
   when: only_config is not defined
 
-- name: Download key from spotify
-  get_url:
-    url: "https://download.spotify.com/debian/pubkey_0D811D58.gpg"
-    dest: /tmp/spotify.gpg
-  when: ansible_os_family == "Archlinux" and only_config is not defined
+- name: Download flatpak packages
+  flatpak:
+    name: com.spotify.Client
 
-- name: Add key for spotify
-  gpg_key:
-    file: /tmp/spotify.gpg
-  when: ansible_os_family == "Archlinux" and only_config is not defined
-
-- name: Install gui-utilities from AUR
-  aur:
-    name: "{{item}}"
-    user: "{{ aur_user }}"
-  when: ansible_os_family == "Archlinux" and only_config is not defined
-  with_items:
-    - spotify
+- name: Add wrapper script for flatpak packages
+  become: True
+  template:
+    src: flatpak_wrapper.sh
+    dest: "/usr/bin/{{item.name}}"
+    mode: 0755
+  loop:
+    - { name: 'spotify', flatpak_package: 'com.spotify.Client' }
 
 #- name: Install gui-utilities from AUR
 #aur:
