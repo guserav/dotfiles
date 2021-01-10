@@ -37,6 +37,7 @@ remote_tmp = /tmp/ansible-$USER
 - `steam_user`: The user to use to install steam with. (Schouldn't be root)
 - `vim_user`: The user to use to install vim with. (Schouldn't be root)
 - `aur_user`: The user to use to install all aur packages with. (Schouldn't be root) TODO replace the other aur roles with that
+- `onedrive_user`: User to add onedrive unit for. Keep in mind that the onedrive client has to be configured separately
 
 # Tags
 Tags can be specified with the `--tags` option in a comma separated list (e.g. `--tags "base,gui"`).

@@ -1,0 +1,16 @@
+# file /etc/systemd/system/onedrive.service
+# This file is manages by ansible
+
+[Unit]
+Description=Onedrive
+Documentation=https://github.com/abraunegg/onedrive
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User={{onedrive_user}}
+Group=users
+Type=simple
+ExecStart=/usr/bin/onedrive --monitor --confdir=/home/{{onedrive_user}}/.config/onedrive
+RestartSec=3
+RestartPreventExitStatus=3

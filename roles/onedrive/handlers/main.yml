@@ -1,0 +1,8 @@
+---
+- name: Start onedrive service
+  become: True
+  listen: Start onedrive service
+  systemd:
+    name: onedrive.service
+    state: started
+

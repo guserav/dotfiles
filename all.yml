@@ -61,6 +61,7 @@
     - multiscreen
     - gnome
     - network-manager
+    - onedrive
 
 - name: Laptop (deprecated)
   hosts: localhost

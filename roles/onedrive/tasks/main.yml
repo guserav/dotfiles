@@ -1,0 +1,28 @@
+- name: Install gui-utilities from AUR
+  aur:
+    name: onedrive
+    user: "{{ aur_user }}"
+  when: ansible_os_family == "Archlinux" and only_config is not defined
+
+- name: Check if onedrive_user is defined and fail if not
+  fail:
+    msg: "Variable onedrive_user is not defined thus the next set of tasks will fail"
+  when: only_config is not defined and onedrive_user is not defined
+
+- name: Symlink service file for onedrive service
+  become: True
+  template:
+    src: "onedrive.service"
+    dest: "/etc/systemd/system/onedrive.service"
+  when: ansible_os_family != "NixOS" and only_config is not defined and onedrive_user is defined
+  notify:
+    - Start onedrive service
+
+- name: Enable systemd onedrive service
+  become: True
+  systemd:
+    name: onedrive.service
+    enabled: True
+  when: only_config is not defined
+  notify:
+    - Start onedrive service
