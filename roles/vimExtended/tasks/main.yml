@@ -4,6 +4,7 @@
   package:
     name:
       - nodejs
+      - npm
       - ctags
     state: present
   when: only_config is not defined

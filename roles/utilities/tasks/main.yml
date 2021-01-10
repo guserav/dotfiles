@@ -21,4 +21,6 @@
     - base-devel
     - pkgfile
     - inetutils
+    - task
+    - strace
   when: only_config is not defined
