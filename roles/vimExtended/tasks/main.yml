@@ -6,6 +6,7 @@
       - nodejs
       - npm
       - ctags
+      - ccls
     state: present
   when: only_config is not defined
 

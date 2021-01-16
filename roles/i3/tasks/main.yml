@@ -13,7 +13,11 @@
       - xorg-xinit
       - xorg-server
       - xf86-video-ati
+      - xf86-video-amdgpu
       - mesa
+      - lib32-mesa
+      - vulkan-radeon
+      - lib32-vulkan-radeon
       - lightdm
       - lightdm-gtk-greeter
       - alsa-utils
