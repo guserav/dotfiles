@@ -33,10 +33,6 @@ remote_tmp = /tmp/ansible-$USER
 - `git_email`: The value to set for user.email in the gitconfig
 - `fish_user`: The user to create and give fish as shell
 - `sudo_user`: The user to create and add as a sudoer
-- `android_user`: The user to use to install android-studio. (Shouldn't be root)
-- `steam_user`: The user to use to install steam with. (Schouldn't be root)
-- `vim_user`: The user to use to install vim with. (Schouldn't be root)
-- `aur_user`: The user to use to install all aur packages with. (Schouldn't be root) TODO replace the other aur roles with that
 - `onedrive_user`: User to add onedrive unit for. Keep in mind that the onedrive client has to be configured separately
 
 # Tags

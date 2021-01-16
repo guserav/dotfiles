@@ -1,7 +1,7 @@
 - name: Install gui-utilities from AUR
   aur:
     name: onedrive
-    user: "{{ aur_user }}"
+    state: "{{ aur_state }}"
   when: ansible_os_family == "Archlinux" and only_config is not defined
 
 - name: Check if onedrive_user is defined and fail if not

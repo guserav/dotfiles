@@ -2,5 +2,5 @@
 - name: Install android-studio from AUR for Arch
   aur:
     name: android-studio
-    user: "{{ android_user }}"
+    state: "{{ aur_state }}"
   when: ansible_os_family == "Archlinux"
