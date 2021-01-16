@@ -1,0 +1,10 @@
+# This file is manages by ansible
+[Unit]
+Description=Run Background change for user {{i3_user}} reguarly
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=2min
+
+[Install]
+WantedBy=timers.target

@@ -88,6 +88,7 @@
     enabled: True
   when: only_config is not defined
 
+
 - name: Run i3 on Xorg startup
   become: yes
   lineinfile:
@@ -107,3 +108,25 @@
     src: "{{ role_path }}/files/gsimplecal_config"
     dest: "~/.config/gsimplecal/config"
     state: link
+
+- name: Check if i3_user is defined and fail if not
+  fail:
+    msg: "Variable i3_user is not defined thus the next set of tasks will fail"
+  when: only_config is not defined and i3_user is not defined
+
+- name: Install i3 background change timer
+  become: True
+  template:
+    src: "{{item}}"
+    dest: "/etc/systemd/system/{{item}}"
+  loop:
+    - i3background.timer
+    - i3background.service
+  when: ansible_os_family != "NixOS" and only_config is not defined and i3_user is defined
+
+- name: Enable Background change timer
+  become: True
+  systemd:
+    name: i3background.timer
+    enabled: True
+  when: only_config is not defined

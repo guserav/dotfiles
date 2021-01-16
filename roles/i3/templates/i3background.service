@@ -1,0 +1,11 @@
+# This file is manages by ansible
+[Unit]
+Description=Service to change background of user {{i3_user}}
+After=graphical.target
+
+[Service]
+Type=oneshot
+User={{i3_user}}
+Group=users
+ExecStart={{ role_path }}/files/nextBackground.sh
+Environment="DISPLAY=:0"
