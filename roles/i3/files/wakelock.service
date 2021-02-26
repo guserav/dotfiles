@@ -6,10 +6,10 @@ Before=sleep.target
 Before=suspend.target
 
 [Service]
-User=zoid
+User=guserav
 Type=forking
 Environment=DISPLAY=:0
-ExecStart=/usr/bin/i3lock -c 000000
+ExecStart=/usr/bin/i3lock -c 113311
 
 [Install]
 WantedBy=sleep.target
