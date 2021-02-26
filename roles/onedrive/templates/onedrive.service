@@ -14,3 +14,6 @@ Type=simple
 ExecStart=/usr/bin/onedrive --monitor --confdir=/home/{{onedrive_user}}/.config/onedrive
 RestartSec=3
 RestartPreventExitStatus=3
+
+[Install]
+WantedBy=multi-user.target
