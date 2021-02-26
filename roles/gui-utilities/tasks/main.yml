@@ -36,3 +36,12 @@
     mode: 0755
   loop:
     - { name: 'spotify', flatpak_package: 'com.spotify.Client' }
+
+- name: Install gui-utilities from AUR
+  aur:
+    name: "{{ item }}"
+    state: "{{ aur_state }}"
+  when: ansible_os_family == "Archlinux" and only_config is not defined
+  loop:
+    - skypeforlinux-stable-bin
+

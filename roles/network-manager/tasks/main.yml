@@ -6,6 +6,8 @@
   with_items:
     - networkmanager
     - network-manager-applet
+    - networkmanager-openconnect
+    - networkmanager-openvpn
   when: only_config is not defined
 
 - name: Enable NetworkManager.service
