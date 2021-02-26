@@ -1,4 +1,12 @@
 ---
+- name: Install packages for fonts
+  become: True
+  package:
+    name:
+      - cantarell-fonts
+      - noto-fonts-emoji
+  when: ansible_os_family != "NixOS" and only_config is not defined
+
 - name: Create temp font directory
   file:
     name: /tmp/fonts
