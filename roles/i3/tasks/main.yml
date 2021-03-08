@@ -21,6 +21,7 @@
       - lightdm
       - lightdm-gtk-greeter
       - alsa-utils
+      - zenity
     state: present
   when: only_config is not defined
 
