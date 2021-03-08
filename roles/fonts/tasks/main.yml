@@ -5,6 +5,7 @@
     name:
       - cantarell-fonts
       - noto-fonts-emoji
+      - otf-latinmodern-math
   when: ansible_os_family != "NixOS" and only_config is not defined
 
 - name: Create temp font directory
