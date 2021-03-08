@@ -1,0 +1,13 @@
+// vim:ts=4:sw=4:et
+{
+    "name": "Terminal",
+    "percent": 1,
+    "swallows": [
+        {
+            "class": "^Xfce4\\-terminal$",
+            "instance": "^xfce4\\-terminal$"
+        }
+    ],
+    "type": "con"
+}
+

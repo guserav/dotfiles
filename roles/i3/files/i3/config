@@ -88,6 +88,11 @@ bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9 
 bindsym $mod+Shift+0 move container to workspace number 10
 
+exec --no-startup-id "i3-msg \"workspace 1 ; append_layout $HOME/.i3/workspaces/layout-ws-1.json\""
+exec --no-startup-id "i3-msg \"workspace 2 ; append_layout $HOME/.i3/workspaces/layout-ws-2.json\""
+exec --no-startup-id "i3-msg \"workspace 3 ; append_layout $HOME/.i3/workspaces/layout-ws-3.json\""
+exec --no-startup-id "i3-msg \"workspace 9 ; append_layout $HOME/.i3/workspaces/layout-ws-9.json\""
+
 # Monitor setup
 bindsym $mod+Control+1 exec $HOME/dotfiles/roles/multiscreen/files/singleMonitor.sh
 bindsym $mod+Control+2 exec $HOME/dotfiles/roles/multiscreen/files/doubleMonitor.sh
@@ -161,10 +166,15 @@ exec --no-startup-id flameshot
 exec --no-startup-id onboard &
 # bluetooth controls
 exec --no-startup-id blueman-applet
+# Password manager
+exec --no-startup-id /usr/bin/keepassxc
 
-#exec --no-startup-id i3-msg 'workspace "1:www"; exec /usr/bin/chromium'
-#exec --no-startup-id i3-msg 'workspace "10"; exec /usr/bin/xfce4-terminal'
-#exec --no-startup-id i3-msg 'workspace ""; exec /usr/bin/spotify'
+exec --no-startup-id /usr/bin/firefox
+exec --no-startup-id /usr/bin/thunderbird
+exec --no-startup-id /usr/bin/dino
+exec --no-startup-id /usr/bin/signal-desktop
+exec --no-startup-id /usr/bin/xfce4-terminal
+exec --no-startup-id /usr/bin/spotify
 
 # rename workspace on the fly
 bindsym $mod+comma exec ~/.i3/rename_workspace
