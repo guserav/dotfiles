@@ -22,6 +22,10 @@
     - keepassxc
     - xdg-desktop-portal-gtk
     - flatpak
+    - texlive-core
+    - texlive-science
+    - texlive-latexextra
+    - texlive-bibtexextra
   when: only_config is not defined
 
 - name: Download flatpak packages

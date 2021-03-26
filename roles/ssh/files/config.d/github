@@ -2,4 +2,8 @@ Host github.com
 	User git
 	IdentityFile ~/.ssh/privat_github
 
+Host 192.168.178.88 jackson
+	User guserav
+	IdentityFile ~/.ssh/privat_github
+
 # vim: syntax=sshconfig
