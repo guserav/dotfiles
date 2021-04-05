@@ -26,6 +26,7 @@
     - texlive-science
     - texlive-latexextra
     - texlive-bibtexextra
+    - onboard
   when: only_config is not defined
 
 - name: Download flatpak packages
