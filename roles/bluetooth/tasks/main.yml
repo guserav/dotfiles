@@ -1,0 +1,21 @@
+---
+- name: Install required packages
+  become: true
+  package:
+    name:
+      - bluez
+      - bluez-tools
+      - blueman
+  when: only_config is not defined
+
+- name: Add the btusb module
+  community.general.modprobe:
+    name: btusb
+    state: present
+
+- name: Enable systemd wakelock service
+  become: True
+  systemd:
+    name: bluetooth.service
+    enabled: True
+  when: only_config is not defined
