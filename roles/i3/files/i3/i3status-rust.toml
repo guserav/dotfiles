@@ -13,7 +13,7 @@ interval = 1
 [[block]]
 block = "memory"
 display_type = "memory"
-format_mem = "{SUg}+{MUg}GB ({MUp}%)"
+format_mem = "{mem_used}+{swap_used} ({mem_used_percents})"
 
 [[block]]
 block = "cpu"
@@ -25,16 +25,13 @@ on_click="pavucontrol"
 
 [[block]]
 block = "net"
-device = "eno1"
-ip = true
-ssid = false
-speed_up = false
-speed_down = false
+format = "{signal_strength} {ip}"
 
 [[block]]
 block = "disk_space"
 path = "/"
 alias = "/"
+format = "{alias} {available}"
 info_type = "available"
 unit = "GB"
 interval = 20
@@ -45,6 +42,7 @@ alert = 1
 block = "disk_space"
 path = "/home"
 alias = "~"
+format = "{alias} {available}"
 info_type = "available"
 unit = "GB"
 interval = 20
