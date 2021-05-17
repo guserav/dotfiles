@@ -35,8 +35,8 @@ format = "{alias} {available}"
 info_type = "available"
 unit = "GB"
 interval = 20
-warning = 5
-alert = 1
+warning = 10
+alert = 5
 
 [[block]]
 block = "disk_space"
@@ -46,8 +46,8 @@ format = "{alias} {available}"
 info_type = "available"
 unit = "GB"
 interval = 20
-warning = 5
-alert = 1
+warning = 20
+alert = 10
 
 [[block]]
 block = "time"
