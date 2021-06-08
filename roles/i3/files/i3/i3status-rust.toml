@@ -6,7 +6,7 @@ name = "awesome"
 
 [[block]]
 block = "custom"
-command = "xsel -o -b"
+command = "xsel -o -b | sed -e 's/\\n//g' | xargs echo -n"
 on_click = "xsel -c -b"
 interval = 1
 
