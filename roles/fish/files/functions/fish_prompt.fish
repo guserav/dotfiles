@@ -36,20 +36,23 @@ end
 
 function fish_prompt --description 'Write out the prompt'
 	set laststatus $status
+    function _git_dir
+        echo (git rev-parse --git-dir 2> /dev/null)
+    end
     function _git_branch_name
-        echo (git symbolic-ref HEAD ^/dev/null | sed -e 's|^refs/heads/||')
+        echo (git rev-parse --abbrev-ref HEAD 2> /dev/null)
     end
     function _is_git_dirty
-        echo (git status -s --ignore-submodules=dirty ^/dev/null)
+        echo (git diff --quiet)
     end
 
 
     set git_info ""
     if git --version 2>&1 > /dev/null
         if set -q _show_git_status
-           if [ (_git_branch_name) ]
+           if [ (_git_dir) ]
                set -l git_branch (set_color -o blue)(_git_branch_name)
-               if [ (_is_git_dirty) ]
+               if [ !(_is_git_dirty) ]
                    for i in (git branch -qv --no-color| string match -r '\*'|cut -d' ' -f4-|cut -d] -f1|tr , '\n')\
                        (git status --porcelain | cut -c 1-2 | uniq)
                        switch $i
