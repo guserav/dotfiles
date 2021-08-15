@@ -1,0 +1,14 @@
+[Unit]
+Description=Automatic Update
+After=network-online.target
+
+[Service]
+Type=simple
+SyslogIdentifier=autoupdate
+ExecStart=/usr/bin/nice -n 19 /usr/bin/pacman -Syuwq --noconfirm
+TimeoutStopSec=600
+KillMode=process
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target

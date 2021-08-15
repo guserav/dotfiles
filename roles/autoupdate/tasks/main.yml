@@ -1,0 +1,17 @@
+- name: Install autoupdate background task
+  become: True
+  copy:
+    src: "{{item}}"
+    dest: "/etc/systemd/system/{{item}}"
+  loop:
+    - autoupdate.timer
+    - autoupdate.service
+  when: ansible_os_family != "NixOS" and only_config is not defined
+
+- name: Enable autoupdate timer
+  become: True
+  systemd:
+    name: autoupdate.timer
+    state: started
+    enabled: True
+  when: only_config is not defined
