@@ -62,3 +62,5 @@
   ca = commit --amend -v
 
 # vim: filetype=gitconfig shiftwidth=2 softtabstop=2
+[init]
+	defaultBranch = main
