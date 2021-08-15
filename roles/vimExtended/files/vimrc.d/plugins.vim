@@ -26,7 +26,7 @@ let g:tmux_navigator_disable_when_zoomed = 1
 " To use this the easiest way is to use bear (in order to generate compile_commands.json)
 if executable('node') || executable('ccls')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    let g:coc_global_extensions = [ 'coc-vimtex', 'coc-ultisnips', 'coc-snippets' ]
+    let g:coc_global_extensions = [ 'coc-vimtex', 'coc-ultisnips', 'coc-snippets', 'coc-python' ]
     " Use <C-j> for jump to next placeholder, it's default of coc.nvim
     let g:coc_snippet_next = '<c-j>'
     " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
