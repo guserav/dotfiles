@@ -1,0 +1,3 @@
+samba_root_dir: /home/guserav/git_repos/
+samba_group: smbgroup
+samba_user: windows

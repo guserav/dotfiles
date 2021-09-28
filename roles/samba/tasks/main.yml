@@ -1,0 +1,39 @@
+---
+- name: Ensure samba is installed
+  become: true
+  package:
+    name: samba
+
+- name: Check all variables are correctly set
+  fail:
+    msg: "Please make sure samba_root_dir is set correctly"
+  when: (samba_root_dir is undefined)
+
+- name: Ensure samba group exists
+  become: true
+  group:
+    name: "{{ samba_group }}"
+    state: present
+
+- name: Ensure samba user exists
+  become: true
+  user:
+    name: "{{ samba_user }}"
+    group: "{{ samba_group }}"
+    shell: "/usr/bin/nologin"
+
+- name: Copy samba configuration
+  become: true
+  template:
+    src: "smb.conf"
+    dest: "/etc/samba/smb.conf"
+
+- name: Ensure systemd service starts on system boot
+  become: true
+  service:
+    name: "{{item}}"
+    enabled: true
+    state: started
+  with_items:
+    - nmb.service
+    - smb.service
