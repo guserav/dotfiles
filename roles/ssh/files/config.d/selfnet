@@ -1,21 +1,20 @@
-Host login-1.server.selfnet.de login-1.selfnet.de login1 login-1
-    HostName login-1.server.selfnet.de
+Host login-*.server.selfnet.de login-*.selfnet.de login-* login
     Port 22
     User erik
     PasswordAuthentication yes
     PubkeyAuthentication yes
     IdentityFile ~/.ssh/selfnet
 
-Host login-2.server.selfnet.de login-2.selfnet.de login2 login-2 login
+Host login-1.server.selfnet.de login-1.selfnet.de login1 login-1 login
+    HostName login-1.server.selfnet.de
+
+Host login-2.server.selfnet.de login-2.selfnet.de login2 login-2
     HostName login-2.server.selfnet.de
-    Port 22
-    User erik
-    PasswordAuthentication yes
-    PubkeyAuthentication yes
-    IdentityFile ~/.ssh/selfnet
+
+Host login-3.server.selfnet.de login-3.selfnet.de login3 login-3
+    HostName login-3.server.selfnet.de
 
 Host git.selfnet.de
-    Protocol 2
     Port 22
     ForwardX11 no
     ForwardX11Trusted no
@@ -38,7 +37,7 @@ Host nat-*.server.selfnet.de
     IdentityFile ~/.ssh/selfnet
 
 # Tunnelt alle auf Verbindungen, die auf *.wh-stuttgart.net bzw. selfnet.de" enden.
-Host !login !login-1 !login-2 !login-1.server.selfnet.de !login-2.server.selfnet.de !login.selfnet.de *.selfnet.de *.wh-stuttgart.net
+Host !login !login-* !login-*.server.selfnet.de !login.selfnet.de *.selfnet.de *.wh-stuttgart.net
     ProxyJump login
     User erik
     IdentityFile ~/.ssh/selfnet
