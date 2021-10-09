@@ -1,3 +1,6 @@
+[init]
+  defaultBranch = main
+
 [user]
   # Prevent git from guessing the user name and email
   # This prevents any command needing this information from running
@@ -62,5 +65,3 @@
   ca = commit --amend -v
 
 # vim: filetype=gitconfig shiftwidth=2 softtabstop=2
-[init]
-	defaultBranch = main
