@@ -11,6 +11,7 @@ Plug 'tpope/vim-repeat'
 
 " Automatically insert closing parentheses, brackets, etc.
 Plug 'jiangmiao/auto-pairs'
+let g:AutoPairsMultilineClose = 0
 
 " Open buffers at same location they left of at
 Plug 'guserav/vim-lastplace'
