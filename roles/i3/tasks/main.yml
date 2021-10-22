@@ -89,6 +89,11 @@
     enabled: True
   when: only_config is not defined
 
+- name: Symlink xprofile
+  file:
+    src: "{{ role_path }}/files/.xprofile"
+    dest: "~/.xprofile"
+    state: link
 
 - name: Run i3 on Xorg startup
   become: yes
