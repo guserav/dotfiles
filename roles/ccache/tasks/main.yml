@@ -1,0 +1,30 @@
+---
+- name: Install vim
+  become: true
+  package:
+    name: ccache
+    state: present
+  when: only_config is not defined
+
+- name: Create directories for backup and temporary files
+  file:
+    path: "~/.config/ccache/"
+    state: directory
+
+- name: Symlink ccache config
+  file:
+    src: "{{ role_path }}/files/ccache.conf"
+    dest: "~/.config/ccache/ccache.conf"
+    state: link
+
+- name: Create symlinks for ccache to be used
+  become: true
+  file:
+    src: "/usr/bin/ccache"
+    dest: "/usr/local/bin/{{ item }}"
+    state: link
+  with_items:
+    - gcc
+    - g++
+    - cc
+    - c++
