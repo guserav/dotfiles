@@ -16,6 +16,7 @@ alias mountVM="vmhgfs-fuse /mnt -o umask=22"
 
 # Ensure rm is asking before deleting large files
 alias rm="rm -I"
+source ~/.profile
 
 # Proxy stuff
 # Enable corp proxy
