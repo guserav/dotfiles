@@ -9,6 +9,8 @@ ExecStart=/usr/bin/nice -n 19 /usr/bin/pacman -Syuwq --noconfirm
 TimeoutStopSec=600
 KillMode=process
 KillSignal=SIGINT
+Restart=on-failure
+RestartSec=30m
 
 [Install]
 WantedBy=multi-user.target
