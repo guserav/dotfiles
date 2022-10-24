@@ -5,6 +5,7 @@
     name:
       - dunst
       - libnotify
+      - xfce4-notifyd
     state: present
   when: only_config is not defined
 
@@ -17,4 +18,15 @@
   file:
     src: "{{ role_path }}/files/dunstrc"
     dest: "~/.config/dunst/dunstrc"
+    state: link
+
+- name: Create xfce-notifyd config directory
+  file:
+    dest: "~/.config/xfce4/xfconf/xfce-perchannel-xml/"
+    state: directory
+
+- name: Symlink xfce-notifyd config
+  file:
+    src: "{{ role_path }}/files/xfce4-notifyd.xml"
+    dest: "~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-notifyd.xml"
     state: link

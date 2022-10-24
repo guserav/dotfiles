@@ -35,8 +35,8 @@
     mouse_left_click = do_action
     mouse_middle_click = close_all
     mouse_right_click = close_current
-    dmenu= "/run/current-system/sw/bin/dmenu -p dunst"
-    browser = "/run/current-system/sw/bin/firefox"
+    dmenu= "/usr/bin/dmenu -p dunst"
+    browser = "/usr/bin/firefox"
 
 [shortcuts]
     close = ctrl+space
