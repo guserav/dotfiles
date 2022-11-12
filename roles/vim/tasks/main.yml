@@ -2,7 +2,7 @@
 - name: Install vim
   become: true
   package:
-    name: neovim
+    name: gvim
     state: present
   when: only_config is not defined
 
