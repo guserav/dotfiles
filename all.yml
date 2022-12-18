@@ -34,6 +34,7 @@
     - links
     - less
     - vimExtended
+    - neovim
     - network-tools
     - utilities
     - user

@@ -78,6 +78,10 @@ function disk-usage --description 'Determine disk usage of specified folder subd
     sudo du -h -c -d 1 $argv 2> /dev/null
 end
 
+function vim --description 'map vim to nvim'
+    nvim $argv
+end
+
 if test -e ~/.config/fish/xcape.config
     source ~/.config/fish/xcape.config
 end

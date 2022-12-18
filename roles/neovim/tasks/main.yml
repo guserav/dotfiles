@@ -1,0 +1,25 @@
+# pip install neovim
+# apt install npm
+- name: Install neovim
+  become: true
+  package:
+    name: neovim
+    state: present
+  when: only_config is not defined
+
+- name: Install python packages needed for nvim
+  pip:
+    name: pynvim
+    state: present
+  when: only_config is not defined
+
+- name: Create directories for neovim config
+  file:
+    path: "~/.config/nvim/"
+    state: directory
+
+- name: Symlink init.vim
+  file:
+    src: "{{ role_path }}/files/init.vim"
+    dest: "~/.config/nvim/init.vim"
+    state: link
