@@ -8,6 +8,9 @@
       - otf-latinmodern-math
       - ttf-dejavu
       - bdf-unifont
+      - gnu-free-fonts
+      - noto-fonts-cjk
+      - noto-fonts
   when: ansible_os_family != "NixOS" and only_config is not defined
 
 - name: Create temp font directory
