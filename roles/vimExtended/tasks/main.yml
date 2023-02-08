@@ -7,6 +7,7 @@
       - npm
       - ctags
       - ccls
+      - python-pynvim
     state: present
   when: only_config is not defined
 
