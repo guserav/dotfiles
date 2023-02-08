@@ -23,4 +23,5 @@
     - inetutils
     - task
     - strace
+    - iotop
   when: only_config is not defined
