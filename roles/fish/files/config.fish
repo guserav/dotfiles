@@ -75,7 +75,8 @@ end
 
 # Find out how much disk space is used from the specified directory subdirectories
 function disk-usage --description 'Determine disk usage of specified folder subdirs'
-    sudo du -h -c -d 1 $argv 2> /dev/null
+    sudo du --human-readable --total --one-file-system --max-depth 1 $argv 2> /dev/null
+    # sudo du -h -c -x -d 1 $argv 2> /dev/null
 end
 
 function vim --description 'map vim to nvim'
