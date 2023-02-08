@@ -15,6 +15,18 @@ Host pchal
     ProxyJump ipvslogin
     IdentityFile ~/.ssh/uni
 
+Host pcsgs09
+    HostName pcsgs09
+    User zeiskeek
+    ProxyJump ipvslogin
+    IdentityFile ~/.ssh/uni
+
+Host argon-fs
+    HostName argon-fs
+    User zeiskeek
+    ProxyJump ipvslogin
+    IdentityFile ~/.ssh/uni
+
 Host visgs*
     User zeiskeek
     ProxyJump ipvslogin
