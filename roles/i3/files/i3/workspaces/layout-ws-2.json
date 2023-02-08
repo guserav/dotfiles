@@ -9,29 +9,18 @@
     "nodes": [
         {
             "name": "Thunderbird",
-            "percent": 0.33,
+            "percent": 0.5,
             "swallows": [
                 {
-                    "class": "^Thunderbird$",
+                    "class": "^thunderbird$",
                     "instance": "^Mail$"
                 }
             ],
             "type": "con"
         },
         {
-            "name": "Dino",
-            "percent": 0.33,
-            "swallows": [
-                {
-                    "class": "^Dino$",
-                    "instance": "^dino$"
-                }
-            ],
-            "type": "con"
-        },
-        {
             "name": "Signal",
-            "percent": 0.33,
+            "percent": 0.5,
             "swallows": [
                 {
                     "class": "^Signal$",

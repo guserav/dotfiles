@@ -4,7 +4,7 @@
     "percent": 1,
     "swallows": [
         {
-            "class": "^firefox$",
+            "class": "^firefox",
             "window_role": "^browser$"
         }
     ],

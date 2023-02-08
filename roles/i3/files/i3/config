@@ -177,7 +177,6 @@ exec --no-startup-id /usr/bin/keepassxc
 
 exec --no-startup-id /usr/bin/firefox
 exec --no-startup-id /usr/bin/thunderbird
-exec --no-startup-id /usr/bin/dino
 exec --no-startup-id /usr/bin/signal-desktop
 exec --no-startup-id /usr/bin/xfce4-terminal
 exec --no-startup-id /usr/bin/spotify
