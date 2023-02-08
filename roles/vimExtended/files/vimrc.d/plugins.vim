@@ -27,12 +27,13 @@ let g:tmux_navigator_disable_when_zoomed = 1
 " To use this the easiest way is to use bear (in order to generate compile_commands.json)
 if executable('node') || executable('ccls')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    let g:coc_global_extensions = [ 'coc-vimtex', 'coc-ultisnips', 'coc-snippets', 'coc-python' ]
+    let g:coc_global_extensions = [ 'coc-vimtex', 'coc-ultisnips', 'coc-snippets', 'coc-python', 'coc-omnisharp']
     " Use <C-j> for jump to next placeholder, it's default of coc.nvim
     let g:coc_snippet_next = '<c-j>'
     " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
     let g:coc_snippet_prev = '<c-k>'
-
+    Plug 'OmniSharp/omnisharp-vim', {'branch': 'release'}
+    let g:OmniSharp_server_use_mono = 1
 else
     call EchoNoLoadPrompt('Error', 'node or ccls not in path. For vim highlighting please add node to path.')
 endif
@@ -53,7 +54,8 @@ let g:gutentags_modules = ['ctags']
 let g:gutentags_project_root = ['.git', '.root']
 let g:gutentags_cache_dir = expand('~/.cache/tags') " Here the databases are created so the project dir is not polluted
 let g:gutentags_define_advanced_commands = 1 " Enable debugging via :GutentagsToggleTrace
-"let g:gutentags_cscope_build_inverted_index = 1
+let g:gutentags_cscope_build_inverted_index = 0
+let g:gutentags_enabled = 0
 
 Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_working_path_mode = 'ra'
