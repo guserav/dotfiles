@@ -89,7 +89,7 @@ endif
 " Show diff between current buffer content and file
 " Copied from https://vim.fandom.com/wiki/Diff_current_buffer_and_the_original_file
 " TODO look into the more complex methods described above
-com! WDiff w !diff % -
+com! WDiff w !diff -u % -
 " }}}
 " Options {{{
 " Prevent vim from playing an error sound and flashing the screen
