@@ -92,4 +92,6 @@ let g:languagetool_jar='$HOME/.vim/plugin/languagetool/LanguageTool-5.0/language
 nnoremap <leader>lc :LanguageToolCheck<cr>      " Check with the current set Language in spelllang default en_us
 nnoremap <leader>lno :LanguageToolClear<cr>     " Clear Highlighting of LanguageTool
 
+Plug 'sirtaj/vim-openscad'
+
 call plug#end()
