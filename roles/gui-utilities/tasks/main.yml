@@ -31,7 +31,8 @@
 
 - name: Download flatpak packages
   flatpak:
-    name: com.spotify.Client
+    name: "{{ item.flatpak_package }}"
+  loop: "{{ gui_utilities_flatpak_packages }}"
 
 - name: Add wrapper script for flatpak packages
   become: True
@@ -39,8 +40,7 @@
     src: flatpak_wrapper.sh
     dest: "/usr/bin/{{item.name}}"
     mode: 0755
-  loop:
-    - { name: 'spotify', flatpak_package: 'com.spotify.Client' }
+  loop: "{{ gui_utilities_flatpak_packages }}"
 
 - name: Install gui-utilities from AUR
   aur:
