@@ -88,15 +88,6 @@ bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9 
 bindsym $mod+Shift+0 move container to workspace number 10
 
-exec --no-startup-id "i3-msg \"workspace 1 ; append_layout $HOME/.i3/workspaces/layout-ws-1.json\""
-exec --no-startup-id "i3-msg \"workspace 2 ; append_layout $HOME/.i3/workspaces/layout-ws-2.json\""
-exec --no-startup-id "i3-msg \"workspace 3 ; append_layout $HOME/.i3/workspaces/layout-ws-3.json\""
-exec --no-startup-id "i3-msg \"workspace 9 ; append_layout $HOME/.i3/workspaces/layout-ws-9.json\""
-
-# Monitor setup
-bindsym $mod+Control+1 exec $HOME/dotfiles/roles/multiscreen/files/singleMonitor.sh
-bindsym $mod+Control+2 exec $HOME/dotfiles/roles/multiscreen/files/doubleMonitor.sh
-
 # reload the configuration file
 bindsym $mod+Shift+c reload
 
@@ -164,10 +155,6 @@ bindsym alt+Shift+r exec "slurp | grim -g - - | wl-copy"
 
 # start wifi applet
 exec --no-startup-id nm-applet
-# set background picture
-exec --no-startup-id feh --bg-scale ~/.wallpaper
-# start dunst notification daemon
-exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd
 # on screen keyboard
 exec --no-startup-id onboard &
 # bluetooth controls
@@ -177,11 +164,17 @@ exec --no-startup-id /usr/bin/keepassxc
 # automatic display config
 exec --no-startup-id /usr/bin/kanshi
 
-exec --no-startup-id /usr/bin/firefox
-exec --no-startup-id /usr/bin/thunderbird
-exec --no-startup-id /usr/bin/signal-desktop
-exec --no-startup-id /usr/bin/xfce4-terminal
-exec --no-startup-id /usr/bin/spotify
+exec swaymsg "workspace 1 ; exec /usr/bin/firefox"
+exec swaymsg "workspace 3 ; exec /usr/bin/xfce4-terminal"
+
+exec /usr/bin/thunderbird
+exec /usr/bin/signal-desktop
+for_window [class="Signal"] move window workspace 2 
+for_window [app_id="thunderbird"] move window workspace 2 
+
+exec /usr/bin/spotify
+for_window [class="Spotify"] move window workspace 9 
+
 
 # rename workspace on the fly
 bindsym $mod+comma exec ~/.config/sway/rename_workspace
@@ -194,15 +187,18 @@ workspace_auto_back_and_forth yes
 
 # browser pop-ups
 for_window [window_role="pop-up"] floating enable
-for_window [class="Arandr"] floating enable
 
-# do not focus newly opened windows
-#no_focus [class="[.]*"]
-#for_window [class="zenity"] focus
+for_window [app_id="solvespace" title="Property Browser"] floating enable
+for_window [app_id="solvespace" title="Property Browser"] border normal 1
+for_window [app_id="solvespace" title="Property Browser"] set height 400
+for_window [app_id="solvespace" title="Property Browser"] move position center
 
 # titlebars for all windows except terminals and firefox
 for_window [class="^.*"] border normal 0
-for_window [class="^.*terminal.*"] border pixel 0
-for_window [class="^.*Firefox.*"] border pixel 0
+for_window [app_id="firefox"] border none
+for_window [app_id="xfce4-terminal"] border none
+
+# for debugging
+# for_window [title=".*"] title_format "<b>%title</b> (%app_id, %class, %instance)"
 
 include /etc/sway/config.d/*
