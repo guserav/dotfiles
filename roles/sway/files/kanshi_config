@@ -1,0 +1,5 @@
+profile tower {
+  output "HP Inc. HP E24d G4 3CQ13402R3" mode 1920x1080 position 0,0
+  output "HP Inc. HP E243i 6CM9440LZF" mode 1920x1200 position 1920,0
+  output "HP Inc. HP E243i 6CM9440M78" mode 1920x1200 position 3840,0
+}

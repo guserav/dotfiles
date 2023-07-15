@@ -83,6 +83,6 @@ function vim --description 'map vim to nvim'
     nvim $argv
 end
 
-if test -e ~/.config/fish/xcape.config
-    source ~/.config/fish/xcape.config
+if test -e ~/.config/fish/load_sway.fish
+    source ~/.config/fish/load_sway.fish
 end

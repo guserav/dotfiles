@@ -1,0 +1,113 @@
+---
+- name: Ensure X autostart things are removed
+  become: true
+  package:
+    name:
+      - xorg-xinit
+      - xorg-server
+      - lightdm
+      - lightdm-gtk-greeter
+    state: absent
+  when: only_config is not defined
+
+- name: Install packages
+  become: true
+  package:
+    name:
+      - alsa-utils
+      - bemenu-wayland
+      - gsimplecal
+      - kanshi
+      - lib32-mesa
+      - lib32-vulkan-radeon
+      - mesa
+      - sway
+      - swayidle
+      - swaylock
+      - vulkan-radeon
+      - waybar
+      - wl-clipboard
+      - xf86-video-amdgpu
+      - xf86-video-ati
+      - xorg-xwayland
+      - zenity
+    state: present
+  when: only_config is not defined
+
+- name: Symlink sway config
+  file:
+    src: "{{ role_path }}/files/sway"
+    dest: "~/.config/sway"
+    state: link
+    force: true
+
+- name: Add user to input group # for waybar keyboard-state
+  become: yes
+  user:
+    name: "{{ ansible_user_id }}"
+    groups: input
+    append: yes
+  when: ansible_os_family != "NixOS"
+
+- name: Symlink load_sway file
+  file:
+    src: "{{ role_path }}/files/load_sway.fish"
+    dest: "~/.config/fish/load_sway.fish"
+    state: link
+    force: true
+  ignore_errors: true
+
+- name: Install packages for status calendar
+  become: true
+  package:
+    name:
+      - python-pytz
+      - python-tzlocal
+  when: only_config is not defined
+
+- name: Symlink waybar config directory
+  file:
+    src: "{{ role_path }}/files/waybar"
+    dest: "~/.config/waybar"
+    state: link
+    force: true
+
+
+- name: Create kanshi directory
+  file:
+    path: ~/.config/kanshi/
+    state: directory
+
+- name: Symlink kanshi config
+  file:
+    src: "{{ role_path }}/files/kanshi_config"
+    dest: "~/.config/kanshi/config"
+    state: link
+
+- name: Create gsimplecal directory
+  file:
+    path: ~/.config/gsimplecal/
+    state: directory
+
+- name: Symlink gsimplecal config
+  file:
+    src: "{{ role_path }}/files/gsimplecal_config"
+    dest: "~/.config/gsimplecal/config"
+    state: link
+
+- name: Install wdisplays from AUR
+  aur:
+    name: "wdisplays"
+    state: "{{ aur_state }}"
+  when: ansible_os_family == "Archlinux" and only_config is not defined
+
+- name: Disable several services used for i3
+  systemd:
+    name: "{{ item }}"
+    enabled: false
+    state: stopped
+  when: only_config is not defined
+  ignore_errors: yes
+  loop:
+    - i3background.timer
+    - wakelock.service

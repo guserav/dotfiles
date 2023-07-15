@@ -51,16 +51,14 @@
     - never
     - gui
   roles:
-    - i3
+    - sway
     - fonts
     - dunst
     - chromium
     - firefox
     - xfce-terminal
-    - dmenu
     - gui-utilities
     - pulseaudio
-    - multiscreen
     - gnome
     - network-manager
     - onedrive

@@ -1,0 +1,212 @@
+set $mod Mod4
+
+font pango: FantasqueMono #monospace 8
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec /usr/bin/xfce4-terminal
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec /usr/bin/bemenu-run
+
+# play/pause media content
+bindsym Scroll_Lock exec playerctl -p spotify play-pause
+
+# change focus
+bindsym $mod+h focus left
+bindsym Shift+$mod+Tab focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+Tab focus right
+bindsym Mod1+Tab focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# move workspace to other monitor
+bindsym $mod+Left move workspace to output left
+bindsym $mod+Down move workspace to output down
+bindsym $mod+Up move workspace to output up
+bindsym $mod+Right move workspace to output right
+
+# split in horizontal orientation
+bindsym $mod+i split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+p focus parent
+
+# focus the child container
+bindsym $mod+c focus child
+
+# switch to workspace
+bindsym $mod+1 workspace number 1 
+bindsym $mod+2 workspace number 2 
+bindsym $mod+3 workspace number 3 
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9 
+bindsym $mod+0 workspace number 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1 
+bindsym $mod+Shift+2 move container to workspace number 2 
+bindsym $mod+Shift+3 move container to workspace number 3 
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9 
+bindsym $mod+Shift+0 move container to workspace number 10
+
+exec --no-startup-id "i3-msg \"workspace 1 ; append_layout $HOME/.i3/workspaces/layout-ws-1.json\""
+exec --no-startup-id "i3-msg \"workspace 2 ; append_layout $HOME/.i3/workspaces/layout-ws-2.json\""
+exec --no-startup-id "i3-msg \"workspace 3 ; append_layout $HOME/.i3/workspaces/layout-ws-3.json\""
+exec --no-startup-id "i3-msg \"workspace 9 ; append_layout $HOME/.i3/workspaces/layout-ws-9.json\""
+
+# Monitor setup
+bindsym $mod+Control+1 exec $HOME/dotfiles/roles/multiscreen/files/singleMonitor.sh
+bindsym $mod+Control+2 exec $HOME/dotfiles/roles/multiscreen/files/doubleMonitor.sh
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# dunst shortcuts
+bindsym Mod1+space exec /usr/bin/dunstctl close
+bindsym Mod1+shift+space exec /usr/bin/dunstctl close-all
+bindsym Mod1+period exec /usr/bin/dunstctl history-pop
+bindsym Mod1+shift+period exec /usr/bin/dunstctl context
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym h resize grow width 5 px or 5 ppt
+        bindsym l resize shrink width 5 px or 5 ppt
+        bindsym k resize grow height 5 px or 5 ppt
+        bindsym j resize shrink height 5 px or 5 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# set up the i3bar
+bar {
+  position top
+  swaybar_command waybar
+}
+
+input "type:keyboard" {
+  xkb_layout us(mac)
+  xkb_model pc104
+  xkb_options eurosign:e
+}
+
+# Screen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
+
+# Volume controls
+bindsym XF86AudioRaiseVolume exec $HOME/.config/sway/increase_volume 5 #increase sound volume
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioPlay exec playerctl -p spotify play-pause
+bindsym Shift+XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle # amixer -q set Master toggle
+
+# suspend screen
+bindsym XF86Sleep exec systemctl suspend
+# lock screen
+bindsym $mod+m exec "swaylock -f -c 113311"
+
+exec swayidle -w \
+         timeout 300 'swaylock -f -c 331111' \
+         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         before-sleep 'swaylock -f -c 113311'
+
+# screenshot
+# requires pip install escrotum
+bindsym control+Print exec "mv $(escrotum) ~/screenshots; notify-send 'Screenshot taken'"
+bindsym $mod+Print exec "sleep1; mv $(escrotum -s) ~/screenshots; notify-send 'Screenshot taken'"
+
+# start wifi applet
+exec --no-startup-id nm-applet
+# set background picture
+exec --no-startup-id feh --bg-scale ~/.wallpaper
+# start dunst notification daemon
+exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd
+# start flameshot (for screenshots)
+exec --no-startup-id flameshot
+# on screen keyboard
+exec --no-startup-id onboard &
+# bluetooth controls
+exec --no-startup-id blueman-applet
+# Password manager
+exec --no-startup-id /usr/bin/keepassxc
+# automatic display config
+exec --no-startup-id /usr/bin/kanshi
+
+exec --no-startup-id /usr/bin/firefox
+exec --no-startup-id /usr/bin/thunderbird
+exec --no-startup-id /usr/bin/signal-desktop
+exec --no-startup-id /usr/bin/xfce4-terminal
+exec --no-startup-id /usr/bin/spotify
+
+# rename workspace on the fly
+bindsym $mod+comma exec ~/.config/sway/rename_workspace
+
+# hide borders at screen edges
+hide_edge_borders both
+
+# Automatic back-and-forth when switching to the current workspace
+workspace_auto_back_and_forth yes
+
+# browser pop-ups
+for_window [window_role="pop-up"] floating enable
+for_window [class="Arandr"] floating enable
+
+# do not focus newly opened windows
+#no_focus [class="[.]*"]
+#for_window [class="zenity"] focus
+
+# titlebars for all windows except terminals and firefox
+for_window [class="^.*"] border normal 0
+for_window [class="^.*terminal.*"] border pixel 0
+for_window [class="^.*Firefox.*"] border pixel 0
+
+include /etc/sway/config.d/*
