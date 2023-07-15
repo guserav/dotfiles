@@ -11,6 +11,7 @@
       - gnu-free-fonts
       - noto-fonts-cjk
       - noto-fonts
+      - ttf-linux-libertine
   when: ansible_os_family != "NixOS" and only_config is not defined
 
 - name: Create temp font directory
@@ -57,4 +58,12 @@
     src: "{{ item }}"
     dest: /usr/share/fonts/
   with_fileglob: "/tmp/fonts/font-awesome-4.7.0/fonts/*"
+  when: ansible_os_family != "NixOS" and only_config is not defined
+
+- name: Install gnu unifont
+  become: true
+  get_url:
+    url: https://unifoundry.com/pub/unifont/unifont-15.0.06/font-builds/unifont-15.0.06.otf
+    dest: /usr/share/fonts/unifont-15.0.06.otf
+    checksum: sha256:7f0284ff6373347c9fd8253196aebd924a7e2f57a7ee56a3a63d7e84551299bd
   when: ansible_os_family != "NixOS" and only_config is not defined
