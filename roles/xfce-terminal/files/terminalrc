@@ -37,4 +37,5 @@ MiscSlimTabs=FALSE
 MiscNewTabAdjacent=FALSE
 ShortcutsNoHelpkey=TRUE
 ShortcutsNoMnemonics=TRUE
+MiscRightClickAction=TERMINAL_RIGHT_CLICK_ACTION_CONTEXT_MENU
 
