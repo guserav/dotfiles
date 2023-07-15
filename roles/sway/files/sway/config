@@ -160,9 +160,7 @@ exec swayidle -w \
          before-sleep 'swaylock -f -c 113311'
 
 # screenshot
-# requires pip install escrotum
-bindsym control+Print exec "mv $(escrotum) ~/screenshots; notify-send 'Screenshot taken'"
-bindsym $mod+Print exec "sleep1; mv $(escrotum -s) ~/screenshots; notify-send 'Screenshot taken'"
+bindsym alt+Shift+r exec "slurp | grim -g - - | wl-copy"
 
 # start wifi applet
 exec --no-startup-id nm-applet
@@ -170,8 +168,6 @@ exec --no-startup-id nm-applet
 exec --no-startup-id feh --bg-scale ~/.wallpaper
 # start dunst notification daemon
 exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd
-# start flameshot (for screenshots)
-exec --no-startup-id flameshot
 # on screen keyboard
 exec --no-startup-id onboard &
 # bluetooth controls

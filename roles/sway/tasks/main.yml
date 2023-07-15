@@ -16,11 +16,13 @@
     name:
       - alsa-utils
       - bemenu-wayland
+      - grim
       - gsimplecal
       - kanshi
       - lib32-mesa
       - lib32-vulkan-radeon
       - mesa
+      - slurp
       - sway
       - swayidle
       - swaylock
