@@ -10,5 +10,8 @@ if test "$(tty)" = "/dev/tty1"
     export QT_AUTO_SCREEN_SCALE_FACTOR=1
     export QT_QPA_PLATFORM='wayland;xcb'
     export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-    exec bash -c "eval \$(ssh-agent); exec /usr/bin/sway"
+    # Start ssh agent and source into environment
+    # Start sway and redirect output to journalctl
+    # Output can be viewed via "journalctl --user --identifier sway"
+    exec bash -c "eval \$(ssh-agent); exec /usr/bin/systemd-cat --identifier=sway /usr/bin/sway"
 end
