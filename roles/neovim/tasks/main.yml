@@ -1,15 +1,11 @@
 # pip install neovim
 # apt install npm
-- name: Install neovim
+- name: Install neovim and dependencies
   become: true
   package:
-    name: neovim
-    state: present
-  when: only_config is not defined
-
-- name: Install python packages needed for nvim
-  pip:
-    name: pynvim
+    name:
+      - neovim
+      - python-pynvim
     state: present
   when: only_config is not defined
 
@@ -18,8 +14,13 @@
     path: "~/.config/nvim/"
     state: directory
 
-- name: Symlink init.vim
+- name: Delete old init.vim
   file:
-    src: "{{ role_path }}/files/init.vim"
     dest: "~/.config/nvim/init.vim"
+    state: absent
+
+- name: Symlink init.lua
+  file:
+    src: "{{ role_path }}/files/init.lua"
+    dest: "~/.config/nvim/init.lua"
     state: link
