@@ -169,11 +169,11 @@ exec swaymsg "workspace 3 ; exec /usr/bin/xfce4-terminal"
 
 exec /usr/bin/thunderbird
 exec /usr/bin/signal-desktop
-for_window [class="Signal"] move window workspace 2 
-for_window [app_id="thunderbird"] move window workspace 2 
+for_window [class="Signal"] move --no-auto-back-and-forth window workspace 2 
+for_window [app_id="thunderbird"] move --no-auto-back-and-forth window workspace 2 
 
 exec /usr/bin/spotify
-for_window [class="Spotify"] move window workspace 9 
+for_window [class="Spotify"] move --no-auto-back-and-forth window workspace 9 
 
 
 # rename workspace on the fly
