@@ -6,6 +6,12 @@ Plug 'vim-scripts/LargeFile'
 " surround with parentheses, braces, ...
 Plug 'tpope/vim-surround'
 
+" for neovim
+if has('nvim')
+    Plug 'klen/nvim-config-local'
+    Plug 'neovim/nvim-lspconfig'
+endif
+
 " repeat advanced plugin commands with .
 Plug 'tpope/vim-repeat'
 
@@ -76,6 +82,8 @@ Plug 'majutsushi/tagbar'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#lsp#enabled = 0
+let g:airline#extensions#nvimlsp#enabled = 0
 
 " show git diff +, -, ~ at the left edge
 Plug 'airblade/vim-gitgutter'
