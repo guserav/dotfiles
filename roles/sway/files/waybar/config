@@ -80,8 +80,8 @@
         "format": "{capacity}% {icon}",
         "format-charging": "{capacity}% ",
         "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-        "format-good": "{icon}",
+        "format-alt": "{capacity}% {time} {icon}",
+        "format-good": "{capacity}% {icon}",
         "format-full": "🗸",
         "format-icons": ["", "", "", "", ""]
     },
