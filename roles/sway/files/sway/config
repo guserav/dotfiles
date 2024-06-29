@@ -129,6 +129,9 @@ input "type:keyboard" {
   xkb_options eurosign:e
 }
 
+input 1386:20911:Wacom_Pen_and_multitouch_sensor_Pen map_to_output eDP-1
+input 1386:20911:Wacom_Pen_and_multitouch_sensor_Finger map_to_output eDP-1
+
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
