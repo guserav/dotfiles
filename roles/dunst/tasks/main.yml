@@ -23,6 +23,7 @@
 - name: Create xfce-notifyd config directory
   file:
     dest: "~/.config/xfce4/xfconf/xfce-perchannel-xml/"
+    recurse: yes
     state: directory
 
 - name: Symlink xfce-notifyd config
