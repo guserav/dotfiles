@@ -3,3 +3,5 @@ gui_utilities_flatpak_packages:
     flatpak_package: 'com.spotify.Client'
   - name: 'solvespace'
     flatpak_package: 'com.solvespace.SolveSpace'
+  - name: 'telegram'
+    flatpak_package: 'org.telegram.desktop'

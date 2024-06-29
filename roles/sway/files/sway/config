@@ -169,8 +169,10 @@ exec swaymsg "workspace 3 ; exec /usr/bin/xfce4-terminal"
 
 exec /usr/bin/thunderbird
 exec /usr/bin/signal-desktop
+exec /usr/bin/telegram
 for_window [class="Signal"] move --no-auto-back-and-forth window workspace 2 
 for_window [app_id="thunderbird"] move --no-auto-back-and-forth window workspace 2 
+for_window [app_id="org.telegram.desktop"] move --no-auto-back-and-forth window workspace 2 
 
 exec /usr/bin/spotify
 for_window [class="Spotify"] move --no-auto-back-and-forth window workspace 9 
