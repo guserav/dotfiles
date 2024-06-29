@@ -3,3 +3,27 @@ profile tower {
   output "HP Inc. HP E243i 6CM9440LZF" mode 1920x1200 position 1920,0
   output "HP Inc. HP E243i 6CM9440M78" mode 1920x1200 position 3840,0
 }
+
+profile homedock {
+  output eDP-1 mode 1920x1080 position 0,0
+  output "HP Inc. HP E243i 6CM9440M78" mode 1920x1200 position 3840,0
+  output "HP Inc. HP E243i 6CM9440LZF" mode 1920x1200 position 1920,0
+}
+
+profile selfnet_U4_vorne_links {
+  output "BNQ BenQ GL2460 Z1F03259SL0" mode 1920x1080 position 0,0 transform 90
+  output "BNQ BenQ GL2460 Z1F03245SL0" mode 1920x1080 position 1080,840
+  output eDP-1 mode 1920x1080 position 1080,1920
+}
+
+profile selfnet_U4_hinten_links {
+  output "BNQ BenQ GW2480 ET41P0087004U" mode 1920x1080 position 1920,0
+  output "BNQ BenQ GW2480 ET41P0082504U" mode 1920x1080 position 0,0
+  output eDP-1 mode 1920x1080 position 970,1080
+}
+
+profile selfnet_U4_vorne_rechts {
+  output "BNQ BenQ GW2480 ETEBP00990SL0" mode 1920x1080 position 1920,0
+  output "BNQ BenQ GW2480 ETEBP00996SL0" mode 1920x1080 position 0,0
+  output eDP-1 mode 1920x1080 position 552,1080
+}
