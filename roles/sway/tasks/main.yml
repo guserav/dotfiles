@@ -22,6 +22,7 @@
       - lib32-mesa
       - lib32-vulkan-radeon
       - mesa
+      - power-profiles-daemon
       - slurp
       - sway
       - swayidle
@@ -102,6 +103,14 @@
     name: "wdisplays"
     state: "{{ aur_state }}"
   when: ansible_os_family == "Archlinux" and only_config is not defined
+
+- name: Make sure power-profiles-daemon is enabled and running
+  become: true
+  systemd:
+    name: power-profiles-daemon
+    enabled: true
+    state: started
+  when: only_config is not defined
 
 - name: Disable several services used for i3
   systemd:

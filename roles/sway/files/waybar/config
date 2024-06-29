@@ -15,6 +15,7 @@
         "disk#home",
         "keyboard-state#num",
         "keyboard-state#cap",
+        "power-profiles-daemon",
         "battery",
         "battery#bat2",
         "clock",
@@ -87,6 +88,17 @@
     },
     "battery#bat2": {
         "bat": "BAT2"
+    },
+    "power-profiles-daemon": {
+      "format": "{icon}",
+      "tooltip-format": "Power profile: {profile}",
+      "tooltip": true,
+      "format-icons": {
+        "default": "",
+        "performance": "🐇",
+        "balanced": "🐘",
+        "power-saver": "🐢"
+      }
     },
     "network": {
         "format-wifi": "{essid} ({signalStrength}%) ",
