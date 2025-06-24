@@ -124,7 +124,8 @@ bar {
 }
 
 input "type:keyboard" {
-  xkb_layout us(mac)
+  xkb_layout us
+  xkb_variant altg-intl
   xkb_model pc104
   xkb_options eurosign:e
 }
