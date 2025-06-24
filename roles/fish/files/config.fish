@@ -5,6 +5,9 @@ alias ....="cd ../../.."
 # Show git status per default
 set -g _show_git_status "show"
 
+# Set global podman socket
+set -g -x DOCKER_HOST "unix://$XDG_RUNTIME_DIR/podman/podman.sock"
+
 # show only 6 dirs in full length
 set -q showDirs
 if test $status -ne 0
