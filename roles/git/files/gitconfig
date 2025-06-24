@@ -61,6 +61,7 @@
   s = status
   sAll = status --ignored=matching
   c = commit -v
+  cl = commit
   f = fetch --all --prune
   a = add -p
   ca = commit --amend -v
