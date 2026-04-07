@@ -1,6 +1,6 @@
 - name: Install gui-utilities from AUR
   aur:
-    name: onedrive
+    name: onedrive-abraunegg
     state: "{{ aur_state }}"
   when: ansible_os_family == "Archlinux" and only_config is not defined
 
