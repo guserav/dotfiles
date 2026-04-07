@@ -203,8 +203,14 @@ for_window [app_id="solvespace" title="Property Browser"] move position center
 for_window [class="^.*"] border normal 0
 for_window [app_id="firefox"] border none
 for_window [app_id="xfce4-terminal"] border none
+# for_window [app_id="xfce4-notifyd"] border pixel 0, move position 10000 10000, exec notification-move.py
+no_focus [app_id="xfce4-notifyd"]
 
 # for debugging
 # for_window [title=".*"] title_format "<b>%title</b> (%app_id, %class, %instance)"
 
+# set sway for systemd unit
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway XDG_SESSION_DESKTOP=sway
+
 include /etc/sway/config.d/*
+
