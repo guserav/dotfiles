@@ -12,10 +12,10 @@ nnoremap <leader>no :set nospell<cr>                                            
 
 augroup SpellCheck
     au!
-    autocmd BufRead * setlocal spell spelllang=en
+    autocmd BufRead * setlocal spell spelllang=en spellsuggest=best,timeout:1000
     " Change Spellcheck highlighting to be visible on every console
     "hi! link SpellBad ErrorMsg
     "hi! link SpellCap Search
-    autocmd ColorScheme * highlight SpellBad term=reverse ctermbg=224 gui=undercurl guisp=Red
-    autocmd ColorScheme * highlight SpellCap ctermbg=Red
+    autocmd ColorScheme * highlight SpellBad cterm=underline gui=underline ctermbg=224 guibg=LightRed
+    autocmd ColorScheme * highlight SpellCap ctermbg=Red guibg=LightRed
 augroup END
