@@ -26,11 +26,11 @@ endfunction
 " values have to reset FIXME: Move that to own color scheme
 augroup Highlighting
     au!
-    autocmd ColorScheme * hi def WordHighlight1 ctermbg=2
-    autocmd ColorScheme * hi def WordHighlight2 ctermbg=6
-    autocmd ColorScheme * hi def WordHighlight3 ctermbg=12
-    autocmd ColorScheme * hi def WordHighlight4 ctermbg=9
-    autocmd ColorScheme * hi def WordHighlight5 ctermbg=13
+    autocmd ColorScheme * hi def WordHighlight1 ctermbg=2 guibg=LightGreen
+    autocmd ColorScheme * hi def WordHighlight2 ctermbg=13 guibg=LightMagenta
+    autocmd ColorScheme * hi def WordHighlight3 ctermbg=9 guibg=LightBlue
+    autocmd ColorScheme * hi def WordHighlight4 ctermbg=12 guibg=Red
+    autocmd ColorScheme * hi def WordHighlight5 ctermbg=6 guibg=White
     " Plugin specific
     autocmd ColorScheme * highlight link TagbarHighlight Special
 augroup END
