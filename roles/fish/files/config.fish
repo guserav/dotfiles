@@ -89,3 +89,6 @@ end
 if test -e ~/.config/fish/load_sway.fish
     source ~/.config/fish/load_sway.fish
 end
+
+# uv
+fish_add_path "/home/erik/.local/bin"
