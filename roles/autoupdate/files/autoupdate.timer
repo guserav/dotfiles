@@ -5,8 +5,8 @@ Description=Automatic Update
 OnBootSec=5min
 OnActiveSec=10min
 RandomizedDelaySec=5min
-Persistent=True
-OnCalendar=*-*-* 20:00:00
+Persistent=False
+OnCalendar=*-*-* *:40:05
 Unit=autoupdate.service
 WakeSystem=False
 

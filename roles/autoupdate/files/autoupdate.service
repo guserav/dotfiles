@@ -5,7 +5,7 @@ After=network-online.target
 [Service]
 Type=simple
 SyslogIdentifier=autoupdate
-ExecStart=/usr/bin/nice -n 19 /usr/bin/pacman -Syuwq --noconfirm
+ExecStart=/usr/bin/nice -n 19 /usr/bin/bash -c "nmcli -t -f GENERAL.METERED dev show $(ip route list 0/0 | sed -r 's/.*dev (\\S*).*/\\1/g' | head -n 1) | grep yes || sudo pacman -Syuwq"
 TimeoutStopSec=600
 KillMode=process
 KillSignal=SIGINT

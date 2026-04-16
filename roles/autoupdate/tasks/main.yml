@@ -6,6 +6,8 @@
   loop:
     - autoupdate.timer
     - autoupdate.service
+  notify:
+    - systemctl daemon-reload
   when: ansible_os_family != "NixOS" and only_config is not defined
 
 - name: Enable autoupdate timer
