@@ -75,7 +75,6 @@
     state: link
     force: true
 
-
 - name: Create kanshi directory
   file:
     path: ~/.config/kanshi/
@@ -98,11 +97,11 @@
     dest: "~/.config/gsimplecal/config"
     state: link
 
-- name: Install wdisplays from AUR
-  aur:
-    name: "wdisplays"
-    state: "{{ aur_state }}"
-  when: ansible_os_family == "Archlinux" and only_config is not defined
+- name: Symlink swaylock config directory
+  file:
+    src: "{{ role_path }}/files/swaylock"
+    dest: "~/.config/swaylock"
+    state: link
 
 - name: Make sure power-profiles-daemon is enabled and running
   become: true

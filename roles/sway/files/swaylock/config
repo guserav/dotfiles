@@ -1,0 +1,6 @@
+color=113311
+show-failed-attempts
+ring-color=113311
+image=~/lock_screen_background.jpg
+indicator-radius=200
+indicator-thickness=20

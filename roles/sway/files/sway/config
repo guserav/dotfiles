@@ -147,12 +147,12 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle # amixer -q
 # suspend screen
 bindsym XF86Sleep exec systemctl suspend
 # lock screen
-bindsym $mod+m exec "swaylock -f -c 113311"
+bindsym $mod+m exec "swaylock -f"
 
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 331111' \
+         timeout 300 'swaylock -f --ring-color 331111 -c 331111' \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep 'swaylock -f -c 113311'
+         before-sleep 'swaylock -f'
 
 # screenshot
 bindsym alt+Shift+r exec "slurp | grim -g - - | wl-copy"
