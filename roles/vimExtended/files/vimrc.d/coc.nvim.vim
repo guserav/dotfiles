@@ -10,7 +10,16 @@ if exists('g:did_coc_loaded')
     nmap <silent> gr <Plug>(coc-references)
 
     " Close completion window on hitting enter
-    inoremap <expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+    inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+
+    " Accept completion on hitting control tab
+    inoremap <silent><expr> <c-a> "\<C-g>u\<c-r>=coc#_select_confirm()\<CR>"
+    " Accept text suggestion on hitting control space
+    inoremap <silent><expr> <c-space> "\<C-g>u\<c-r>=coc#pum#insert()\<CR>"
+
+    " Use tab to navigate suggestions in pum menu
+    inoremap <silent><expr> <tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+    inoremap <silent><expr> <s-tab> coc#pum#prev(1)
 
     " Use K to show documentation in preview window.
     " This is the indented behaviour of K
@@ -36,6 +45,9 @@ if exists('g:did_coc_loaded')
         autocmd!
         autocmd CursorHold * silent call CocActionAsync('highlight')
     augroup end
+
+    " make selection in coc#pum readable, it isn't in the solarized theme
+    hi PmenuSel cterm=reverse ctermfg=13 ctermbg=7 guibg=LightGray guifg=DarkGrey
 else
     call EchoNoLoadPrompt('Error', "Coc didn't load")
 endif
