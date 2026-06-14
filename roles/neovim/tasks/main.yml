@@ -19,8 +19,11 @@
     dest: "~/.config/nvim/init.vim"
     state: absent
 
-- name: Symlink init.lua
+- name: Symlink files
   file:
-    src: "{{ role_path }}/files/init.lua"
-    dest: "~/.config/nvim/init.lua"
+    src: "{{ role_path }}/files/{{ item }}"
+    dest: "~/.config/nvim/{{ item }}"
     state: link
+  loop:
+    - init.lua
+    - coc-settings.json
